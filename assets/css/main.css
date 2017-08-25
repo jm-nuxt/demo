@@ -1,0 +1,177 @@
+body{
+  font-size: 14px;
+  line-height: 1.42875;
+  font-family: "Microsoft YaHei","Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+}
+
+*, *::before, *::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li{
+  list-style: none;
+}
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover{
+  color: inherit;
+}
+
+.website-container{
+  width: 1190px;
+  margin: 0 auto;
+}
+
+/* 文本样式 */
+.text-right{
+  text-align: right;
+}
+.text-center{
+  text-align: center;
+}
+.text-indent{
+  text-indent: 2em;
+}
+
+.middle::after{
+  content: "";
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+.clearfix::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.pull-right{
+  float: right !important;
+}
+.pull-left{
+  float: left !important;
+}
+.pull-none{
+  float: none !important;
+}
+.mr-sm{
+  margin-right: 20px;
+}
+.pl-sm{
+  padding-left: 20px;
+}
+.font-md{
+  font-size: 18px;
+}
+
+/* 表格布局 */
+.d-table{
+  display: table;
+  table-layout: fixed;
+}
+.d-table-cell{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/* 按鈕样式 */
+.btn{
+  cursor: pointer;
+}
+
+.btn-line{
+  border:1px solid #2f8ae5;
+  color: #fff;
+  background: transparent;
+}
+
+.btn-line:hover{
+  background: #2f8ae5;
+  color: #fff;
+}
+
+
+/* icon */
+.start{
+  width: 15px;
+  height: 15px;
+  background: url('~assets/img/start.png') no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right:10px;
+}
+
+.location{
+  width: 11px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url('~assets/img/location.png') no-repeat;
+}
+
+.text-overflow{
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 覆盖elemen ui 样式*/
+.banner .el-carousel__button{
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: #b6bbbe;
+  opacity: 1;
+}
+
+.banner .is-active .el-carousel__button{
+  background-color: #2788e8;
+}
+
+.banner .el-carousel__indicator{
+  padding: 30px 6px;
+}
+
+/*style-box*/
+.style-header{
+  font-weight: normal;
+  line-height: 1.2;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  color: #3d3d3d;
+  padding: 0 88px;
+}
+.style-header .title{
+  font-size: 26px;
+}
+
+.style-header::after,
+.style-header::before{
+  content: "";
+  height: 2px;
+  background: #6e6e6e;
+  width: 80px;
+  position: absolute;
+  left: 0;
+  top: 15px;
+}
+
+.style-header::after{
+  left: auto;
+  right: 0;
+}
+
+.style-header .small{
+  font-size: 16px;
+  display: block;
+}
