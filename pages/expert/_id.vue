@@ -1,7 +1,7 @@
 <template>
   <section>
-    <p>{{detail}}</p>
-
+    <!-- <p>{{detail}}</p> -->
+    <p>{{report}}</p>
     <!-- <p>{{attribute}}</p> -->
 
     <!-- 个人信息 style-2-->
@@ -160,12 +160,12 @@
           <ul class="report-list">
             <li v-for="(item, index) in report" :key="index">
               <div class="img-box">
-                <img src="" alt="">
+                <img :src="item.report | imgCdn" :alt="item.title" :title="item.title">
               </div>
 
               <dl class="report-content">
-                <dt class="title text-overflow">国金证券--星网锐捷:企业通信快速成长,股权收购低估值优势显现国金证券--星网锐捷:企业通信快速成长,股权收购低估值优势显现国金证券--星网锐捷:企业通信快速成长,股权收购低估值优势显现 <time class="time">2017-03-16</time></dt>
-                <dd class="desc">第一,公司为国内排名前列的企业级网络通信设备商。星网锐捷是国内领先的企业级通信设备供应商,排名仅次于华为,思科与华三。近年来通过收购四创软件、德明通讯,拓展进入防灾减灾信息服务和无线数据接入终端领域。第二,深耕ICT融合发展,无线WLAN 引领高增长。星网锐捷在教育和金融行业通信设备市场份额领先。公司连续11 年在教育行业网络市场占有率第一,服务2300 余所高校覆盖率高达95%。并积极拓展轨交,医疗等新兴细分市场,尤其公司WLAN产品经过多年努力,已经获得国内排名第一,成为</dd>
+                <dt class="title text-overflow" :title="item.title">{{item.title}}<time class="time">2017-03-16</time></dt>
+                <dd class="desc">{{item.report}}</dd>
               </dl>
             </li>
           </ul>

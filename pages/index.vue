@@ -173,6 +173,9 @@
   export default {
     data(){
       return {
+        styleInfoFilter:[],
+        expertLists:[],
+        carouselsFilter:[],
         bottomCarouselsFilter:[]
       }
     },
