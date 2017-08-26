@@ -1,4 +1,5 @@
 const address = require('./config/address')
+
 module.exports = {
   /*
    ** Headers of the page
