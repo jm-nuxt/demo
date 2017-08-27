@@ -1,5 +1,5 @@
 import * as axios from 'axios'
-import address  from "~/config/address";
+import address from '~/config/address'
 
 let options = {
   params: +new Date()

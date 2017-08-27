@@ -86,9 +86,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+console.log(0);
 
 var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
-var host = process.env.HOST || '192.168.102.114';
+var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
 
 app.set('port', port);
@@ -97,8 +98,17 @@ app.set('port', port);
 app.use('/api', __WEBPACK_IMPORTED_MODULE_2__api__["a" /* default */]);
 
 // Import and Set Nuxt.js options
+console.log(1);
 var config = __webpack_require__(5);
+console.log(2);
 config.dev = !("development" === 'production');
+
+// TODO remove
+process.on('unhandledRejection', function (reason, p) {
+  console.log(p);
+  console.log("Unhandled Rejection:", reason.stack);
+  process.exit(1);
+});
 
 // Init Nuxt.js
 var nuxt = new __WEBPACK_IMPORTED_MODULE_1_nuxt__["Nuxt"](config);
@@ -174,10 +184,10 @@ router.get('/users/:id', function (req, res, next) {
 
 /***/ }),
 /* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-var address = __webpack_require__(7);
+var address = __webpack_require__(6);
+
 module.exports = {
   /*
    ** Headers of the page
@@ -203,7 +213,7 @@ module.exports = {
   modules: [['@nuxtjs/proxy']],
   proxy: {
     '/webapi/v2': {
-      target: address.SERVER_ADDRESS, //'http://www.jmexpert.com',
+      target: address.SERVER_ADDRESS,
       ws: false
       // changeOrigin: true
     }
@@ -242,7 +252,7 @@ module.exports = {
         name: 'fonts/[name].[hash:7].[ext]'
       }
     }],
-    postcss: [__webpack_require__(8)({
+    postcss: [__webpack_require__(7)({
       browsers: ['last 3 versions']
     })]
   },
@@ -263,17 +273,26 @@ module.exports = {
 };
 
 /***/ }),
-/* 6 */,
-/* 7 */
+/* 6 */
 /***/ (function(module, exports) {
 
-module.exports = {
-  IMG_ADDRESS: 'http://img.jumore.com',
-  SERVER_ADDRESS: 'http://webapi.jtt.com' //'http://www.jmexpert.com'
+var envs = {
+  dev: {
+    IMG_ADDRESS: 'http://image.jm.com',
+    SERVER_ADDRESS: 'http://webapi.jtt.com'
+  },
+
+  production: {
+    IMG_ADDRESS: 'http://img.jumore.com',
+    SERVER_ADDRESS: 'http://www.jmexpert.com'
+  }
 };
 
+var env = 'production';
+module.exports = envs[env];
+
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("autoprefixer");

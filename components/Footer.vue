@@ -44,12 +44,12 @@
   import axios from '~/plugins/axios'
   import vuex from 'vuex'
 
-
   export default{
-    computed:{
-      footer(){
+    
+    
+    computed: {
+      footer () {
         return this.$store.state.footer.footer
-        // return this.$store.footer.state.footer
       }
     }
   }

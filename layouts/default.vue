@@ -1,22 +1,26 @@
 <template>
   <div>
-    <Top />
+    <top />
     <my-header />
     <nuxt/>
     <my-footer/>
+
+    <login />
   </div>
 </template>
 
 <script>
   import Top from '~/components/Top.vue'
-  import  MyHeader from '~/components/Header.vue'
+  import MyHeader from '~/components/Header.vue'
   import MyFooter from '~/components/Footer.vue'
+  import login from '~/components/Login.vue'
 
   export default {
     components: {
       Top,
       MyHeader,
-      MyFooter
+      MyFooter,
+      login
     }
   }
 </script>

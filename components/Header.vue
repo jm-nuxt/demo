@@ -2,7 +2,7 @@
     <el-row class="website-container header">
       <el-col :span="12" class="logo">
         <h1 class="logo-title">
-          <a href="#" class="logo-link">
+          <a href="/" class="logo-link">
             聚贸云智库
           </a>
         </h1>
@@ -42,15 +42,15 @@
               <div class="sub-nav">
                 <ul>
                   <li>
-                    <a href="#">
+                    <nuxt-link :to="{ path: `/experts` }">
                       我要咨询专家 <small>I want my consultant</small>
-                    </a>
+                    </nuxt-link>
                   </li>
 
                   <li>
-                    <a href="#">
+                    <nuxt-link :to="{path:'/releaseResearch'}">
                       邀请专家调研企业 <small>Invite experts to do researches</small>
-                    </a>
+                    </nuxt-link>
                   </li>
                 </ul>
               </div>
@@ -62,16 +62,16 @@
 </template>
 
 <script>
-    export default {
-      data() {
-        return {
-
-        };
-      },
-      methods: {
+  export default {
+    data () {
+      return {
 
       }
+    },
+    methods: {
+
     }
+  }
 </script>
 
 <style lang="scss" scoped="scoped">

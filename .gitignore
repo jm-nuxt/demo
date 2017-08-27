@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# 开发环境下build包
+.nuxt

@@ -1,7 +1,7 @@
 <template>
   <section>
     <!-- <p>{{detail}}</p> -->
-    <p>{{report}}</p>
+    <!-- <p>{{report}}</p> -->
     <!-- <p>{{attribute}}</p> -->
 
     <!-- 个人信息 style-2-->
@@ -172,6 +172,7 @@
         </div>
       </div>
     </div>
+
   </section>
 </template>
 
@@ -179,31 +180,28 @@
   import axios from '~/plugins/axios'
 
   export default {
-    name:'expret',
-    data(){
+    name: 'expret-id',
 
+    data () {
       return {
         query: this.$route.query,
-        params:this.$route.params
+        params: this.$route.params
       }
     },
-    async asyncData ({ params, query, error }) {
 
-      var expertId = params.id;
+    async asyncData ({ params, query, error }) {
+      var expertId = params.id
       return Promise.all([
-        axios.get(`/webapi/v2/detailedExpertInfo/${expertId}`).then((data)=> data.data.rows),
-        axios.get(`/webapi/v2/expertAttribute/${expertId}`).then((data)=> data.data),
+        axios.get(`/webapi/v2/detailedExpertInfo/${expertId}`).then((data) => data.data.rows),
+        axios.get(`/webapi/v2/expertAttribute/${expertId}`).then((data) => data.data),
         axios.get(`/webapi/v2/researchReport/${expertId}`).then((data) => data.data.rows)
-      ])
-      .then((data) => {
-        console.log(data[2])
+      ]).then((data) => {
         return {
           detail: data[0],
           attribute: data[1],
           report: data[2]
         }
-      })
-      .catch(error => console.log(error))
+      }).catch(error => console.log(error))
     }
   }
 </script>

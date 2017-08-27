@@ -73,6 +73,7 @@ export function getContext (context, app) {
   let ctx = {
     isServer: !!context.isServer,
     isClient: !!context.isClient,
+    isStatic: process.static,
     isDev: true,
     app: app,
     store: context.store,

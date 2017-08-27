@@ -1,8 +1,8 @@
-import Vue from "vue"
+import Vue from 'vue'
 
 export default (Options = {}) => {
   if (!Array.prototype.remove) {
-    Array.prototype.remove = function(item) {
+    Array.prototype.remove = function (item) {
       if (!this.length) return
       var index = this.indexOf(item)
       if (index > -1) {

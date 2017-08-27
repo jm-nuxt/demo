@@ -3,8 +3,10 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _11fc5c36 = () => import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
-const _6a1c0423 = () => import('..\\pages\\expert\\_id.vue' /* webpackChunkName: "pages/expert-id" */).then(m => m.default || m)
+const _b54584a2 = () => import('..\\pages\\index.vue' /* webpackChunkName: "pages\\index" */).then(m => m.default || m)
+const _32e0615f = () => import('..\\pages\\releaseResearch.vue' /* webpackChunkName: "pages\\releaseResearch" */).then(m => m.default || m)
+const _85e7dbc8 = () => import('..\\pages\\experts\\index.vue' /* webpackChunkName: "pages\\experts" */).then(m => m.default || m)
+const _296feb84 = () => import('..\\pages\\experts\\_id.vue' /* webpackChunkName: "pages\\experts-id" */).then(m => m.default || m)
 
 
 
@@ -42,13 +44,23 @@ export function createRouter () {
     routes: [
 		{
 			path: "/",
-			component: _11fc5c36,
+			component: _b54584a2,
 			name: "index"
 		},
 		{
-			path: "/expert/:id?",
-			component: _6a1c0423,
-			name: "expert-id"
+			path: "/releaseResearch",
+			component: _32e0615f,
+			name: "releaseResearch"
+		},
+		{
+			path: "/experts",
+			component: _85e7dbc8,
+			name: "experts"
+		},
+		{
+			path: "/experts/:id",
+			component: _296feb84,
+			name: "experts-id"
 		}
     ],
     fallback: false

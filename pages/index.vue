@@ -144,24 +144,27 @@
               <!-- {{item}} -->
               <!--  :to="'/expert/' + item.id +'?tmp=' + item.templateId" -->
                <!-- :to="{ path: 'expert', params:{id: item.id}, query: { tmp: item.templateId }}" -->
-              <nuxt-link class="detail" :to="{ path: `/expert/${item.id}?tpl=1` }"> 查看详情 》</nuxt-link>
+              <nuxt-link class="detail" :to="{ path: `/experts/${item.id}?tpl=${item.templateId || 1}` }"> 查看详情 》</nuxt-link>
               <!-- <router-link target="_blank"  class="expert-detail" :to="{'path': '/expert/' + item.id, 'query': {'tempNo': item.templateId}}">查看详情 》</router-link> -->
             </li>
           </ul>
 
-          <a class="more">更多专家 <span class="en">More</span></a>
+          <a class="more">
+            更多专家 <span class="en">More</span> 
+            <i class="icon-arrow-right"></i>
+          </a>
         </div>
       </div>
     </div>
 
     <!-- 底部幻灯片 -->
     <el-carousel class="banner" indicator-position="none" height="500px">
-        <el-carousel-item v-for="(item, index) in bottomCarouselsFilter" :key="index">
-          <a :href="item.url" @click="jplNul($event, item.url)">
-            <img v-lazyload="lazyLoadPic(item.adsImg)" >
-          </a>
-        </el-carousel-item>
-      </el-carousel>
+      <el-carousel-item v-for="(item, index) in bottomCarouselsFilter" :key="index">
+        <a :href="item.url" @click="jplNul($event, item.url)">
+          <img v-lazyload="lazyLoadPic(item.adsImg)" >
+        </a>
+      </el-carousel-item>
+    </el-carousel>
   </section>
 </template>
 
@@ -171,33 +174,34 @@
   import axios from '~/plugins/axios'
 
   export default {
-    data(){
+    data () {
       return {
-        styleInfoFilter:[],
-        expertLists:[],
-        carouselsFilter:[],
-        bottomCarouselsFilter:[]
+        styleInfoFilter: [],
+        expertLists: [],
+        carouselsFilter: [],
+        bottomCarouselsFilter: []
       }
     },
-    fetch({store, params}){
-      store.dispatch('getFooter')
+
+    async fetch ({ store, params }) {
+      const { data } = await axios.get(`/webapi/v2/indexBottomMenu`)
+      store.commit('SET_FOOTER', data.rows)
     },
-    async asyncData () {
+    
+    asyncData () {
       return Promise.all([
-        axios.get(`/webapi/v2/indexBanner`).then((data)=> data.data.rows),
-        axios.get(`/webapi/v2/advantageExpertInfo`).then((data)=> data.data.rows),
+        axios.get(`/webapi/v2/indexBanner`).then((data) => data.data.rows),
+        axios.get(`/webapi/v2/advantageExpertInfo`).then((data) => data.data.rows),
         axios.get(`/webapi/v2/indexIndustryExp?offset=0&limit=4`).then((data) => data.data.rows),
-        axios.get(`/webapi/v2/indexBannerBottom`).then((data)=> data.data.rows)
-      ])
-      .then((data) => {
+        axios.get(`/webapi/v2/indexBannerBottom`).then((data) => data.data.rows)
+      ]).then((data) => {
         return {
           carouselsFilter: data[0],
           styleInfoFilter: data[1],
           expertLists: data[2],
           bottomCarouselsFilter: data[3]
         }
-      })
-      .catch(error => console.log(error))
+      }).catch(error => console.log(error))
     },
 
     head () {
@@ -205,19 +209,19 @@
     },
 
     computed: {
-      styleBannerImg() {
-          var sb = this.styleBanner ||[];
-          return sb.length > 0 ? sb[0].adsImg : "";
+      styleBannerImg () {
+        var sb = this.styleBanner || []
+        return sb.length > 0 ? sb[0].adsImg : ''
       },
 
-      styleBannerUrl(){
-          var sb = this.styleBanner ||[];
-          return sb.length > 0 ? sb[0].url : "";
+      styleBannerUrl () {
+        var sb = this.styleBanner || []
+        return sb.length > 0 ? sb[0].url : ''
       }
     },
 
     methods: {
-      lazyLoadPic(url) {
+      lazyLoadPic (url) {
         return Vue.filter('imgCdn')(url)
       }
     }
@@ -444,33 +448,6 @@
       display: block;
       font-size: 14px;
       margin-top: 14px;
-    }
-  }
-
-  .more{
-    text-align: center;
-    background-color: #f5f5f5;
-    padding: 15px;
-    display: block;
-    color: #3e3e3e;
-    font-size: 16px;
-    border:1px solid #dedede;
-    margin-top: 35px;
-
-    .en{
-      color: #9e9e9e;
-    }
-
-    &:after{
-      width: 7px;
-      height: 7px;
-      border-top: 1px solid #9e9e9e;
-      border-right: 1px solid #9e9e9e;
-      content: "";
-      display: inline-block;
-      transform: rotate(45deg);
-      transform-origin: top center;
-      margin-left: 8px;
     }
   }
 </style>
