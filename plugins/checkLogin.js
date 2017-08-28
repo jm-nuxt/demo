@@ -8,13 +8,13 @@ export default {
 			window.userNotLoginCallback = function(){
 				document.body.removeChild(script)
 				console.log('沒有登录哦！')
-				reject()
+				reject && reject()
 			}
 
 			window.userLoginSuccessCallback = function(){
 				document.body.removeChild(script)
 				console.log('已经登录了')
-				resolve()
+				resolve && resolve()
 			}
 
 			script.id = '_hasLoginJs'
