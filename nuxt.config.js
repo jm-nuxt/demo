@@ -40,7 +40,7 @@ module.exports = {
   /*
    ** Add axios globally
    */
-  plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive'],
+  plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive', '~plugins/checkLogin'],
   build: {
     vendor: ['axios', 'element-ui'],
 

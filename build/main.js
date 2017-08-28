@@ -226,7 +226,7 @@ module.exports = {
   /*
    ** Add axios globally
    */
-  plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive'],
+  plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive', '~plugins/checkLogin'],
   build: {
     vendor: ['axios', 'element-ui'],
 
@@ -284,7 +284,8 @@ var envs = {
 
   test: {
     IMG_ADDRESS: 'http://image.jm.com',
-    SERVER_ADDRESS: 'http://webapi.jtt.com'
+    SERVER_ADDRESS: 'http://webapi.jtt.com',
+    USERCENTER_ADDRESS: "http://test-uc3.dev.com"
   },
 
   production: {

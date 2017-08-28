@@ -1,0 +1,29 @@
+import address from '~/config/address'
+
+exports.hasLogin = function (config) {
+	return new Promise(function(resolve, reject) {
+		const script = document.createElement('scripe')
+
+		window.userNotLoginCallback = function(){
+			document.body.removeChild(script)
+			console.log('沒有登录哦！')
+			reject()
+		}
+
+		window.userLoginSuccessCallback = function(){
+			document.body.removeChild(script)
+			console.log('已经登录了')
+			resolve()
+		}
+
+		script.id = '_hasLoginJs'
+    script.type = 'text/javascript'
+    script.charset = 'utf-8'
+    script.defer = true
+    script.async = true
+		script.src = address.USERCENTER_ADDRESS + '/hasLogin?serviceContext=&_t=' + Date.now()
+	
+		document.body.appendChild(script)
+
+	})
+}

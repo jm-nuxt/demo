@@ -1,16 +1,18 @@
 <template lang="html">
   <section class="research">
-  {{ detail }}
+  <!-- {{ detail }} -->
+
+  <!-- <p> {{expert}}</p> -->
     <header class="company">
       <div class="website-container">
         <div class="company-info-wrap d-table">
           <div class="img-box d-table-cell">
-            <img src="" alt="">
+            <img :src="detail.companyLogoUrl | imgCdn" :alt="detail.companyName" :title="detail.companyName"/>
           </div>
 
           <div class="company-info d-table-cell">
-            <h2 class="company-name">点点滴滴</h2>
-            <a class="go">跳转至公司界面</a>  
+            <h2 class="company-name" :title="detail.companyName">{{ detail.companyName }}</h2>
+            <a target="_blank" class="go" :href="detail.websiteUrl" :title="detail.companyName">跳转至公司界面</a>  
           </div>
         </div>
       </div>
@@ -23,12 +25,11 @@
         </header>
         <article class="research-box">
             <header class="research-title">
-              <h3 class="title">xp真实，在聚贸工作0.1年，在聚贸</h3>
-              <time class="time">2017-02-06 18:20:20</time>
+              <h3 class="title" :title="detail.title">{{ detail.title }}</h3>
+              <time class="time">{{ detail.publisTime }}</time>
             </header>
 
-            <section class="research-content">
-              zxp真实，在聚贸工作0.1年，在聚贸资讯工作0.2年，在打交道建档立卡工作0.2年，在成长相册工作3.9年，2017年3月毕业于浙江大学，获得学士。精通。奖励资
+            <section v-html="detail.content" class="research-content">
             </section>
         </article>
 
@@ -49,13 +50,14 @@
         <div class="repert-box">
           <div class="d-table">
             <div class="img-box d-table-cell">
-              <img src="" alt="">
+              <img :src="expert.imgUrl | imgCdn" :alt="expert.expertName">
             </div>
 
             <dl class="d-table-cell repert-info">
-              <dd class="name text-overflow">黄雪川</dd>
+              <dd class="name text-overflow">{{
+              expert.expertName}}</dd>
               <dd>
-                <address class="address text-overflow"> <i class="icon-location"></i>山东青岛</address>
+                <address class="address text-overflow"> <i class="icon-location"></i>{{expert.city}}</address>
               </dd>
             </dl>
           </div>
@@ -63,22 +65,22 @@
           <div class="content-list">
             <p> 
               <label>担任职务:</label>
-              <span>开发商穿心嘻嘻嘻</span>
+              <span>{{expert.positionName}}</span>
             </p>
 
             <p> 
-              <label>担任职务:</label>
-              <span>开发商穿心嘻嘻嘻</span>
+              <label>所在公司:</label>
+              <span>{{expert.companyName}}</span>
             </p>
 
-            <p> 
+        <!--     <p> 
               <label>擅长领域:</label>
               <span>开发商穿心嘻嘻嘻</span>
-            </p>
+            </p> -->
 
-            <p>
+            <p v-if="Number(expert.yearsOfWorking)">
               <label>年限:</label>
-              <span>99年</span>
+              <span>{{Number(expert.yearsOfWorking).toFixed(0)}}年</span>
             </p>
           </div>
           
@@ -100,10 +102,16 @@ export default {
 
   async asyncData({ params }){
     try {
-      const { data } = await axios.get(`/webapi/v2/detailedResearchReport/${params.id}`)
+      const result = await axios.get(`/webapi/v2/detailedResearchReport/${params.id}`)
+      const detail = result.data || {}
+      const { data } = await axios.get(`/webapi/v2/detailedExpertInfo/${detail.rows.expertId}`)
+      
+      console.log(detail)
+      console.log(data)
 
       return {
-        detail: data.rows || {}
+        detail: detail.rows || {},
+        expert: data.rows || {}
       }
     } catch(e){
       console.log(e)
@@ -113,6 +121,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  .img-box{
+    img{
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+      display: block;
+    }
+  }
+
   .company{
     margin-bottom: 30px;
     width: 100%;

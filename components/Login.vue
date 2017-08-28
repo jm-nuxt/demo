@@ -42,7 +42,9 @@
 
 <script>
 	import axios from '~/plugins/axios'
+	import hasLogin from '~/plugins/checkLogin'
 
+	console.log(hasLogin)
 	export default{
 		name: 'dialog-login',
 

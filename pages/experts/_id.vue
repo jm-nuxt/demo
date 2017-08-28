@@ -169,7 +169,7 @@
 
               <dl class="report-content">
                 <dt class="title text-overflow" :title="item.title">
-                    <nuxt-link :to="{path: '/companyResearch/item.id'}">{{item.title}}<time class="time">2017-03-16</time></nuxt-link>
+                    <nuxt-link :to="{path: `/companyResearch/${item.id}`}">{{item.title}}<time class="time">2017-03-16</time></nuxt-link>
                 </dt>
                 <dd class="desc">{{item.report}}</dd>
               </dl>
