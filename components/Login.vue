@@ -42,9 +42,8 @@
 
 <script>
 	import axios from '~/plugins/axios'
-	import hasLogin from '~/plugins/checkLogin'
+	import login from '~/plugins/checkLogin'
 
-	console.log(hasLogin)
 	export default{
 		name: 'dialog-login',
 
@@ -68,20 +67,34 @@
 		},
 
 		methods: {
-			async login (formName) {
+			login (formName) {
+				
+
 				this.$refs[formName].validate((valid) => {
           if (valid) {
+          	login.hasLogin()
+          	
 						axios.post(`/webapi/v2/validateLoginInfo`, this.form)
 							.then(({data}) => {
 								if(data.code === 200){
-									this.$store.commit('SET_OPEN', false)
-									return axios.get(`/webapi/v2/userInfo`)
+									return axios.post(`/webapi/v2/doLogin`, {
+										activeStatus: 1,
+										checkCode: '',
+										username: this.form.username,
+										password: this.form.password
+									})
 								}else{
 									this.$message.error(`${data.desc}`)
+									return Promise.reject()
 								}
 							})
 							.then(data => {
 								console.log(data)
+								// this.$store.commit('SET_OPEN', false)
+								return axios.get(`/webapi/v2/userInfo`)
+							})
+							.catch(e => {
+								console.log(e)
 							})
           }
         })

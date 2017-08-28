@@ -89,7 +89,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 console.log(0);
 
 var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
-var host = process.env.HOST || '127.0.0.1';
+var host = process.env.HOST || '192.168.102.114';
 var port = process.env.PORT || 3000;
 
 app.set('port', port);
@@ -216,6 +216,10 @@ module.exports = {
       target: address.SERVER_ADDRESS,
       ws: false
       // changeOrigin: true
+    },
+    '/sso': {
+      target: address.USERCENTER_ADDRESS,
+      ws: false
     }
   },
 
