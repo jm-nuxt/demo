@@ -29,7 +29,6 @@ module.exports = {
     '/webapi/v2': {
       target: address.SERVER_ADDRESS,
       ws: false
-      // changeOrigin: true
     },
     '/sso': {
       target: address.USERCENTER_ADDRESS,
