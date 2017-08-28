@@ -32,7 +32,7 @@
 
           <p>Address : NORTHWEST PODIUM OF ANNO DOMINI MANSION, NO.8, QIUSHI ROAD,HANGZHOU,CHINA</p>
 
-          <p>Copyright &copyright; 聚贸云智库 www.jmexpert.com 浙ICP备15010831号-58</p>
+          <p>Copyright &copy; 聚贸云智库 www.jmexpert.com 浙ICP备15010831号-58</p>
         </el-col>
       </el-row>
     </div>
@@ -45,8 +45,9 @@
   import vuex from 'vuex'
 
   export default{
-    
-    
+    data () {
+      return {}
+    },
     computed: {
       footer () {
         return this.$store.state.footer.footer

@@ -14,8 +14,10 @@
               <img :src="detail.imgUrl | imgCdn" alt="">
             </div>
 
-            <button type="button" class="collection btn-line" name="button" v-if="query.tpl == 1">
-              <i class="start"></i>收藏专家
+            <button type="button" class="collection btn-line pull-none" :class="{liked: detail.isFavorite === 1}" name="button" v-if="query.tpl == 1">
+              <i class="start"></i>
+              <span class="favorite-text" v-if="detail.isFavorite === 1">收藏成功</span>
+              <span class="favorite-text" v-else>收藏专家</span>
               <small class="small">Add expert to your favorite</small>
             </button>
           </el-col>
@@ -72,8 +74,9 @@
                 </dl>
 
                 <div class="d-table-cell text-right">
-                  <button type="button" class="collection btn-line" name="button">
-                    <i class="start"></i>收藏专家
+                  <button type="button" class="collection btn-line" name="button" :class="{liked: detail.isFavorite === 1}">
+                    <i class="start"></i>
+                    <span class="favorite-text">收藏专家</span>
                     <small class="small">Add expert to your favorite</small>
                   </button>
                 </div>
@@ -104,8 +107,9 @@
           </el-col>
 
           <el-col :span="4" class="actions" v-if="query.tpl==3">
-            <button type="button" class="collection btn-line" name="button">
-              <i class="start"></i>收藏专家
+            <button type="button" class="collection btn-line" name="button" :class="{liked: detail.isFavorite === 1}">
+              <i class="start"></i>
+              <span class="favorite-text">收藏专家</span>
               <small class="small">Add expert to your favorite</small>
             </button>
           </el-col>
@@ -146,7 +150,7 @@
     </div>
 
     <div class="pic">
-      <img src="~assets/img/bg-expertdetail-middle.jpg" alt="">
+      <img src="~assets/img/bg-expertdetail-middle.jpg" alt="个人详情中间图">
     </div>
 
     <!-- 企业研报 -->
@@ -164,7 +168,9 @@
               </div>
 
               <dl class="report-content">
-                <dt class="title text-overflow" :title="item.title">{{item.title}}<time class="time">2017-03-16</time></dt>
+                <dt class="title text-overflow" :title="item.title">
+                    <nuxt-link :to="{path: '/companyResearch/item.id'}">{{item.title}}<time class="time">2017-03-16</time></nuxt-link>
+                </dt>
                 <dd class="desc">{{item.report}}</dd>
               </dl>
             </li>
@@ -172,7 +178,6 @@
         </div>
       </div>
     </div>
-
   </section>
 </template>
 
@@ -218,7 +223,10 @@
       border-radius: 100%;
     }
   }
-
+   .favorite-text{
+       display: inline-block;
+       vertical-align: middle;
+   }
 
   .introduction{
     padding: 16px 0;
@@ -231,17 +239,18 @@
   }
   .btn{
     width: 170px;
-    text-align: left;
+    text-align: center;
     padding: 2px 8px;
     margin-left: 15px;
     color: #fff;
-
+    border-color: #fff;
     &:first-child{
       margin-left: 0;
     }
 
     &:hover{
       color: #fff;
+      border-color: #2788e7;
     }
     .small{
       display: block;
@@ -275,13 +284,13 @@
       }
 
       .address{
+        display: inline-block;
+        font-style: normal;
+        font-size: 14px;
         .location{
           margin-right: 8px;
           vertical-align: top;
         }
-        display: inline-block;
-        font-style: normal;
-        font-size: 14px;
       }
       dd{
         line-height: 28px;
@@ -296,9 +305,19 @@
       cursor: pointer;
       border-radius: 2px;
       padding: 5px 8px;
-
+      &.btn-line{
+       border-color: #fff;
+       &:hover{
+          border-color: #2788e8;
+        }
+       }
 
       .start{
+        display: inline-block;
+        vertical-align: middle;
+        width: 15px;
+        height: 14px;
+        margin-right:10px;
         background-image: url('~assets/img/start-white.png');
       }
 
@@ -320,16 +339,16 @@
 
     .btn-line{
       color: #2788e8;
-      &:hover{
-        color: #fff;
-      }
+        &:hover{
+           color: #fff;
+        }
     }
+
 
     .content{
       padding: 0 78px;
       color: #6e6e6e;
       position: relative;
-      padding: 10px 0;
     }
     .introduce{
       position: relative;
@@ -463,5 +482,9 @@
       margin: 0 0 20px;
     }
   }
-
+  // 收藏成功
+     .collection.liked{
+         border-color: #2788e8;
+         background-color: #2788e8;
+     }
 </style>
