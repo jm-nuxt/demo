@@ -68,12 +68,11 @@
 
 		methods: {
 			login (formName) {
-				
 
 				this.$refs[formName].validate((valid) => {
           if (valid) {
-          	login.hasLogin()
-          	
+          	login.hasLogin().then(()=>{}, ()=>{})
+
 						axios.post(`/webapi/v2/validateLoginInfo`, this.form)
 							.then(({data}) => {
 								if(data.code === 200){
@@ -89,9 +88,11 @@
 								}
 							})
 							.then(data => {
-								console.log(data)
-								// this.$store.commit('SET_OPEN', false)
-								return axios.get(`/webapi/v2/userInfo`)
+								this.$store.commit('SET_OPEN', {opend: false})
+								return axios.get(`/webapi/v2/userInfo`).then(data => data.data.rows || {})
+							})
+							.then(data => {
+								this.$store.commit('SET_USER', data)
 							})
 							.catch(e => {
 								console.log(e)

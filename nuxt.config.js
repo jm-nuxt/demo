@@ -32,7 +32,7 @@ module.exports = {
       // changeOrigin: true
     },
     '/sso': {
-      target: address.USERCENTER_ADDRESS,
+      target: address.SERVER_ADDRESS,
       ws: false
     }
   },

@@ -51,6 +51,8 @@
 <script>
 	import axios from '~/plugins/axios'
 
+	console.log(123)
+
 	export default {
 		name: 'experts',
 		data () {
