@@ -64,16 +64,20 @@
 				  </el-form-item>
 
 					<el-form-item class="text-center">
-				    <el-button class="submit-btn" type="primary" @click="submitForm('ruleForm')">提交</el-button>
+				    <el-button  :disabled="loading" class="submit-btn" type="primary" @click="submitForm('form')"> 
+				    	<span v-show="!loading">提交</span> 
+				    	<span v-show="loading">正在提交中...</span> 
+				    </el-button>
 				  </el-form-item>
 				 </div>
 			</el-form>
-
 		</div>
 	</section>
 </template>
 
 <script>
+	import axios from '~/plugins/axios'
+
 	export default {
 		data () {
 			return {
@@ -128,14 +132,46 @@
 			}
 		},
 
+		computed: {
+			loading: {
+				get(){
+					return this.$store.state.release.loading
+				},
+
+				set(newVal) {
+					this.$store.state.release.loading = newVal
+				}
+			},
+			user: {
+				get(){
+					console.log(1111111)
+					return this.$store.state.user.user
+				},
+
+				set(newVal){
+					this.$store.state.user.user = newVal
+				}
+			}
+		},
+
 		methods: {
 			submitForm (formName) {
 				if (this.$store.state.user.user.id) {
 					this.$refs[formName].validate((valid) => {
 						if (valid) {
+							this.$store.commit('SET_RELEASE_LOADING', true)
+							axios.post(`/webapi/v2/surveyBill`, this.release)
+								.then(data => {
+									this.$store.commit('SET_RELEASE_LOADING', false)
+									const result = data.data || {}
+									if(result.statusCode === 200){
+										alert('发布成功')
+									}
 
-						} else {
-
+								}, data => {
+									console.log(data);
+								})
+								.catch(err => this.$store.commit('SET_RELEASE_LOADING', false))
 						}
 					})
 				} else {

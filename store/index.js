@@ -3,6 +3,7 @@ import footer from './footer'
 import experts from './experts'
 import login from './login'
 import user from './user'
+import release from './release'
 
 const createStroe = () => {
   return new Vuex.Store({
@@ -10,7 +11,8 @@ const createStroe = () => {
       footer,
       experts,
       login,
-      user
+      user,
+      release
     }
   })
 }

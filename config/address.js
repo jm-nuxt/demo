@@ -13,9 +13,9 @@ const envs = {
   production: {
     IMG_ADDRESS: 'http://img.jumore.com',
     SERVER_ADDRESS: 'http://www.jmexpert.com',
-    USERCENTER_ADDRESS: 'http://passport.jumore.com'
+    USERCENTER_ADDRESS: 'http://passport.jumore.com/cas/'
   }
 }
 
-let env = 'test'
+let env = 'production'
 module.exports = envs[env]

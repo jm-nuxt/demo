@@ -3,7 +3,6 @@ import address from '~/config/address'
 export default {
 	hasLogin(config) {
 		const Login = new Promise(function(resolve, reject) {
-			console.log(reject)
 			const script = document.createElement('script')
 			script.id = '_hasLoginJs'
 	    script.type = 'text/javascript'
@@ -19,10 +18,10 @@ export default {
 				reject()
 			}
 
-			window.userLoginSuccessCallback = function(){
+			window.userLoginSuccessCallback = function(token){
 				document.body.removeChild(script)
 				console.log('已经登录了')
-				resolve()
+				resolve(token)
 			}
 		})
 

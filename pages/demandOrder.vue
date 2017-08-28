@@ -59,7 +59,6 @@
 				  </el-form-item>
 				 </div>
 			</el-form>
-
 		</div>
 	</section>
 </template>
@@ -112,6 +111,10 @@
 		      ]
 		    }
 			}
+		},
+
+		computed: {
+			
 		},
 		methods: {
 			submitForm(formName){
