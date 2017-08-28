@@ -1,5 +1,10 @@
 const envs = {
-  dev: {
+	dev: {
+		IMG_ADDRESS: 'http://image.jm.com',
+    SERVER_ADDRESS: 'http://192.168.102.191:8099'
+	},
+
+  test: {
     IMG_ADDRESS: 'http://image.jm.com',
     SERVER_ADDRESS: 'http://webapi.jtt.com'
   },
@@ -10,5 +15,5 @@ const envs = {
   }
 }
 
-let env = 'production'
+let env = 'test'
 module.exports = envs[env]

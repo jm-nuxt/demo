@@ -111,9 +111,23 @@
 		        { required: true, message: '请输入联系方式', trigger: 'blur' }
 		      ]
 		    }
-
 			}
 		},
+		methods: {
+			submitForm(formName){
+				if(this.$store.state.user.user.id){
+					this.$refs[formName].validate((valid) => {
+						if(valid){
+
+						}else{
+
+						}
+					})
+				}else{
+					this.$store.commit('SET_OPEN', {opend: true});
+				}
+			}
+		}
 	}
 </script>
 

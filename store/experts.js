@@ -1,9 +1,7 @@
-import axios from '~/plugins/axios'
-
 const experts = {
   state: {
     loading: false,
-  	totalPage: 0
+    totalPage: 0
   },
 
   mutations: {
@@ -12,7 +10,7 @@ const experts = {
     },
 
     GET_TOTALPAGE (state, payload) {
-    	state.totalPage = payload
+      state.totalPage = payload
     }
   }
 }

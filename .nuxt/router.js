@@ -7,6 +7,8 @@ const _26cc3b47 = () => import('..\\pages\\index.vue' /* webpackChunkName: "page
 const _a17d7e12 = () => import('..\\pages\\releaseResearch.vue' /* webpackChunkName: "pages\\releaseResearch" */).then(m => m.default || m)
 const _d07640f8 = () => import('..\\pages\\experts\\index.vue' /* webpackChunkName: "pages\\experts" */).then(m => m.default || m)
 const _dd468810 = () => import('..\\pages\\demandOrder.vue' /* webpackChunkName: "pages\\demandOrder" */).then(m => m.default || m)
+const _715d9b75 = () => import('..\\pages\\companyResearch\\index.vue' /* webpackChunkName: "pages\\companyResearch" */).then(m => m.default || m)
+const _a1d411c6 = () => import('..\\pages\\companyResearch\\_id.vue' /* webpackChunkName: "pages\\companyResearch-id" */).then(m => m.default || m)
 const _074cf2ec = () => import('..\\pages\\experts\\_id.vue' /* webpackChunkName: "pages\\experts-id" */).then(m => m.default || m)
 
 
@@ -62,6 +64,16 @@ export function createRouter () {
 			path: "/demandOrder",
 			component: _dd468810,
 			name: "demandOrder"
+		},
+		{
+			path: "/companyResearch",
+			component: _715d9b75,
+			name: "companyResearch"
+		},
+		{
+			path: "/companyResearch/:id",
+			component: _a1d411c6,
+			name: "companyResearch-id"
 		},
 		{
 			path: "/experts/:id",

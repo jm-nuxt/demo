@@ -75,8 +75,7 @@
 
 <script>
 	export default {
-
-		data(){
+		data () {
 			return {
 				release: {
 					// 调研公司信息
@@ -110,7 +109,7 @@
 		        { required: true, message: '请输入调研描述', trigger: 'blur' }
 		      ],
 		      intentionUserName: [
-		        {required: true, message: '请输入发布者名称', trigger: 'blur' }
+		        { required: true, message: '请输入发布者名称', trigger: 'blur' }
 		      ],
 		      intentionUserCompany: [
 		        { required: true, message: '请输入发布者公司', trigger: 'blur' }
@@ -119,16 +118,31 @@
 		        { required: true, message: '请输入发布者职务', trigger: 'blur' }
 		      ],
 		      intentionUserEmail: [
-		        { required: true,  message: '请输入邮箱地址', trigger: 'blur' },
-		        { type: 'email', message: '请输入正确的邮箱地址', trigger:'blur' }
+		        { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+		        { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
 		      ],
 		      intentionUserTel: [
 		        { required: true, message: '请输入联系方式', trigger: 'blur' }
 		      ]
 		    }
-
 			}
 		},
+
+		methods: {
+			submitForm (formName) {
+				if (this.$store.state.user.user.id) {
+					this.$refs[formName].validate((valid) => {
+						if (valid) {
+
+						} else {
+
+						}
+					})
+				} else {
+					this.$store.commit('SET_OPEN', {opend: true})
+				}
+			}
+		}
 	}
 </script>
 
@@ -140,8 +154,6 @@
 	.release-form{
 		padding: 40px 0;
 	}
-
-
 
 	.submit-btn{
 		width: 200px;

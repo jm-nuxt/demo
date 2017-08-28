@@ -26,7 +26,7 @@
 </script>
 
 <style>
-.container
+/*.container
 {
   margin: 0;
   width: 100%;
@@ -58,5 +58,5 @@
   font-weight: 300;
   font-size: 2.5em;
   margin: 0;
-}
+}*/
 </style>

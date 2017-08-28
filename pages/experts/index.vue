@@ -3,7 +3,7 @@
 		<div class="website-container">
 			<ul class="experts">
 				<li v-for="(item, index) in experts" :key="index">
-					<nuxt-link target="_blank" :to="{ path: `/expert/${item.id}?tpl=${item.templateId || 1}` }">
+					<nuxt-link target="_blank" :to="{ path: `/experts/${item.id}?tpl=${item.templateId || 1}` }">
 						<el-row>
 							<el-col :span="3" class="text-center">
 								<div class="img-box">

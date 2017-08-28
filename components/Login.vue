@@ -26,7 +26,7 @@
 				</el-form-item>
 
 				<el-form-item>
-					<el-button class="login-btn" type="primary" @click="login()">登 录</el-button>
+					<el-button class="login-btn" type="primary" @click="login('form')">登 录</el-button>
 				</el-form-item>
 		  </el-form>
 
@@ -55,8 +55,7 @@
 
 				rules: {
 					username: [
-					 { required: true, message: '请输入手机号/邮箱', trigger: 'blur' },
-					 { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+					 { required: true, message: '请输入手机号/邮箱', trigger: 'blur' }
 				 ],
 
 				 password: [
@@ -67,22 +66,23 @@
 		},
 
 		methods: {
-			async login () {
-				console.log(this.form)
-
-				// 验证
-				const { data } = await axios.post(`/webapi/v2/validateLoginInfo`, this.form)
-
-				// 登录成功
-				if(data.code === 200){
-					this.$store.commit('SET_OPEN', false)
-
-					const { data } = await axios.get(`/webapi/v2/userInfo`)
-
-					console.log(data);
-				} else {
-					this.$message.error(`${data.desc}`);
-				}
+			async login (formName) {
+				this.$refs[formName].validate((valid) => {
+          if (valid) {
+						axios.post(`/webapi/v2/validateLoginInfo`, this.form)
+							.then(({data}) => {
+								if(data.code === 200){
+									this.$store.commit('SET_OPEN', false)
+									return axios.get(`/webapi/v2/userInfo`)
+								}else{
+									this.$message.error(`${data.desc}`)
+								}
+							})
+							.then(data => {
+								console.log(data)
+							})
+          }
+        })
 			}
 		},
 

@@ -279,6 +279,11 @@ module.exports = {
 var envs = {
   dev: {
     IMG_ADDRESS: 'http://image.jm.com',
+    SERVER_ADDRESS: 'http://192.168.102.191:8099'
+  },
+
+  test: {
+    IMG_ADDRESS: 'http://image.jm.com',
     SERVER_ADDRESS: 'http://webapi.jtt.com'
   },
 
@@ -288,7 +293,7 @@ var envs = {
   }
 };
 
-var env = 'production';
+var env = 'test';
 module.exports = envs[env];
 
 /***/ }),
