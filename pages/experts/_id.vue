@@ -74,7 +74,7 @@
                 </dl>
 
                 <div class="d-table-cell text-right">
-                  <button type="button" class="collection btn-line" name="button" :class="{liked: detail.isFavorite === 1}>
+                  <button type="button" class="collection btn-line" name="button" :class="{liked: detail.isFavorite === 1}">
                     <i class="start"></i>
                     <span class="favorite-text">收藏专家</span>
                     <small class="small">Add expert to your favorite</small>
@@ -107,7 +107,7 @@
           </el-col>
 
           <el-col :span="4" class="actions" v-if="query.tpl==3">
-            <button type="button" class="collection btn-line" name="button" :class="{liked: detail.isFavorite === 1}>
+            <button type="button" class="collection btn-line" name="button" :class="{liked: detail.isFavorite === 1}">
               <i class="start"></i>
               <span class="favorite-text">收藏专家</span>
               <small class="small">Add expert to your favorite</small>
@@ -150,7 +150,7 @@
     </div>
 
     <div class="pic">
-      <img src="~assets/img/bg-expertdetail-middle.jpg" alt="">
+      <img src="~assets/img/bg-expertdetail-middle.jpg" alt="个人详情中间图">
     </div>
 
     <!-- 企业研报 -->
@@ -178,7 +178,6 @@
         </div>
       </div>
     </div>
-
   </section>
 </template>
 
