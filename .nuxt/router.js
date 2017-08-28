@@ -3,10 +3,11 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _b54584a2 = () => import('..\\pages\\index.vue' /* webpackChunkName: "pages\\index" */).then(m => m.default || m)
-const _32e0615f = () => import('..\\pages\\releaseResearch.vue' /* webpackChunkName: "pages\\releaseResearch" */).then(m => m.default || m)
-const _85e7dbc8 = () => import('..\\pages\\experts\\index.vue' /* webpackChunkName: "pages\\experts" */).then(m => m.default || m)
-const _296feb84 = () => import('..\\pages\\experts\\_id.vue' /* webpackChunkName: "pages\\experts-id" */).then(m => m.default || m)
+const _26cc3b47 = () => import('..\\pages\\index.vue' /* webpackChunkName: "pages\\index" */).then(m => m.default || m)
+const _a17d7e12 = () => import('..\\pages\\releaseResearch.vue' /* webpackChunkName: "pages\\releaseResearch" */).then(m => m.default || m)
+const _d07640f8 = () => import('..\\pages\\experts\\index.vue' /* webpackChunkName: "pages\\experts" */).then(m => m.default || m)
+const _dd468810 = () => import('..\\pages\\demandOrder.vue' /* webpackChunkName: "pages\\demandOrder" */).then(m => m.default || m)
+const _074cf2ec = () => import('..\\pages\\experts\\_id.vue' /* webpackChunkName: "pages\\experts-id" */).then(m => m.default || m)
 
 
 
@@ -44,22 +45,27 @@ export function createRouter () {
     routes: [
 		{
 			path: "/",
-			component: _b54584a2,
+			component: _26cc3b47,
 			name: "index"
 		},
 		{
 			path: "/releaseResearch",
-			component: _32e0615f,
+			component: _a17d7e12,
 			name: "releaseResearch"
 		},
 		{
 			path: "/experts",
-			component: _85e7dbc8,
+			component: _d07640f8,
 			name: "experts"
 		},
 		{
+			path: "/demandOrder",
+			component: _dd468810,
+			name: "demandOrder"
+		},
+		{
 			path: "/experts/:id",
-			component: _296feb84,
+			component: _074cf2ec,
 			name: "experts-id"
 		}
     ],

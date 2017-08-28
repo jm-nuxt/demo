@@ -19,15 +19,15 @@
               <div class="sub-nav">
                 <ul>
                   <li>
-                    <a href="#">
+                    <nuxt-link :to="{path: '/demandOrder'}">
                       企业需求 <small>Enterprise demand</small>
-                    </a>
+                    </nuxt-link>
                   </li>
 
                   <li>
-                    <a href="#">
+                    <nuxt-link :to="{ path: `/experts` }">
                       媒体采访 <small>Media interview</small>
-                    </a>
+                    </nuxt-link>
                   </li>
                 </ul>
               </div>

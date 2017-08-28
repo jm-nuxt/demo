@@ -2,26 +2,17 @@
 	<section class="release-form-wrap">
 		<div class="website-container">
 			<header class="form-fieldset-header">
-				<h2> <span class="title">发布调研单</span></h2>
+				<h2> <span class="title">发布需求单</span></h2>
 			</header>
 
 			<el-form class="release-form" ref="form" :rules="rules" :model="release" label-width="125px">
 				<div class="form-textarea">
-					<el-form-item label="调研公司信息:" prop="companyIntroduces">
+					<el-form-item label="需求描述:" prop="requirementContent">
 				    <el-input
 				    	type="textarea"
-				    	placeholder="请尽可能的对公司信息进行描述，以便客服人员安排相应的专家进行调研"
+				    	placeholder="请尽可能说明具体内容问题，并对背景有所介绍，让专家能够快速理解您需求内容的重点"
 				    	:rows="5"
-				    	v-model="release.companyIntroduces">
-				    </el-input>
-				  </el-form-item>
-
-				  <el-form-item label="调研描述:" prop="content">
-				    <el-input
-				    	type="textarea"
-				    	:rows="5"
-							placeholder="请尽可能说明具体内容问题，并对背景有所介绍，让专家能够快速理解您调查内容的重点"
-				    	v-model="release.content">
+				    	v-model="release.requirementContent">
 				    </el-input>
 				  </el-form-item>
 				</div>
@@ -79,11 +70,8 @@
 		data(){
 			return {
 				release: {
-					// 调研公司信息
-					companyIntroduces: '',
-
-					// 调研描述
-					content: '',
+					// 需求描述
+					requirementContent: '',
 
 					// 发布者名称
 					intentionUserName: '',
@@ -102,12 +90,9 @@
 				},
 
 				rules: {
-		      companyIntroduces: [
-		        { required: true, message: '请输入调研公司信息', trigger: 'blur' },
+		      requirementContent: [
+		        { required: true, message: '请输入需求描述', trigger: 'blur' },
 		        { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-		      ],
-		      content: [
-		        { required: true, message: '请输入调研描述', trigger: 'blur' }
 		      ],
 		      intentionUserName: [
 		        {required: true, message: '请输入发布者名称', trigger: 'blur' }
