@@ -2,8 +2,8 @@
 	<section>
 		<el-dialog custom-class="dialog-login"  :visible.sync="opend">
 			<h2 class="text-center title">欢迎登录</h2>
-		  <el-form :model="form" :rules="rules">
-		    <el-form-item>
+		  <el-form :model="form"  ref="form" :rules="rules">
+		    <el-form-item prop="username">
 		      <el-input
 		      	v-model="form.username"
 		      	auto-complete="off"
@@ -11,7 +11,7 @@
 		      </el-input>
 		    </el-form-item>
 
-		    <el-form-item>
+		    <el-form-item prop="password">
 		      <el-input
 		      	type="password"
 		      	v-model="form.password"
@@ -51,6 +51,17 @@
 				form: {
 					username: '',
 					password: ''
+				},
+
+				rules: {
+					username: [
+					 { required: true, message: '请输入手机号/邮箱', trigger: 'blur' },
+					 { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+				 ],
+
+				 password: [
+					 { required: true, message: '请输入账号密码', trigger: 'blur' }
+				 ]
 				}
 			}
 		},
@@ -60,7 +71,6 @@
 				console.log(this.form)
 
 				// 验证
-
 				const { data } = await axios.post(`/webapi/v2/validateLoginInfo`, this.form)
 
 				// 登录成功
