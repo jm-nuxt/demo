@@ -1,54 +1,59 @@
 <template>
-	<section class="experts-wrap">
-		<div class="website-container">
-			<ul class="experts">
-				<li v-for="(item, index) in experts" :key="index">
-					<nuxt-link target="_blank" :to="{ path: `/experts/${item.id}?tpl=${item.templateId || 1}` }">
-						<el-row>
-							<el-col :span="3" class="text-center">
-								<div class="img-box">
-									<img :src="item.imgUrl | imgCdn" :alt="item.expertName" :title="item.expertName">
-								</div>
-							</el-col>
-							<el-col :span="21">
-								<dl>
-									<dt>
-										<h3 :title="item.expertName" class="expert-name">{{ item.expertName }}</h3>
-										
-										<address class="address" :title="item.city"> <i class="icon-location"></i>{{ item.city }}</address>
-										
-										<span class="job" :title="item.positionName">{{ item.positionName }}</span>
+    <section class="experts-wrap">
+        <div class="website-container">
+            <ul class="experts">
+                <li v-for="(item, index) in experts" :key="index">
+                    <nuxt-link target="_blank" :to="{ path: `/experts/${item.id}?tpl=${item.templateId || 1}` }">
+                        <el-row>
+                            <el-col :span="3" class="text-center">
+                                <div class="img-box">
+                                    <img :src="item.imgUrl | imgCdn" :alt="item.expertName" :title="item.expertName">
+                                </div>
+                            </el-col>
+                            <el-col :span="21">
+                                <dl>
+                                    <dt>
+                                    <h3 :title="item.expertName" class="expert-name">{{ item.expertName }}</h3>
 
-										<span v-if="item.companyName" :title="item.companyName"> | {{ item.companyName}}</span>
+                                    <address class="address" :title="item.city"><i class="icon-location"></i>{{
+                                        item.city }}
+                                    </address>
 
-										<button 
-											type="button" 
-											class="pull-right btn btn-primary" 
-											:class="{'is-collect': item.isFavorite === 1}"
-											@click.stop.prevent="collection(item.id)">
-											<i class="icon-start-white"></i>
-											收藏专家
-										</button>
-									</dt>
-									<dd class="expert-desc-title">专家简介</dd>
-									<dd class="expert-desc" :title="item.expertIntroduces">{{ item.expertIntroduces }}</dd>
-								</dl>
-							</el-col>
-						</el-row>
-					</nuxt-link>
-				</li>
-			</ul>
+                                    <span class="job" :title="item.positionName">{{ item.positionName }}</span>
 
-			<a class="more" v-if="totalPage > page" @click.stop="getExperts()">
-				
-				<span v-show="!loading">更多专家 <span class="en">More</span> <i class="icon-arrow-right"></i></span>
-				<span v-show="loading">加载中...</span>
-			</a>
-		</div>
-	</section>
+                                    <span v-if="item.companyName"
+                                          :title="item.companyName"> | {{ item.companyName}}</span>
+
+                                    <button
+                                            type="button"
+                                            class="pull-right btn btn-primary"
+                                            :class="{'is-collect': item.isFavorite === 1}"
+                                            @click.stop.prevent="collection(item.id)">
+                                        <i class="icon-start-white"></i>
+                                        收藏专家
+                                    </button>
+                                    </dt>
+                                    <dd class="expert-desc-title">专家简介</dd>
+                                    <dd class="expert-desc" :title="item.expertIntroduces">{{ item.expertIntroduces }}
+                                    </dd>
+                                </dl>
+                            </el-col>
+                        </el-row>
+                    </nuxt-link>
+                </li>
+            </ul>
+
+            <a class="more" v-if="totalPage > page" @click.stop="getExperts()">
+
+                <span v-show="!loading">更多专家 <span class="en">More</span> <i class="icon-arrow-right"></i></span>
+                <span v-show="loading">加载中...</span>
+            </a>
+        </div>
+    </section>
 </template>
 
 <script>
+
 	import axios from '~/plugins/axios'
 
 	console.log(123)
@@ -147,84 +152,89 @@
 			}
 		}
 	}	
+
 </script>
 
-<style lang="scss" scoped>
-	
-	.experts-wrap{
-		border-top: 2px solid #1c86ea;
-		padding-top: 30px;
-	}
+<style lang="scss" rel="stylesheet/scss" scoped>
 
-	.experts{
-		
-		li{
-			margin-bottom: 16px;
-			padding: 20px;
-		}
-		
-		.is-collect{
-			background-color: #fff;
-			color: #6e6e6e;
-			border: 1px solid #ccc;
+    .experts-wrap {
+        border-top: 2px solid #1c86ea;
+        padding-top: 30px;
+    }
 
-			.icon-start-white{
-				background-image: url('~assets/img/start-stroke.png');
-			}
-		}
+    .experts {
 
-		li:hover{
-			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-			.expert-name{
-				color: #F68306;
-			}
-		}
-		
-		.img-box{
-			width: 120px;
-			height: 120px;
-			border-radius: 100%;
-			border: none;
-			display: inline-block;
-		}
+    li {
+        margin-bottom: 16px;
+        padding: 20px;
+    }
 
-		img{
-			width: 100%;
-			height: 100%;
-			border-radius: 100%;
-		}
+    .is-collect {
+        background-color: #fff;
+        color: #6e6e6e;
+        border: 1px solid #ccc;
 
-		.expert-name{
-			font-size: 20px;
-			font-weight: normal;
-			color: #3d3d3d;
-			display: inline-block;
-			margin-right: 25px;
-		}
+    .icon-start-white {
+        background-image: url('~assets/img/start-stroke.png');
+    }
 
-		.address{
-      .location{
+    }
+
+    li:hover {
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+
+    .expert-name {
+        color: #F68306;
+    }
+
+    }
+
+    .img-box {
+        width: 120px;
+        height: 120px;
+        border-radius: 100%;
+        border: none;
+        display: inline-block;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+    }
+
+    .expert-name {
+        font-size: 20px;
+        font-weight: normal;
+        color: #3d3d3d;
+        display: inline-block;
+        margin-right: 25px;
+    }
+
+    .address {
+        display: inline-block;
+        font-style: normal;
+        margin-right: 20px;
+    .location {
         margin-right: 8px;
         vertical-align: top;
-      }
-      display: inline-block;
-      font-style: normal;
-      margin-right: 20px;
+    }
     }
 
-    .btn{
-    	padding: 8px 20px;
-			border-radius: 2px;
+    .btn {
+        padding: 8px 20px;
+        border-radius: 2px;
     }
 
-    .expert-desc-title{
-    	font-size: 16px;
-    	color: #3d3d3d;
-    	margin-top: 8px;
+    .expert-desc-title {
+        font-size: 16px;
+        color: #3d3d3d;
+        margin-top: 8px;
     }
 
-    dd{
-    	line-height: 26px;
+    dd {
+        line-height: 26px;
     }
-	}
+
+    }
 </style>

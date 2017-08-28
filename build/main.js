@@ -89,16 +89,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 console.log(0);
 
 var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
-var host = process.env.HOST || '192.168.102.114';
+var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
 
 app.set('port', port);
-
+console.log(1);
 // Import API Routes
 app.use('/api', __WEBPACK_IMPORTED_MODULE_2__api__["a" /* default */]);
 
 // Import and Set Nuxt.js options
-console.log(1);
 var config = __webpack_require__(5);
 console.log(2);
 config.dev = !("development" === 'production');
@@ -106,7 +105,7 @@ config.dev = !("development" === 'production');
 // TODO remove
 process.on('unhandledRejection', function (reason, p) {
   console.log(p);
-  console.log("Unhandled Rejection:", reason.stack);
+  console.log('Unhandled Rejection:', reason.stack);
   process.exit(1);
 });
 
@@ -215,7 +214,6 @@ module.exports = {
     '/webapi/v2': {
       target: address.SERVER_ADDRESS,
       ws: false
-      // changeOrigin: true
     },
     '/sso': {
       target: address.SERVER_ADDRESS,
@@ -289,12 +287,13 @@ var envs = {
   test: {
     IMG_ADDRESS: 'http://image.jm.com',
     SERVER_ADDRESS: 'http://webapi.jtt.com',
-    USERCENTER_ADDRESS: "http://test-uc3.dev.com"
+    USERCENTER_ADDRESS: 'http://test-uc3.dev.com'
   },
 
   production: {
     IMG_ADDRESS: 'http://img.jumore.com',
-    SERVER_ADDRESS: 'http://www.jmexpert.com'
+    SERVER_ADDRESS: 'http://www.jmexpert.com',
+    USERCENTER_ADDRESS: 'http://passport.jumore.com'
   }
 };
 

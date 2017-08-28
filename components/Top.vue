@@ -8,17 +8,17 @@
         <a v-if="!user" @click.prevent="showLogin()">登录/Sign</a>
 
         <a href="" v-if="user">
-          <i>icon</i>
+          <!-- i>icon</i>
           <span>{{user.userName}}</span>
-          <i>icon</i>
+          <i>icon</i> -->
 
-          <div>
+          <!-- <div>
             <p>
               <a href="#">个人中心</a>
             </p>
 
             <p><a href="#">退出</a></p>
-          </div>
+          </div> -->
         </a>
       </el-col>
     </el-row>
