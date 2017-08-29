@@ -14,7 +14,6 @@
         </div>
       </div>
     </header>
-
     <div class="website-container clearfix">
       <div class="main-bar pull-left">
         <header class="header-title">
@@ -69,19 +68,11 @@
               <label>所在公司:</label>
               <span>{{expert.companyName}}</span>
             </p>
-
-        <!--     <p> 
-              <label>擅长领域:</label>
-              <span>开发商穿心嘻嘻嘻</span>
-            </p> -->
-
             <p v-if="Number(expert.yearsOfWorking)">
               <label>年限:</label>
               <span>{{Number(expert.yearsOfWorking).toFixed(0)}}年</span>
             </p>
           </div>
-          
-
           <div class="text-center">
             <nuxt-link :to="{ path: `/experts/${expert.id}?tpl=${expert.templateId}` }" class="btn btn-primary expert-link">专家个人页面</nuxt-link>
           </div>
@@ -101,25 +92,23 @@ export default {
     const { data } = await axios.get(`/webapi/v2/indexBottomMenu`)
     store.commit('SET_FOOTER', data.rows)
   },
-    
-  async asyncData({ params }){
+  async asyncData ({ params }) {
     try {
       const result = await axios.get(`/webapi/v2/detailedResearchReport/${params.id}`)
       const detail = result.data || {}
       const { data } = await axios.get(`/webapi/v2/detailedExpertInfo/${detail.rows.expertId}`)
-      
       return {
         detail: detail.rows || {},
         expert: data.rows || {}
       }
-    } catch(e){
+    } catch (e) {
       console.log(e)
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" type="text/scss" rel="stylesheet/scss" scoped>
 
   .img-box{
     img{

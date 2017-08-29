@@ -9,7 +9,7 @@
                 <div class="img-box">
                   <img v-if="item.imgUrl" :src="item.imgUrl | imgCdn" :alt="item.expertName" :title="item.expertName">
 
-                  <img v-if="!item.imgUrl" src="~assets/img/headGray.png" alt="用户头像" :title="item.expertName">
+                  <img v-else src="~assets/img/headGray.png" alt="用户头像" :title="item.expertName">
                 </div>
               </el-col>
               <el-col :span="21">
@@ -38,7 +38,7 @@
                     </button>
                   </dt>
                   <dd class="expert-desc-title">专家简介</dd>
-                  <dd class="expert-desc" 
+                  <dd class="expert-desc"
                     :title="item.expertIntroduces">{{ item.expertIntroduces | cutStr }}
                   </dd>
                 </dl>
@@ -57,136 +57,117 @@
 </template>
 
 <script>
+import axios from '~/plugins/axios'
 
-	import axios from '~/plugins/axios'
+export default {
+  name: 'experts',
+  data () {
+    return {
+      experts: [],
+      page: 1,
+      limit: 8
+    }
+  },
 
-	export default {
-		name: 'experts',
-		data () {
-			return {
-				experts: [],
-				page: 1,
-				limit: 8
-			}
-		},
-
-		computed: {
-      user () {
-        return this.$store.state.user.user
-      },
-			/**
-			 * [totalPage 获取砖家列表总页数]
-			 * @return {[Number]} [专家列表总页数]
-			 */
-			totalPage () {
-				return this.$store.state.experts.totalPage
-			},
-
-			/**
-			 * [loading 是否正在请求专家的ajax请求中]
-			 * @return {[Boolean]} [请求专家列表状态]
-			 */
-			loading () {
-				return this.$store.state.experts.loading
-			}
-		},
-
-		/**
-		 * [asyncData Nuxt.js 服务端渲染函数]
-		 * @param  {[Object]} options.store    [Vuex store 对象]
-		 * @return {[Undefined]}               [无返回值]
-		 */
-		async asyncData ({ store }) {
-			try {
-				const { data } = await axios.get('/webapi/v2/pageExpertInfo', { params: { offset: 0, limit: 8 } })
-				store.commit('GET_TOTALPAGE', data.totalPage)
-				return {
-					experts: data.rows
-				}
-			}catch (e) {
-				console.log(e);
-			}
-		},
-
-    async fetch ({ store, params }) {
-      const { data } = await axios.get(`/webapi/v2/indexBottomMenu`)
-      store.commit('SET_FOOTER', data.rows)
+  computed: {
+    user () {
+      return this.$store.state.user.user
+    },
+    /**
+     * [totalPage 获取砖家列表总页数]
+     * @return {[Number]} [专家列表总页数]
+     */
+    totalPage () {
+      return this.$store.state.experts.totalPage
     },
 
-		methods: {
-			/**
-			 * [collection 点击收藏/取消收藏专家]
-			 * @param  {[Number]} expertId 		[收藏专家的ID]
-			 * @return {[Undefined]}          [无返回值]
-			 */
-			async collection (expert) {
-				let user = this.$store.state.user.user
-				if(user.id){
-					try {
-						// TODO: 判断收藏还是取消收藏
-            
-            this.$set(expert, 'loading', true)
-            
-            let path = 'favorite'
-
-            if(expert.isFavorite ===1){
-              path = 'notFavorite'
-            }
-
-            const { data } = await axios.get(`/webapi/v2/${path}/1/${expert.id}`)
-            this.$set(expert, 'loading', false)
-
-            if(data.statusCode !== 200){
-              this.$message.error(data.desc)
-            }else{
-              expert.isFavorite = expert.isFavorite? 0 : 1
-            }
-
-					} catch (e) {
-            this.$set(expert, 'loading', false)
-					}
-				}else{
-					this.$store.commit('SET_OPEN', {opend: true})					
-				}
-				
-			},
-
-			/**
-			 * [getExperts 分页获取专家列表]
-			 * @return {[Undefined]} [无返回值]
-			 */
-			async getExperts () {
-				this.$store.commit('SET_LOADING', true)
-
-				try {
-					let params = { 
-						params: { 
-							offset: (this.page) * this.limit, 
-							limit: this.limit
-						}
-					}
-					const { data } = await axios.get('/webapi/v2/pageExpertInfo', params)
-					this.experts = this.experts.concat(data.rows)
-					this.page++;
-				} catch (e) {
-					console.log(e)
-				}
-				this.$store.commit('SET_LOADING', false)
-			}
-		},
-
-    watch: {
-      async user (val, newVal) {
-        try {
-          const { data } = await axios.get('/webapi/v2/pageExpertInfo', { params: { offset: 0, limit: this.page*this.limit } })
-          this.experts = data.rows
-        }catch (e) {
-          console.log(e);
-        }
-      }
+    /**
+     * [loading 是否正在请求专家的ajax请求中]
+     * @return {[Boolean]} [请求专家列表状态]
+     */
+    loading () {
+      return this.$store.state.experts.loading
     }
-	}	
+  },
+  /**
+   * [asyncData Nuxt.js 服务端渲染函数]
+   * @param  {[Object]} options.store    [Vuex store 对象]
+   * @return {[Undefined]}               [无返回值]
+   */
+  async asyncData ({ store }) {
+    try {
+      const { data } = await axios.get('/webapi/v2/pageExpertInfo', { params: { offset: 0, limit: 8 } })
+      store.commit('GET_TOTALPAGE', data.totalPage)
+      return {
+        experts: data.rows
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  async fetch ({ store }) {
+    const { data } = await axios.get(`/webapi/v2/indexBottomMenu`)
+    store.commit('SET_FOOTER', data.rows)
+  },
 
+  methods: {
+    /**
+     * [collection 点击收藏/取消收藏专家]
+     * @param  {[Number]} expertId [收藏专家的ID]
+     * @return {[Undefined]}          [无返回值]
+     */
+    async collection (expert) {
+      let user = this.$store.state.user.user
+      if (user.id) {
+        try {
+          // TODO: 判断收藏还是取消收藏
+          this.$set(expert, 'loading', true)
+          let path = 'favorite'
+
+          if (expert.isFavorite === 1) {
+            path = 'notFavorite'
+          }
+
+          const { data } = await axios.get(`/webapi/v2/${path}/1/${expert.id}`)
+          this.$set(expert, 'loading', false)
+
+          if (data.statusCode !== 200) {
+            this.$message.error(data.desc)
+          } else {
+            expert.isFavorite = expert.isFavorite? 0 : 1
+          }
+        } catch (e) {
+          this.$set(expert, 'loading', false)
+        }
+      } else {
+        this.$store.commit('SET_OPEN', {opend: true})
+      }
+    },
+
+    /**
+     * [getExperts 分页获取专家列表]
+     * @return {[Undefined]} [无返回值]
+     */
+    async getExperts () {
+      this.$store.commit('SET_LOADING', true)
+
+      try {
+        let params = {
+          params: {
+            offset: (this.page) * this.limit,
+            limit: this.limit
+          }
+        }
+        const {data} = await axios.get('/webapi/v2/pageExpertInfo', params)
+        this.experts = this.experts.concat(data.rows)
+        this.page++
+      } catch (e) {
+        console.log(e)
+      }
+      this.$store.commit('SET_LOADING', false)
+    }
+  }
+}
 </script>
 
 <style lang="scss" type="text/scss" rel="stylesheet/scss" scoped>
@@ -208,17 +189,18 @@
         color: #6e6e6e;
         border: 1px solid #ccc;
 
-      .icon-start-white {
-          background-image: url('~assets/img/start-stroke.png');
-      }
+    .icon-start-white {
+        background-image: url('~assets/img/start-stroke.png');
+    }
+
     }
 
     li:hover {
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 
-      .expert-name {
-          color: #F68306;
-      }
+    .expert-name {
+        color: #F68306;
+    }
 
     }
 
