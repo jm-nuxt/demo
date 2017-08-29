@@ -207,7 +207,7 @@
 
                             <dl class="report-content">
                                 <dt class="title text-overflow" :title="item.title">
-                                    <nuxt-link :to="{path: '/companyResearch/item.id'}">{{item.title}}
+                                    <nuxt-link :to="{path: `/companyResearch/${item.id}`}">{{item.title}}
                                         <time class="time">{{item.publisTime}}</time>
                                     </nuxt-link>
                                 </dt>
@@ -262,9 +262,9 @@
             }
           })
         } else {
-          axios.get(`/webapi/v2/noFavorite/1/${this.$route.params.id}`).then(({data}) => {
+          axios.get(`/webapi/v2/notFavorite/1/${this.$route.params.id}`).then(({data}) => {
             if (data.rows.statusCode === 200) {
-              this.detail.isFavorite = -1
+              this.detail.isFavorite = 0
             }
           })
         }

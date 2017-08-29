@@ -3,8 +3,8 @@
     <!-- 幻灯片 -->
     <el-carousel class="banner" height="500px" :interval="5000" arrow="hover">
       <el-carousel-item v-for="(item, index) in carouselsFilter" :key="index">
-        <a :href="item.url" @click="jplNul($event,item.url)">
-          <img :src="item.adsImg | imgCdn">
+        <a :href="item.url || `javascript:;`" target="_blank" :title="item.title">
+          <img :src="item.adsImg | imgCdn" alt="顶部广告轮播图">
         </a>
       </el-carousel-item>
     </el-carousel>
@@ -91,8 +91,8 @@
               </nuxt-link>
             </li>
             <li>
-              <a :href="styleBannerUrl" @click="jplNul($event,styleBannerUrl)">
-                <img class="style-banner" v-lazyload="lazyLoadPic(styleBannerImg)">
+              <a :href="styleBannerUrl || `javascript:;`" target="_blank">
+                <img class="style-banner" v-lazyload="lazyLoadPic(styleBannerImg)" alt="中间广告图">
               </a>
             </li>
           </ul>
@@ -125,19 +125,18 @@
               <nuxt-link class="detail" :to="{ path: `/experts/${item.id}?tpl=${item.templateId || 1}` }"> 查看详情 》</nuxt-link>
             </li>
           </ul>
-          <nuxt-link class="more" to="{path: `/experts`}">
+          <nuxt-link class="more" to="/experts">
             更多专家 <span class="en">More</span>
             <i class="icon-arrow-right"></i>
           </nuxt-link>
         </div>
       </div>
     </div>
-
     <!-- 底部幻灯片 -->
     <el-carousel class="banner" indicator-position="none" height="500px">
       <el-carousel-item v-for="(item, index) in bottomCarouselsFilter" :key="index">
-        <a :href="item.url" @click="jplNul($event, item.url)">
-          <img v-lazyload="lazyLoadPic(item.adsImg)" >
+        <a :href="item.url || `javascript:;`" :title="item.title" target="_blank">
+          <img v-lazyload="lazyLoadPic(item.adsImg)" alt="底部广告轮播图">
         </a>
       </el-carousel-item>
     </el-carousel>
@@ -184,12 +183,12 @@
 
     computed: {
       styleBannerImg () {
-        var sb = this.styleBanner || []
+        var sb = this.styleInfoFilter || []
         return sb.length > 0 ? sb[0].adsImg : ''
       },
 
       styleBannerUrl () {
-        var sb = this.styleBanner || []
+        var sb = this.styleInfoFilter || []
         return sb.length > 0 ? sb[0].url : ''
       }
     },
