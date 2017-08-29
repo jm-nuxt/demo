@@ -3,8 +3,9 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _11fc5c36 = () => import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
-const _6a1c0423 = () => import('..\\pages\\expert\\_id.vue' /* webpackChunkName: "pages/expert-id" */).then(m => m.default || m)
+const _8f0c9eb0 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
+const _39338e72 = () => import('../pages/expert/index.vue' /* webpackChunkName: "pages/expert" */).then(m => m.default || m)
+const _722c7e22 = () => import('../pages/expert/_id.vue' /* webpackChunkName: "pages/expert-id" */).then(m => m.default || m)
 
 
 
@@ -42,12 +43,17 @@ export function createRouter () {
     routes: [
 		{
 			path: "/",
-			component: _11fc5c36,
+			component: _8f0c9eb0,
 			name: "index"
 		},
 		{
-			path: "/expert/:id?",
-			component: _6a1c0423,
+			path: "/expert",
+			component: _39338e72,
+			name: "expert"
+		},
+		{
+			path: "/expert/:id",
+			component: _722c7e22,
 			name: "expert-id"
 		}
     ],

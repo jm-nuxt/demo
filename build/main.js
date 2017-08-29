@@ -88,7 +88,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
-var host = process.env.HOST || '192.168.102.114';
+var host = process.env.HOST || '192.168.2.106';
 var port = process.env.PORT || 3000;
 
 app.set('port', port);
@@ -174,10 +174,10 @@ router.get('/users/:id', function (req, res, next) {
 
 /***/ }),
 /* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-var address = __webpack_require__(7);
+var address = __webpack_require__(6);
+
 module.exports = {
   /*
    ** Headers of the page
@@ -242,7 +242,7 @@ module.exports = {
         name: 'fonts/[name].[hash:7].[ext]'
       }
     }],
-    postcss: [__webpack_require__(8)({
+    postcss: [__webpack_require__(7)({
       browsers: ['last 3 versions']
     })]
   },
@@ -263,17 +263,25 @@ module.exports = {
 };
 
 /***/ }),
-/* 6 */,
-/* 7 */
+/* 6 */
 /***/ (function(module, exports) {
 
-module.exports = {
-  IMG_ADDRESS: 'http://img.jumore.com',
-  SERVER_ADDRESS: 'http://webapi.jtt.com' //'http://www.jmexpert.com'
-};
+var envs = {
+  dev: {
+    IMG_ADDRESS: 'http://image.jm.com',
+    SERVER_ADDRESS: 'http://webapi.jtt.com' //'http://www.jmexpert.com'
+  },
+
+  production: {
+    IMG_ADDRESS: 'http://img.jumore.com',
+    SERVER_ADDRESS: 'http://www.jmexpert.com'
+  }
+  // let env = 'dev'
+};var env = 'production';
+module.exports = envs[env];
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("autoprefixer");
