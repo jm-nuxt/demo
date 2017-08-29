@@ -53,109 +53,103 @@
 </template>
 
 <script>
+import axios from '~/plugins/axios'
 
-	import axios from '~/plugins/axios'
+export default {
+  name: 'experts',
+  data () {
+    return {
+      experts: [],
+      page: 1,
+      limit: 8
+    }
+  },
 
-	console.log(123)
+  computed: {
+    /**
+     * [totalPage 获取砖家列表总页数]
+     * @return {[Number]} [专家列表总页数]
+     */
+    totalPage () {
+      return this.$store.state.experts.totalPage
+    },
 
-	export default {
-		name: 'experts',
-		data () {
-			return {
-				experts: [],
-				page: 1,
-				limit: 8
-			}
-		},
+    /**
+     * [loading 是否正在请求专家的ajax请求中]
+     * @return {[Boolean]} [请求专家列表状态]
+     */
+    loading () {
+      return this.$store.state.experts.loading
+    }
+  },
 
-		computed: {
-			/**
-			 * [totalPage 获取砖家列表总页数]
-			 * @return {[Number]} [专家列表总页数]
-			 */
-			totalPage () {
-				return this.$store.state.experts.totalPage
-			},
+  /**
+   * [asyncData Nuxt.js 服务端渲染函数]
+   * @param  {[Object]} options.store    [Vuex store 对象]
+   * @return {[Undefined]}               [无返回值]
+   */
+  async asyncData ({store}) {
+    try {
+      const {data} = await axios.get('/webapi/v2/pageExpertInfo', {params: {offset: 0, limit: 8}})
+      store.commit('GET_TOTALPAGE', data.totalPage)
+      return {
+        experts: data.rows
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  },
 
-			/**
-			 * [loading 是否正在请求专家的ajax请求中]
-			 * @return {[Boolean]} [请求专家列表状态]
-			 */
-			loading () {
-				return this.$store.state.experts.loading
-			}
-		},
+  methods: {
+    /**
+     * [collection 点击收藏/取消收藏专家]
+     * @param  {[Number]} expertId        [收藏专家的ID]
+     * @return {[Undefined]}          [无返回值]
+     */
+    async collection (expertId) {
+      let user = this.$store.state.user.user
 
-		/**
-		 * [asyncData Nuxt.js 服务端渲染函数]
-		 * @param  {[Object]} options.store    [Vuex store 对象]
-		 * @return {[Undefined]}               [无返回值]
-		 */
-		async asyncData ({ store }) {
-			try {
-				const { data } = await axios.get('/webapi/v2/pageExpertInfo', { params: { offset: 0, limit: 8 } })
-					store.commit('GET_TOTALPAGE', data.totalPage)
-				return {
-					experts: data.rows
-				}
-			}catch (e) {
-				console.log(e);
-			}
-		},
+      if (user.id) {
+        try {
+          // TODO: 判断收藏还是取消收藏
+          const {data} = await axios.get(`/webapi/v2/favorite/1/${expertId}`)
+          console.log(data)
 
-		methods: {
-			/**
-			 * [collection 点击收藏/取消收藏专家]
-			 * @param  {[Number]} expertId 		[收藏专家的ID]
-			 * @return {[Undefined]}          [无返回值]
-			 */
-			async collection (expertId) {
-				let user = this.$store.state.user.user
-				console.log(user)
+        } catch (e) {
+          console.log(e)
+        }
+      } else {
+        this.$store.commit('SET_OPEN', {opend: true})
+      }
+    },
 
-				if(user.id){
-					try {
-						// TODO: 判断收藏还是取消收藏
-						const { data } = await axios.get(`/webapi/v2/favorite/1/${expertId}`)
-						console.log(data)
+    /**
+     * [getExperts 分页获取专家列表]
+     * @return {[Undefined]} [无返回值]
+     */
+    async getExperts () {
+      this.$store.commit('SET_LOADING', true)
 
-					} catch (e) {
-						console.log(e)
-					}
-				}else{
-					this.$store.commit('SET_OPEN', {opend: true})					
-				}
-				
-			},
-
-			/**
-			 * [getExperts 分页获取专家列表]
-			 * @return {[Undefined]} [无返回值]
-			 */
-			async getExperts () {
-				this.$store.commit('SET_LOADING', true)
-
-				try {
-					let params = { 
-						params: { 
-							offset: (this.page) * this.limit, 
-							limit: this.limit
-						}
-					}
-					const { data } = await axios.get('/webapi/v2/pageExpertInfo', params)
-					this.experts = this.experts.concat(data.rows)
-					this.page++;
-				} catch (e) {
-					console.log(e)
-				}
-				this.$store.commit('SET_LOADING', false)
-			}
-		}
-	}	
-
+      try {
+        let params = {
+          params: {
+            offset: (this.page) * this.limit,
+            limit: this.limit
+          }
+        }
+        const {data} = await axios.get('/webapi/v2/pageExpertInfo', params)
+        this.experts = this.experts.concat(data.rows)
+        this.page++
+      } catch (e) {
+        console.log(e)
+      }
+      this.$store.commit('SET_LOADING', false)
+    }
+  }
+}
 </script>
 
-<style lang="scss" rel="stylesheet/scss" scoped>
+<style lang="scss" type="text/scss" rel="stylesheet/scss" scoped>
 
     .experts-wrap {
         border-top: 2px solid #1c86ea;
