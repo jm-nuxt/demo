@@ -27,7 +27,7 @@
         </el-form-item>
 
         <el-form-item>
-          <el-button class="login-btn" type="primary" @click="login('form')">登 录</el-button>
+          <el-button :disabled="loading" class="login-btn" type="primary" @click="login('form')">登 录</el-button>
         </el-form-item>
       </el-form>
 
@@ -52,8 +52,11 @@
 
 		data(){
 			return {
+        loading: false,
+
         centerAddress: address.CENTER_ADDRESS,
-				form: {
+				
+        form: {
 					username: '',
 					password: ''
 				},
@@ -76,7 +79,7 @@
 				this.$refs[formName].validate((valid) => {
           if (valid) {
           	login.hasLogin().then(()=>{}, ()=>{})
-
+            this.loading = true
 						axios.post(`/webapi/v2/validateLoginInfo`, this.form)
 							.then(({data}) => {
 								if(data.code === 200){
@@ -97,9 +100,11 @@
 							})
 							.then(data => {
 								this.$store.commit('SET_USER', data)
+                this.loading = false
 							})
 							.catch(e => {
 								console.log(e)
+                this.loading = false
 							})
 
           }

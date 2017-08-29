@@ -91,7 +91,7 @@
         return Promise.all([
           axios.get(`/webapi/v2/expertAttribute/${expertId}`).then((data) => data.data),
           axios.get(`/webapi/v2/researchReport/${expertId}`).then((data) => data.data.rows),
-          axios.get(`/webapi/v1/pageResearchReport?expertId=${params.id}&offset=0&limit=3`)
+          axios.get(`/webapi/v2/pageResearchReport?expertId=${params.id}&offset=0&limit=3`)
         ]).then(data => {
           return {
             attribute: data[0],
