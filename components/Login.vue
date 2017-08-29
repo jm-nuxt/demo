@@ -22,8 +22,8 @@
         </el-form-item>
 
         <el-form-item>
-          <a href="" class="pull-left">免费注册</a>
-          <a href="" class="pull-right">忘记密码</a>
+          <a target="_blank" class="pull-left">免费注册</a>
+          <a :href="`${centerAddress}/user/forgetPassword?flag=1`" target="_blank" class="pull-right">忘记密码</a>
         </el-form-item>
 
         <el-form-item>
@@ -45,12 +45,14 @@
 
 	import axios from '~/plugins/axios'
 	import login from '~/plugins/checkLogin'
+  import address from '~/config/address'
 
 	export default{
 		name: 'dialog-login',
 
 		data(){
 			return {
+        centerAddress: address.CENTER_ADDRESS,
 				form: {
 					username: '',
 					password: ''

@@ -72,25 +72,7 @@
 	export default {
 		data(){
 			return {
-				release: {
-					// 需求描述
-					requirementContent: '',
-
-					// 发布者名称
-					intentionUserName: '',
-
-					// 发布者公司
-					intentionUserCompany: '',
-
-					// 发布者职务
-					intentionUserPosition: '',
-
-					// 电子邮箱
-					intentionUserEmail: '',
-
-					// 联系方式
-					intentionUserTel: ''
-				},
+				
 
 				rules: {
 		      requirementContent: [
@@ -117,6 +99,11 @@
 			}
 		},
 
+		async fetch ({ store, params }) {
+      const { data } = await axios.get(`/webapi/v2/indexBottomMenu`)
+      store.commit('SET_FOOTER', data.rows)
+    },
+
 		computed: {
 			loading: {
 				get(){
@@ -125,6 +112,36 @@
 
 				set(newVal) {
 					this.$store.state.demandOrder.loading = newVal
+				}
+			},
+			user: {
+				get(){
+					return this.$store.state.user.user || {}
+				},
+
+				set(newVal){
+					this.$store.state.user.user = newVal
+				}
+			},
+			release(){
+				return {
+					// 需求描述
+					requirementContent: '',
+
+					// 发布者名称
+					intentionUserName: this.user.realName || '',
+
+					// 发布者公司
+					intentionUserCompany: this.user.companyName || '',
+
+					// 发布者职务
+					intentionUserPosition: this.user.job || '',
+
+					// 电子邮箱
+					intentionUserEmail: this.user.email || '',
+
+					// 联系方式
+					intentionUserTel: this.user.userName || ''
 				}
 			}
 		},

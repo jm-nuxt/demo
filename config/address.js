@@ -7,13 +7,15 @@ const envs = {
   test: {
     IMG_ADDRESS: 'http://image.jm.com',
     SERVER_ADDRESS: 'http://webapi.jtt.com',
-    USERCENTER_ADDRESS: 'http://test-uc3.dev.com'
+    USERCENTER_ADDRESS: 'http://test-uc3.dev.com',
+    CENTER_ADDRESS: 'http://center.jtt.com'
   },
 
   production: {
     IMG_ADDRESS: 'http://img.jumore.com',
     SERVER_ADDRESS: 'http://www.jmexpert.com',
-    USERCENTER_ADDRESS: 'http://passport.jumore.com/cas/'
+    USERCENTER_ADDRESS: 'http://passport.jumore.com/cas/',
+    CENTER_ADDRESS: 'http://center.jmexpert.com'
   }
 }
 

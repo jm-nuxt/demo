@@ -4,9 +4,28 @@
 			<header class="form-fieldset-header">
 				<h2> <span class="title">发布调研单</span></h2>
 			</header>
-
+			<!-- {{expert}} -->
 			<el-form class="release-form" ref="form" :rules="rules" :model="release" label-width="125px">
+
 				<div class="form-textarea">
+
+					<el-form-item v-if="expert.id" label="专家信息:">
+			    	<h3>
+			    		<span class="name">{{ expert.expertName }}</span>
+			    		<address class="address"><i class="icon-location"></i> {{expert.city}}</address>
+			    	</h3>
+							
+				    <p>
+				    	<span :title="expert.positionName">
+				    		{{ expert.positionName }}</span>
+				    		<span v-if="expert.positionName && expert.companyName"> | </span>
+				    		<span v-if="expert.companyName":title="expert.companyName">{{ expert.companyName }}</span> 
+				    		<span v-if="expert.yearsOfWorking"> {{ Number(expert.yearsOfWorking) }}年</span>
+				    </p>
+
+				    <p>{{ expert.expertIntroduces}}</p>
+				  </el-form-item>
+
 					<el-form-item label="调研公司信息:" prop="companyIntroduces">
 				    <el-input
 				    	type="textarea"
@@ -79,31 +98,10 @@
 	import axios from '~/plugins/axios'
 
 	export default {
+
+		
 		data () {
 			return {
-				release: {
-					// 调研公司信息
-					companyIntroduces: '',
-
-					// 调研描述
-					content: '',
-
-					// 发布者名称
-					intentionUserName: '',
-
-					// 发布者公司
-					intentionUserCompany: '',
-
-					// 发布者职务
-					intentionUserJob: '',
-
-					// 电子邮箱
-					intentionUserEmail: '',
-
-					// 联系方式
-					intentionUserTel: ''
-				},
-
 				rules: {
 		      companyIntroduces: [
 		        { required: true, message: '请输入调研公司信息', trigger: 'blur' },
@@ -132,7 +130,26 @@
 			}
 		},
 
+		async asyncData({query}){
+			if(query.expertId){
+				const { data } = await axios.get(`/webapi/v2/detailedExpertInfo/${query.expertId}`)
+				return {
+					expert: data.rows
+				}
+			}else{
+				return {
+					expert: {}
+				}
+			}
+		},
+
+		async fetch ({ store, params }) {
+      const { data } = await axios.get(`/webapi/v2/indexBottomMenu`)
+      store.commit('SET_FOOTER', data.rows)
+    },
+    
 		computed: {
+			
 			loading: {
 				get(){
 					return this.$store.state.release.loading
@@ -142,14 +159,41 @@
 					this.$store.state.release.loading = newVal
 				}
 			},
+
 			user: {
 				get(){
-					console.log(1111111)
-					return this.$store.state.user.user
+					return this.$store.state.user.user || {}
 				},
 
 				set(newVal){
 					this.$store.state.user.user = newVal
+				}
+			},
+
+			release() {
+				return {
+					// 调研公司信息
+					companyIntroduces: '',
+
+					// 调研描述
+					content: '',
+
+					// 发布者名称
+					intentionUserName: this.user.realName || '',
+
+					// 发布者公司
+					intentionUserCompany: this.user.companyName || '',
+
+					// 发布者职务
+					intentionUserJob: this.user.job || '',
+
+					// 电子邮箱
+					intentionUserEmail: this.user.email || '',
+
+					// 联系方式
+					intentionUserTel: this.user.userName || '',
+
+					objectId: this.$route.query.expertId || null
 				}
 			}
 		},
@@ -171,8 +215,6 @@
 		                })
 									}
 
-								}, data => {
-									console.log(data);
 								})
 								.catch(err => this.$store.commit('SET_RELEASE_LOADING', false))
 						}
@@ -196,5 +238,19 @@
 
 	.submit-btn{
 		width: 200px;
+	}
+	.name {
+    display: inline-block;
+    margin-right: 20px;
+  }
+	.address {
+    display: inline-block;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: normal;
+    .location {
+      margin-right: 8px;
+      vertical-align: top;
+    }
 	}
 </style>

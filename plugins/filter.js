@@ -8,3 +8,9 @@ Vue.filter('imgCdn', (val) => {
     return val
   }
 })
+
+Vue.filter('cutStr', (val, nums) => {
+	if (val && val.substr) {
+		return val.substr(0, nums || 130) + (val.length > 130 ? '...' : '')
+	}
+})

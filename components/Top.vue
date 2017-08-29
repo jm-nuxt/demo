@@ -2,22 +2,25 @@
   <div class="website-top">
     <el-row class="website-container">
       <el-col :span="24" class="text-right">
-        <a href="#">申请成为专家/Apply for an expert</a>
-        <a href="#">用户注册/Free Registration</a>
 
-        <a v-if="!user.id" @click.prevent="showLogin()">登录/Sign</a>
+        <a :href="`${centerAddress}/expertApply/init`" @click="goCenter($event)">申请成为专家/Apply for an expert</a>
 
-        <div href="" v-if="user.id" class="user-wrap">
+        <a target="_blank" v-if="!user.id">用户注册/Free Registration</a>
+
+        <a href="#" v-if="!user.id" @click.prevent="showLogin()">登录/Sign</a>
+
+        <div v-if="user.id" class="user-wrap">
+
           <img class="header-img" v-if="user.headImg" :src="user.headImg | imgCdn" :alt="user.userName">
           <img class="header-img" src="~assets/img/user-photo.png" alt="用户头像"/>
-          <a class="user-name text-overflow">{{user.userName}}</a>
 
+          <a :href="`${centerAddress}/jttoverview/init`" class="user-name text-overflow">{{user.userName}}</a>
           <div class="actions">
             <p>
-              <a href="#">个人中心</a>
+              <a :href="`${centerAddress}/jttoverview/init`" target="_blank">个人中心</a>
             </p>
-
-            <p><a href="#">退出</a></p>
+            <!-- {{$route || 123}} -->
+            <p><a :href="`${userCenterAddress}/logout?returnUrl=${fullpath}`">退出</a></p>
           </div>
         </div>
       </el-col>
@@ -28,10 +31,21 @@
 <script>
 import login from "~/plugins/checkLogin"
 import axios from '~/plugins/axios'
+import address from '~/config/address'
 
 export default {
+  data(){
+    return {
+      fullpath: '',
+      centerAddress: address.CENTER_ADDRESS,
+      userCenterAddress: address.USERCENTER_ADDRESS
+    }
+  },
   mounted(){
+    this.fullpath = location.origin;
+
     login.hasLogin()
+
     .then(data => {
       return axios.get(`/webapi/v2/userInfo`)
         .then(data => {
@@ -45,6 +59,7 @@ export default {
     })
   },
   computed: {
+
     user: {
       get(){
         return this.$store.state.user.user || {}
@@ -57,8 +72,16 @@ export default {
     }
   },
   methods: {
+    // 显示登录
     showLogin(){
       this.$store.commit('SET_OPEN', {opend: true})
+    },
+
+    goCenter($event){
+      if(!this.user.id){
+        $event.preventDefault();
+        this.showLogin()
+      }
     },
   }
 }
@@ -67,8 +90,10 @@ export default {
 <style lang="scss" scoped>
   .website-top{
     line-height: 30px;
+    height: 32px;
     background-color: #f5f5f5;
     color: #6e6e6e;
+    // overflow: hidden;
   }
   
   .user-wrap{
@@ -118,7 +143,12 @@ export default {
 
     p{
       line-height: 40px;
+
+      a{
+        margin-left: 0;
+      }
     }
+
 
     a:hover{
       color: #2788e8;

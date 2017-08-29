@@ -5,10 +5,10 @@
         <el-col :span="6" :class="{'last': index === 3}" class="help-nav" v-for="(item, index) in footer" :key="index" >
           <ul>
             <li v-for="(item, index) in item.artInfo" :key="index">
-              <a href="#">
-                <p>{{item.title}}</p>
+              <nuxt-link :to="`/services/${item.id}`">
+                <p :title="item.title">{{item.title}}</p>
                 <small>{{ item.subTitle}}</small>
-              </a>
+              </nuxt-link>
             </li>
           </ul>
 
@@ -60,6 +60,7 @@
   footer{
     color: #6e6e6e;
     padding-bottom: 25px;
+    background-color: #f5f5f5;
   }
   .help-list{
     padding: 35px 0;

@@ -75,80 +75,84 @@
 </script>
 
 <style lang="scss" type="text/scss" scoped="scoped">
-    .header {
-        position: relative;
-        z-index: 3;
+  .header {
+    position: relative;
+    z-index: 3;
+  }
+
+  .logo-link {
+    text-indent: -9999px;
+    margin-top: 23px;
+    background: url('~assets/img/logo.png') no-repeat left center;
+    display: block;
+    width: 497px;
+    height: 56px;
+  }
+
+  h3 {
+    font-weight: normal;
+    line-height: 18px;
+    cursor: pointer;
+  }
+
+  .website-nav {
+    float: right;
+    padding: 33px 0;
+
+    h3{
+      font-size: 16px;
     }
 
-    .logo-link {
-        text-indent: -9999px;
-        margin-top: 23px;
-        background: url('~assets/img/logo.png') no-repeat left center;
-        display: block;
-        width: 497px;
-        height: 56px;
+    ul {
+        color: #6e6e6e;
     }
 
-    h3 {
-        font-weight: normal;
-        line-height: 18px;
-        cursor: pointer;
-    }
+    li {
+      margin-left: 30px;
+      float: left;
+      position: relative;
 
-    .website-nav {
-        font-size: 16px;
-        float: right;
-        padding: 33px 0;
 
-        ul {
-            color: #6e6e6e;
-        }
-
-        li {
-            margin-left: 30px;
-            float: left;
-            position: relative;
-
-            &:hover {
-                .sub-nav {
-                    display: block;
-                }
-
-                > * {
-                    color: #2788e8;
-                }
-            }
-        }
-    }
-
-    .sub-nav {
-        position: absolute;
-        padding: 10px;
-        border: 1px solid #dedede;
-        background-color: #fff;
-        text-align: center;
-        min-width: 160px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: none;
-
-        a {
-            display: block;
-            white-space: nowrap;
-        }
-
-        small {
+      &:hover {
+        .sub-nav {
             display: block;
         }
 
-        li {
-            margin: 0;
-            padding: 10px 0;
-            float: none;
+        > * {
+            color: #2788e8;
         }
-
-        li + li {
-            border-top: 1px solid #333;
-        }
+      }
     }
+  }
+
+  .sub-nav {
+    position: absolute;
+    padding: 10px;
+    border: 1px solid #dedede;
+    background-color: #fff;
+    text-align: center;
+    min-width: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+
+    a {
+      display: block;
+      white-space: nowrap;
+    }
+
+    small {
+      display: block;
+    }
+
+    li {
+      margin: 0;
+      padding: 10px 0;
+      float: none;
+    }
+
+    li + li {
+      border-top: 1px solid #333;
+    }
+  }
 </style>

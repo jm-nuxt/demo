@@ -1,8 +1,5 @@
 <template lang="html">
   <section class="research">
-  <!-- {{ detail }} -->
-
-  <!-- <p> {{expert}}</p> -->
     <header class="company">
       <div class="website-container">
         <div class="company-info-wrap d-table">
@@ -86,7 +83,7 @@
           
 
           <div class="text-center">
-            <nuxt-link :to="{ path: `/experts/111?tpl=1` }" class="btn btn-primary expert-link">专家个人页面</nuxt-link>
+            <nuxt-link :to="{ path: `/experts/${expert.id}?tpl=${expert.templateId}` }" class="btn btn-primary expert-link">专家个人页面</nuxt-link>
           </div>
         </div>
       </div>
@@ -100,15 +97,17 @@ import axios from '~/plugins/axios'
 export default {
   name: 'companyResearch-id',
 
+  async fetch ({ store, params }) {
+    const { data } = await axios.get(`/webapi/v2/indexBottomMenu`)
+    store.commit('SET_FOOTER', data.rows)
+  },
+    
   async asyncData({ params }){
     try {
       const result = await axios.get(`/webapi/v2/detailedResearchReport/${params.id}`)
       const detail = result.data || {}
       const { data } = await axios.get(`/webapi/v2/detailedExpertInfo/${detail.rows.expertId}`)
       
-      console.log(detail)
-      console.log(data)
-
       return {
         detail: detail.rows || {},
         expert: data.rows || {}

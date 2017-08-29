@@ -3,8 +3,8 @@
     <!-- 幻灯片 -->
     <el-carousel class="banner" height="500px" :interval="5000" arrow="hover">
       <el-carousel-item v-for="(item, index) in carouselsFilter" :key="index">
-        <a :href="item.url" @click="jplNul($event,item.url)">
-          <img :src="item.adsImg | imgCdn">
+        <a :href="item.url || `javascript:;`" target="_blank" :title="item.title">
+          <img :src="item.adsImg | imgCdn" alt="顶部广告轮播图">
         </a>
       </el-carousel-item>
     </el-carousel>
@@ -78,7 +78,7 @@
         <div  class="box-content">
           <ul  class="photo-list">
             <li v-for="(item, index) in styleInfoFilter" :class="{'pull-right': index === 5}">
-              <nuxt-link :to="'/expert/' + item.id">
+              <nuxt-link :to="{ path: `/experts/${item.id}`, query: {tpl: item.templateId} }">
                 <img v-lazyload="lazyLoadPic(item.imgUrl)" :alt="item.companyName" :title="item.companyName" />
 
                 <div class="expert-info">
@@ -90,29 +90,10 @@
                 </div>
               </nuxt-link>
             </li>
-
-            <!-- <li class="pull-right">
-              <img src="" alt="">
-
-              <div class="expert-info">
-                <dl class="">
-                  <dt>吕梁泽</dt>
-                  <dd>某单位项目经理</dd>
-                  <dd>如何构建企业可信竞争力 <span>12年</span></dd>
-                </dl>
-              </div>
-            </li> -->
             <li>
-              <a :href="styleBannerUrl" @click="jplNul($event,styleBannerUrl)">
-                <img class="style-banner" v-lazyload="lazyLoadPic(styleBannerImg)">
+              <a :href="styleBannerUrl || `javascript:;`" target="_blank">
+                <img class="style-banner" v-lazyload="lazyLoadPic(styleBannerImg)" alt="中间广告图">
               </a>
-              <!-- <div class="expert-info">
-                <dl class="">
-                  <dt>吕梁泽111</dt>
-                  <dd class="desc">某单位项目经理</dd>
-                  <dd class="desc">如何构建企业可信竞争力 <span>12年</span></dd>
-                </dl>
-              </div> -->
             </li>
           </ul>
         </div>
@@ -141,27 +122,21 @@
 
                 <dd v-for="(items, index2) in item.multipleSkills.slice(0,4)" :key="index2">{{items}}</dd>
               </dl>
-              <!-- {{item}} -->
-              <!--  :to="'/expert/' + item.id +'?tmp=' + item.templateId" -->
-               <!-- :to="{ path: 'expert', params:{id: item.id}, query: { tmp: item.templateId }}" -->
               <nuxt-link class="detail" :to="{ path: `/experts/${item.id}?tpl=${item.templateId || 1}` }"> 查看详情 》</nuxt-link>
-              <!-- <router-link target="_blank"  class="expert-detail" :to="{'path': '/expert/' + item.id, 'query': {'tempNo': item.templateId}}">查看详情 》</router-link> -->
             </li>
           </ul>
-
-          <a class="more">
-            更多专家 <span class="en">More</span> 
+          <nuxt-link class="more" to="/experts">
+            更多专家 <span class="en">More</span>
             <i class="icon-arrow-right"></i>
-          </a>
+          </nuxt-link>
         </div>
       </div>
     </div>
-
     <!-- 底部幻灯片 -->
     <el-carousel class="banner" indicator-position="none" height="500px">
       <el-carousel-item v-for="(item, index) in bottomCarouselsFilter" :key="index">
-        <a :href="item.url" @click="jplNul($event, item.url)">
-          <img v-lazyload="lazyLoadPic(item.adsImg)" >
+        <a :href="item.url || `javascript:;`" :title="item.title" target="_blank">
+          <img v-lazyload="lazyLoadPic(item.adsImg)" alt="底部广告轮播图">
         </a>
       </el-carousel-item>
     </el-carousel>
@@ -170,7 +145,6 @@
 
 <script>
   import Vue from 'vue'
-  import Vuex from 'vuex'
   import axios from '~/plugins/axios'
 
   export default {
@@ -187,7 +161,6 @@
       const { data } = await axios.get(`/webapi/v2/indexBottomMenu`)
       store.commit('SET_FOOTER', data.rows)
     },
-    
     asyncData () {
       return Promise.all([
         axios.get(`/webapi/v2/indexBanner`).then((data) => data.data.rows),
@@ -210,12 +183,12 @@
 
     computed: {
       styleBannerImg () {
-        var sb = this.styleBanner || []
+        var sb = this.styleInfoFilter || []
         return sb.length > 0 ? sb[0].adsImg : ''
       },
 
       styleBannerUrl () {
-        var sb = this.styleBanner || []
+        var sb = this.styleInfoFilter || []
         return sb.length > 0 ? sb[0].url : ''
       }
     },
@@ -228,7 +201,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" type="text/scss" rel="stylesheet/scss" scoped>
 
 
   .box{

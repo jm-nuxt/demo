@@ -7,7 +7,9 @@
             <el-row>
               <el-col :span="3" class="text-center">
                 <div class="img-box">
-                  <img :src="item.imgUrl | imgCdn" :alt="item.expertName" :title="item.expertName">
+                  <img v-if="item.imgUrl" :src="item.imgUrl | imgCdn" :alt="item.expertName" :title="item.expertName">
+
+                  <img v-if="!item.imgUrl" src="~assets/img/headGray.png" alt="用户头像" :title="item.expertName">
                 </div>
               </el-col>
               <el-col :span="21">
@@ -15,8 +17,7 @@
                   <dt>
                     <h3 :title="item.expertName" class="expert-name">{{ item.expertName }}</h3>
 
-                    <address class="address" :title="item.city"><i class="icon-location"></i>{{
-                        item.city }}
+                    <address class="address" v-if="item.city" :title="item.city"><i class="icon-location"></i>{{ item.city }}
                     </address>
 
                     <span class="job" :title="item.positionName">{{ item.positionName }}</span>
@@ -24,7 +25,6 @@
                     <span v-if="item.companyName"
                           :title="item.companyName"> | {{ item.companyName}}</span>
 
-                    <!-- <p>{{item.loading}}</p> -->
                     <button
                       type="button"
                       :disable="item.loading"
@@ -39,7 +39,7 @@
                   </dt>
                   <dd class="expert-desc-title">专家简介</dd>
                   <dd class="expert-desc" 
-                    :title="item.expertIntroduces">{{ item.expertIntroduces }}
+                    :title="item.expertIntroduces">{{ item.expertIntroduces | cutStr }}
                   </dd>
                 </dl>
               </el-col>
@@ -108,6 +108,11 @@
 			}
 		},
 
+    async fetch ({ store, params }) {
+      const { data } = await axios.get(`/webapi/v2/indexBottomMenu`)
+      store.commit('SET_FOOTER', data.rows)
+    },
+
 		methods: {
 			/**
 			 * [collection 点击收藏/取消收藏专家]
@@ -173,7 +178,7 @@
     watch: {
       async user (val, newVal) {
         try {
-          const { data } = await axios.get('/webapi/v2/pageExpertInfo', { params: { offset: 0, limit: 8 } })
+          const { data } = await axios.get('/webapi/v2/pageExpertInfo', { params: { offset: 0, limit: this.page*this.limit } })
           this.experts = data.rows
         }catch (e) {
           console.log(e);
@@ -184,11 +189,11 @@
 
 </script>
 
-<style lang="scss" rel="stylesheet/scss" scoped>
+<style lang="scss" type="text/scss" rel="stylesheet/scss" scoped>
 
   .experts-wrap {
     border-top: 2px solid #1c86ea;
-    padding-top: 30px;
+    padding: 30px 0;
   }
 
   .experts {
