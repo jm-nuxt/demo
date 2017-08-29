@@ -41,7 +41,7 @@ export default {
       console.log('Not Login')
     })
     .then(data => {
-      this.$store.commit('SET_USER', data)
+      this.$store.commit('SET_USER', data || {})
     })
   },
   computed: {

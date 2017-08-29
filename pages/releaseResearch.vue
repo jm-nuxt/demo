@@ -165,7 +165,10 @@
 									this.$store.commit('SET_RELEASE_LOADING', false)
 									const result = data.data || {}
 									if(result.statusCode === 200){
-										alert('发布成功')
+										this.$alert('调研单发布成功', false, {
+		                  type: 'success',
+		                  confirmButtonText: '确定'
+		                })
 									}
 
 								}, data => {

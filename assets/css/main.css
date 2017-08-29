@@ -112,6 +112,10 @@ a:hover{
 }
 
 
+button:focus{
+  outline: none;
+}
+
 /* icon */
 i[class*= 'icon-']{
   display: inline-block;

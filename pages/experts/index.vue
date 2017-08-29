@@ -1,62 +1,64 @@
 <template>
-    <section class="experts-wrap">
-        <div class="website-container">
-            <ul class="experts">
-                <li v-for="(item, index) in experts" :key="index">
-                    <nuxt-link target="_blank" :to="{ path: `/experts/${item.id}?tpl=${item.templateId || 1}` }">
-                        <el-row>
-                            <el-col :span="3" class="text-center">
-                                <div class="img-box">
-                                    <img :src="item.imgUrl | imgCdn" :alt="item.expertName" :title="item.expertName">
-                                </div>
-                            </el-col>
-                            <el-col :span="21">
-                                <dl>
-                                    <dt>
-                                    <h3 :title="item.expertName" class="expert-name">{{ item.expertName }}</h3>
+  <section class="experts-wrap">
+    <div class="website-container">
+      <ul class="experts">
+        <li v-for="(item, index) in experts" :key="index">
+          <nuxt-link target="_blank" :to="{ path: `/experts/${item.id}?tpl=${item.templateId || 1}` }">
+            <el-row>
+              <el-col :span="3" class="text-center">
+                <div class="img-box">
+                  <img :src="item.imgUrl | imgCdn" :alt="item.expertName" :title="item.expertName">
+                </div>
+              </el-col>
+              <el-col :span="21">
+                <dl>
+                  <dt>
+                    <h3 :title="item.expertName" class="expert-name">{{ item.expertName }}</h3>
 
-                                    <address class="address" :title="item.city"><i class="icon-location"></i>{{
-                                        item.city }}
-                                    </address>
+                    <address class="address" :title="item.city"><i class="icon-location"></i>{{
+                        item.city }}
+                    </address>
 
-                                    <span class="job" :title="item.positionName">{{ item.positionName }}</span>
+                    <span class="job" :title="item.positionName">{{ item.positionName }}</span>
 
-                                    <span v-if="item.companyName"
-                                          :title="item.companyName"> | {{ item.companyName}}</span>
+                    <span v-if="item.companyName"
+                          :title="item.companyName"> | {{ item.companyName}}</span>
 
-                                    <button
-                                            type="button"
-                                            class="pull-right btn btn-primary"
-                                            :class="{'is-collect': item.isFavorite === 1}"
-                                            @click.stop.prevent="collection(item.id)">
-                                        <i class="icon-start-white"></i>
-                                        收藏专家
-                                    </button>
-                                    </dt>
-                                    <dd class="expert-desc-title">专家简介</dd>
-                                    <dd class="expert-desc" :title="item.expertIntroduces">{{ item.expertIntroduces }}
-                                    </dd>
-                                </dl>
-                            </el-col>
-                        </el-row>
-                    </nuxt-link>
-                </li>
-            </ul>
+                    <!-- <p>{{item.loading}}</p> -->
+                    <button
+                      type="button"
+                      :disable="item.loading"
+                      class="pull-right btn btn-primary"
+                      :class="{'is-collect': item.isFavorite === 1}"
+                      @click.stop.prevent="collection(item)">
+                      <i class="icon-start-white"></i>
 
-            <a class="more" v-if="totalPage > page" @click.stop="getExperts()">
+                      <span v-if="item.isFavorite !== 1">收藏专家</span>
+                      <span v-else>取消收藏</span>
+                    </button>
+                  </dt>
+                  <dd class="expert-desc-title">专家简介</dd>
+                  <dd class="expert-desc" 
+                    :title="item.expertIntroduces">{{ item.expertIntroduces }}
+                  </dd>
+                </dl>
+              </el-col>
+            </el-row>
+          </nuxt-link>
+        </li>
+      </ul>
 
-                <span v-show="!loading">更多专家 <span class="en">More</span> <i class="icon-arrow-right"></i></span>
-                <span v-show="loading">加载中...</span>
-            </a>
-        </div>
-    </section>
+      <a class="more" v-if="totalPage > page" @click.stop="getExperts()">
+        <span v-show="!loading">更多专家 <span class="en">More</span> <i class="icon-arrow-right"></i></span>
+        <span v-show="loading">加载中...</span>
+      </a>
+    </div>
+  </section>
 </template>
 
 <script>
 
 	import axios from '~/plugins/axios'
-
-	console.log(123)
 
 	export default {
 		name: 'experts',
@@ -69,6 +71,9 @@
 		},
 
 		computed: {
+      user () {
+        return this.$store.state.user.user
+      },
 			/**
 			 * [totalPage 获取砖家列表总页数]
 			 * @return {[Number]} [专家列表总页数]
@@ -94,7 +99,7 @@
 		async asyncData ({ store }) {
 			try {
 				const { data } = await axios.get('/webapi/v2/pageExpertInfo', { params: { offset: 0, limit: 8 } })
-					store.commit('GET_TOTALPAGE', data.totalPage)
+				store.commit('GET_TOTALPAGE', data.totalPage)
 				return {
 					experts: data.rows
 				}
@@ -109,18 +114,31 @@
 			 * @param  {[Number]} expertId 		[收藏专家的ID]
 			 * @return {[Undefined]}          [无返回值]
 			 */
-			async collection (expertId) {
+			async collection (expert) {
 				let user = this.$store.state.user.user
-				console.log(user)
-
 				if(user.id){
 					try {
 						// TODO: 判断收藏还是取消收藏
-						const { data } = await axios.get(`/webapi/v2/favorite/1/${expertId}`)
-						console.log(data)
+            
+            this.$set(expert, 'loading', true)
+            
+            let path = 'favorite'
+
+            if(expert.isFavorite ===1){
+              path = 'notFavorite'
+            }
+
+            const { data } = await axios.get(`/webapi/v2/${path}/1/${expert.id}`)
+            this.$set(expert, 'loading', false)
+
+            if(data.statusCode !== 200){
+              this.$message.error(data.desc)
+            }else{
+              expert.isFavorite = expert.isFavorite? 0 : 1
+            }
 
 					} catch (e) {
-						console.log(e)
+            this.$set(expert, 'loading', false)
 					}
 				}else{
 					this.$store.commit('SET_OPEN', {opend: true})					
@@ -150,19 +168,30 @@
 				}
 				this.$store.commit('SET_LOADING', false)
 			}
-		}
+		},
+
+    watch: {
+      async user (val, newVal) {
+        try {
+          const { data } = await axios.get('/webapi/v2/pageExpertInfo', { params: { offset: 0, limit: 8 } })
+          this.experts = data.rows
+        }catch (e) {
+          console.log(e);
+        }
+      }
+    }
 	}	
 
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
 
-    .experts-wrap {
-        border-top: 2px solid #1c86ea;
-        padding-top: 30px;
-    }
+  .experts-wrap {
+    border-top: 2px solid #1c86ea;
+    padding-top: 30px;
+  }
 
-    .experts {
+  .experts {
 
     li {
         margin-bottom: 16px;
@@ -174,18 +203,17 @@
         color: #6e6e6e;
         border: 1px solid #ccc;
 
-    .icon-start-white {
-        background-image: url('~assets/img/start-stroke.png');
-    }
-
+      .icon-start-white {
+          background-image: url('~assets/img/start-stroke.png');
+      }
     }
 
     li:hover {
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 
-    .expert-name {
-        color: #F68306;
-    }
+      .expert-name {
+          color: #F68306;
+      }
 
     }
 

@@ -4,6 +4,7 @@ import experts from './experts'
 import login from './login'
 import user from './user'
 import release from './release'
+import demandOrder from './demandOrder'
 
 const createStroe = () => {
   return new Vuex.Store({
@@ -12,7 +13,8 @@ const createStroe = () => {
       experts,
       login,
       user,
-      release
+      release,
+      demandOrder
     }
   })
 }

@@ -33,10 +33,10 @@
 				    </el-input>
 				  </el-form-item>
 
-				  <el-form-item label="发布者职务:" prop="intentionUserJob">
+				  <el-form-item label="发布者职务:" prop="intentionUserPosition">
 				    <el-input
 				    	placeholder="请填写发布者的职务信息"
-				    	v-model="release.intentionUserJob">
+				    	v-model="release.intentionUserPosition">
 				    </el-input>
 				  </el-form-item>
 
@@ -55,7 +55,10 @@
 				  </el-form-item>
 
 					<el-form-item class="text-center">
-				    <el-button class="submit-btn" type="primary" @click="submitForm('ruleForm')">提交</el-button>
+				    <el-button :disabled="loading" class="submit-btn" type="primary" @click="submitForm('form')">
+				    	<span v-if="!loading">提交</span>
+				    	<span v-if="loading">正在提交中...</span>
+				    </el-button>
 				  </el-form-item>
 				 </div>
 			</el-form>
@@ -64,8 +67,9 @@
 </template>
 
 <script>
-	export default {
+	import axios from '~/plugins/axios'
 
+	export default {
 		data(){
 			return {
 				release: {
@@ -79,7 +83,7 @@
 					intentionUserCompany: '',
 
 					// 发布者职务
-					intentionUserJob: '',
+					intentionUserPosition: '',
 
 					// 电子邮箱
 					intentionUserEmail: '',
@@ -99,7 +103,7 @@
 		      intentionUserCompany: [
 		        { required: true, message: '请输入发布者公司', trigger: 'blur' }
 		      ],
-		      intentionUserJob: [
+		      intentionUserPosition: [
 		        { required: true, message: '请输入发布者职务', trigger: 'blur' }
 		      ],
 		      intentionUserEmail: [
@@ -114,16 +118,38 @@
 		},
 
 		computed: {
-			
+			loading: {
+				get(){
+					return this.$store.state.demandOrder.loading
+				},
+
+				set(newVal) {
+					this.$store.state.demandOrder.loading = newVal
+				}
+			}
 		},
 		methods: {
 			submitForm(formName){
 				if(this.$store.state.user.user.id){
 					this.$refs[formName].validate((valid) => {
 						if(valid){
+							this.$store.commit('SET_DEMANDORDER_LOADING', true)
 
-						}else{
-
+							axios.post(`/webapi/v2/demandBill`, this.release)
+								.then(data => {
+									this.$store.commit('SET_DEMANDORDER_LOADING', false)
+									const result = data.data || {}
+									if(result.statusCode === 200){
+										// alert('发布成功')
+										this.$alert('需求单发布成功', false, {
+		                  type: 'success',
+		                  confirmButtonText: '确定'
+		                })
+									}
+								})
+								.catch(e => {
+									this.$store.commit('SET_DEMANDORDER_LOADING', false)
+								})
 						}
 					})
 				}else{
