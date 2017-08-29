@@ -125,8 +125,8 @@
               <nuxt-link class="detail" :to="{ path: `/experts/${item.id}?tpl=${item.templateId || 1}` }"> 查看详情 》</nuxt-link>
             </li>
           </ul>
-          <nuxt-link class="more" to="/experts">
-            更多专家 <span class="en">More</span> 
+          <nuxt-link class="more" to="{path: `/experts`}">
+            更多专家 <span class="en">More</span>
             <i class="icon-arrow-right"></i>
           </nuxt-link>
         </div>
@@ -146,12 +146,9 @@
 
 <script>
   import Vue from 'vue'
-  import Vuex from 'vuex'
   import axios from '~/plugins/axios'
-  import NuxtLink from 'nuxt/lib/app/components/nuxt-link'
 
   export default {
-    components: {NuxtLink},
     data () {
       return {
         styleInfoFilter: [],
