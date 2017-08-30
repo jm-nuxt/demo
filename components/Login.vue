@@ -1,24 +1,24 @@
 <template>
   <section @keyup.enter="login('form')">
-    <el-dialog custom-class="dialog-login" :visible.sync="opend" >
+    <el-dialog custom-class="dialog-login" :visible.sync="opend">
       <h2 class="text-center title">欢迎登录</h2>
-      <el-form :model="form" ref="form" :rules="rules" >
+      <el-form :model="form" ref="form" :rules="rules">
         <el-form-item prop="username">
           <el-input
-            v-model="form.username"
-            auto-complete="off"
-            auto-focus="true"
-            placeholder="请输入手机号/邮箱">
+              v-model="form.username"
+              auto-complete="off"
+              :autofocus="true"
+              placeholder="请输入手机号/邮箱">
           </el-input>
         </el-form-item>
 
-        <el-form-item prop="password" >
-            <el-input
+        <el-form-item prop="password">
+          <el-input
               type="password"
               v-model="form.password"
               auto-complete="off"
               placeholder="请输入密码">
-            </el-input>
+          </el-input>
         </el-form-item>
 
         <el-form-item>
@@ -42,72 +42,68 @@
 </template>
 
 <script>
-
-	import axios from '~/plugins/axios'
-	import login from '~/plugins/checkLogin'
+  import axios from '~/plugins/axios'
+  import login from '~/plugins/checkLogin'
   import address from '~/config/address'
 
-	export default{
-		name: 'dialog-login',
+  export default {
+    name: 'dialog-login',
 
-		data(){
-			return {
+    data () {
+      return {
         loading: false,
 
         centerAddress: address.CENTER_ADDRESS,
-				
+
         form: {
-					username: '',
-					password: ''
-				},
+          username: '',
+          password: ''
+        },
 
-				rules: {
-					username: [
-					 { required: true, message: '请输入手机号/邮箱', trigger: 'blur' }
-				 ],
+        rules: {
+          username: [
+            {required: true, message: '请输入手机号/邮箱', trigger: 'blur'}
+          ],
 
-				 password: [
-					 { required: true, message: '请输入账号密码', trigger: 'blur' }
-				 ]
-				}
-			}
-		},
+          password: [
+            {required: true, message: '请输入账号密码', trigger: 'blur'}
+          ]
+        }
+      }
+    },
 
-		methods: {
-			login (formName) {
-
-
-
-				this.$refs[formName].validate((valid) => {
+    methods: {
+      login (formName) {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
-          	login.hasLogin().then(()=>{}, ()=>{})
+            login.hasLogin().then(() => {}, () => {})
             this.loading = true
-						axios.post(`/webapi/v2/validateLoginInfo`, this.form)
-							.then(({data}) => {
-								if(data.code === 200){
-									return axios.post(`/webapi/v2/doLogin`, {
-										activeStatus: 1,
-										checkCode: '',
-										username: this.form.username,
-										password: this.form.password
-									})
-								}else{
-									this.$message.error(`${data.desc}`)
-									return Promise.reject()
-								}
-							})
-							.then(data => {
-								this.$store.commit('SET_OPEN', {opend: false})
-								return axios.get(`/webapi/v2/userInfo`).then(data => data.data.rows || {})
-							})
-							.then(data => {
-								this.$store.commit('SET_USER', data)
+            axios.post(`/webapi/v2/validateLoginInfo`, this.form)
+              .then(({data}) => {
+                if (data.code === 200) {
+                  return axios.post(`/webapi/v2/doLogin`, {
+                    activeStatus: 1,
+                    checkCode: '',
+                    username: this.form.username,
+                    password: this.form.password
+                  })
+                } else {
+                  this.$message.error(`${data.desc}`)
+                  return Promise.reject()
+                }
+              })
+              .then(data => {
+                this.$store.commit('SET_OPEN', {opend: false})
+                return axios.get(`/webapi/v2/userInfo`).then(data => data.data.rows || {})
+              })
+              .then(data => {
+                this.$store.commit('SET_USER', data)
                 this.loading = false
-							})
-							.catch(e => {
-								console.log(e)
+              })
+              .catch(e => {
+                console.log(e)
                 this.loading = false
-							})
+              })
           }
         })
       }
@@ -134,44 +130,44 @@
 </script>
 
 <style lang="scss" type="text/scss">
-.dialog-login {
-  width: 360px;
+  .dialog-login {
+    width: 360px;
 
-  .el-dialog__body {
-    padding: 30px 60px;
+    .el-dialog__body {
+      padding: 30px 60px;
+    }
   }
-}
 
 </style>
 
 <style lang="scss" scoped type="text/scss">
-    .title {
-        margin-bottom: 30px;
-        font-size: 26px;
-        color: #3e3e3e;
-    }
+  .title {
+    margin-bottom: 30px;
+    font-size: 26px;
+    color: #3e3e3e;
+  }
 
-    .login-btn {
-        width: 100%;
-    }
+  .login-btn {
+    width: 100%;
+  }
 
-    .dialog-footer {
-        border-top: 1px solid #ccc;
-        padding-top: 15px;
-    }
+  .dialog-footer {
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+  }
 
-    .contact {
-        background: url('~assets/img/phone.png') no-repeat 10px center;
-        padding-left: 60px;
-        color: #9e9e9e;
+  .contact {
+    background: url('~assets/img/phone.png') no-repeat 10px center;
+    padding-left: 60px;
+    color: #9e9e9e;
 
     .phone {
-        font-size: 24px;
+      font-size: 24px;
     }
 
     .time {
-        font-size: 12px;
+      font-size: 12px;
     }
 
-    }
+  }
 </style>
