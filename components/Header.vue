@@ -1,16 +1,16 @@
 <template>
-    <el-row class="website-container header">
-      <el-col :span="12" class="logo">
-        <h1 class="logo-title">
-          <a href="#" class="logo-link">
+  <el-row class="website-container header">
+    <el-col :span="12" class="logo">
+      <h1 class="logo-title">
+        <a href="/" class="logo-link">
             聚贸云智库
-          </a>
-        </h1>
-      </el-col>
-      <el-col :span="12">
-        <nav class="website-nav">
-          <ul class="clearfix">
-            <li>
+        </a>
+      </h1>
+    </el-col>
+    <el-col :span="12">
+      <nav class="website-nav">
+        <ul class="clearfix">
+          <li>
               <h3>
                 <p>发布需求</p>
                 <small>Post demand</small>
@@ -19,68 +19,68 @@
               <div class="sub-nav">
                 <ul>
                   <li>
-                    <a href="#">
-                      企业需求 <small>Enterprise demand</small>
-                    </a>
+                    <nuxt-link :to="{path: '/demandOrder'}">
+                      企业需求
+                      <small>Enterprise demand</small>
+                    </nuxt-link>
                   </li>
 
                   <li>
-                    <a href="#">
-                      媒体采访 <small>Media interview</small>
-                    </a>
+                    <nuxt-link :to="{ path: `/experts` }">
+                      媒体采访
+                      <small>Media interview</small>
+                    </nuxt-link>
                   </li>
                 </ul>
               </div>
-            </li>
+          </li>
 
-            <li>
-              <h3>
-                  <p>联系专家</p>
-                  <small>Contact an expert</small>
-              </h3>
+          <li>
+            <h3>
+                <p>联系专家</p>
+                <small>Contact an expert</small>
+            </h3>
 
-              <div class="sub-nav">
-                <ul>
-                  <li>
-                    <a href="#">
-                      我要咨询专家 <small>I want my consultant</small>
-                    </a>
-                  </li>
+            <div class="sub-nav">
+              <ul>
+                <li>
+                  <nuxt-link :to="{ path: `/experts` }">
+                    我要咨询专家
+                    <small>I want my consultant</small>
+                  </nuxt-link>
+                </li>
 
-                  <li>
-                    <a href="#">
-                      邀请专家调研企业 <small>Invite experts to do researches</small>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </nav>
-      </el-col>
-    </el-row>
+                <li>
+                  <nuxt-link :to="{path:'/releaseResearch'}">
+                    邀请专家调研企业
+                    <small>Invite experts to do researches</small>
+                  </nuxt-link>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
-    export default {
-      data() {
-        return {
-
-        };
-      },
-      methods: {
-
-      }
-    }
+  export default {
+    data () {
+      return {}
+    },
+    methods: {}
+  }
 </script>
 
-<style lang="scss" scoped="scoped">
-  .header{
+<style lang="scss" type="text/scss" scoped="scoped">
+  .header {
     position: relative;
     z-index: 3;
   }
 
-  .logo-link{
+  .logo-link {
     text-indent: -9999px;
     margin-top: 23px;
     background: url('~assets/img/logo.png') no-repeat left center;
@@ -89,67 +89,69 @@
     height: 56px;
   }
 
-  h3{
+  h3 {
     font-weight: normal;
     line-height: 18px;
     cursor: pointer;
   }
 
-  .website-nav{
-    font-size: 16px;
+  .website-nav {
     float: right;
-
     padding: 33px 0;
 
-    ul{
-      color: #3e3e3e;
+    h3{
+      font-size: 16px;
     }
 
-    li{
+    ul {
+        color: #6e6e6e;
+    }
+
+    li {
       margin-left: 30px;
       float: left;
       position: relative;
 
-      &:hover{
-        .sub-nav{
-          display: block;
+
+      &:hover {
+        .sub-nav {
+            display: block;
         }
 
-        >*{
-          color: #2788e8;
+        > * {
+            color: #2788e8;
         }
       }
     }
   }
 
-  .sub-nav{
+  .sub-nav {
     position: absolute;
     padding: 10px;
     border: 1px solid #dedede;
     background-color: #fff;
     text-align: center;
     min-width: 160px;
-
     left: 50%;
     transform: translateX(-50%);
     display: none;
 
-    a{
+    a {
       display: block;
       white-space: nowrap;
     }
 
-    small{
+    small {
       display: block;
     }
 
-    li{
+    li {
       margin: 0;
       padding: 10px 0;
       float: none;
     }
 
-    li+li{
+    li + li {
       border-top: 1px solid #333;
     }
   }

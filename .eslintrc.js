@@ -11,6 +11,10 @@ module.exports = {
     'html'
   ],
   // add your custom rules here
-  rules: {},
+  rules: {
+    indent: [
+      2, 2
+    ]
+  },
   globals: {}
 }

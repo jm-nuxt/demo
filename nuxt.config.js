@@ -6,36 +6,33 @@ module.exports = {
    */
   head: {
     title: 'starter',
-    meta: [
-      {
-        charset: 'utf-8'
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Nuxt.js project'
-      }
-    ],
-    link: [
-      {
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
-      }
-    ]
+    meta: [{
+      charset: 'utf-8'
+    }, {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1'
+    }, {
+      hid: 'description',
+      name: 'description',
+      content: 'Nuxt.js project'
+    }],
+    link: [{
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    }]
   },
   modules: [
     ['@nuxtjs/proxy']
   ],
   proxy: {
     '/webapi/v2': {
-      target: address.SERVER_ADDRESS, //'http://www.jmexpert.com',
+      target: address.SERVER_ADDRESS,
       ws: false
-      // changeOrigin: true
+    },
+    '/sso': {
+      target: address.SERVER_ADDRESS,
+      ws: false
     }
   },
 
@@ -46,8 +43,9 @@ module.exports = {
   /*
    ** Add axios globally
    */
-  plugins: ['~plugins/element-ui', '~plugins/filter','~plugins/directive'],
+  plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive', '~plugins/checkLogin'],
   build: {
+
     vendor: ['axios', 'element-ui'],
 
     babel: {
@@ -59,23 +57,33 @@ module.exports = {
       ]
     },
 
-    loaders: [{
-        test: /\.(png|jpe?g|gif|svg)$/,
-        loader: 'url-loader',
-        query: {
-          limit: 1000,
-          name: 'img/[name].[hash:7].[ext]'
-        }
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 1000,
-          name: 'fonts/[name].[hash:7].[ext]'
-        }
+    extend(config, ctx){
+      if(ctx.isClient){
+        // config.module.rules.push({
+        //   test: /\.vue$/,
+        //   loader: 'vue-loader',
+        //   options: {
+        //     preserveWhitespace: false
+        //   }
+        // })
       }
-    ],
+    },
+
+    loaders: [{
+      test: /\.(png|jpe?g|gif|svg)$/,
+      loader: 'url-loader',
+      query: {
+        limit: 1000,
+        name: 'img/[name].[hash:7].[ext]'
+      }
+    }, {
+      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+      loader: 'url-loader',
+      query: {
+        limit: 1000,
+        name: 'fonts/[name].[hash:7].[ext]'
+      }
+    }],
     postcss: [
       require('autoprefixer')({
         browsers: ['last 3 versions']
@@ -83,18 +91,17 @@ module.exports = {
     ]
   },
 
-
   /*
    ** Run ESLINT on save
    */
-  extend(config, ctx) {
+  extend (config, ctx) {
     if (ctx.isClient) {
-      config.module.rules.push({
-        enforce: 'pre',
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        exclude: /(node_modules)/
-      })
+      // config.module.rules.push({
+      //   enforce: 'pre',
+      //   test: /\.(js|vue)$/,
+      //   loader: 'eslint-loader',
+      //   exclude: /(node_modules)/
+      // })
     }
   }
 }

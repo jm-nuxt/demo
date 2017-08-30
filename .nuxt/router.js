@@ -4,8 +4,14 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const _8f0c9eb0 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
-const _39338e72 = () => import('../pages/expert/index.vue' /* webpackChunkName: "pages/expert" */).then(m => m.default || m)
-const _722c7e22 = () => import('../pages/expert/_id.vue' /* webpackChunkName: "pages/expert-id" */).then(m => m.default || m)
+const _9cca36ce = () => import('../pages/demandOrder.vue' /* webpackChunkName: "pages/demandOrder" */).then(m => m.default || m)
+const _d4dbd0bc = () => import('../pages/experts/index.vue' /* webpackChunkName: "pages/experts" */).then(m => m.default || m)
+const _85ef9dd0 = () => import('../pages/releaseResearch.vue' /* webpackChunkName: "pages/releaseResearch" */).then(m => m.default || m)
+const _81db52ba = () => import('../pages/services/_id.vue' /* webpackChunkName: "pages/services-id" */).then(m => m.default || m)
+const _0eb4caec = () => import('../pages/experts/_id.vue' /* webpackChunkName: "pages/" */).then(m => m.default || m)
+const _4072918d = () => import('../pages/experts/_id/index.vue' /* webpackChunkName: "pages/experts-id" */).then(m => m.default || m)
+const _6163818c = () => import('../pages/experts/_id/reports.vue' /* webpackChunkName: "pages/experts-id-reports" */).then(m => m.default || m)
+const _c236c98e = () => import('../pages/companyResearch/_id.vue' /* webpackChunkName: "pages/companyResearch-id" */).then(m => m.default || m)
 
 
 
@@ -47,14 +53,45 @@ export function createRouter () {
 			name: "index"
 		},
 		{
-			path: "/expert",
-			component: _39338e72,
-			name: "expert"
+			path: "/demandOrder",
+			component: _9cca36ce,
+			name: "demandOrder"
 		},
 		{
-			path: "/expert/:id",
-			component: _722c7e22,
-			name: "expert-id"
+			path: "/experts",
+			component: _d4dbd0bc,
+			name: "experts"
+		},
+		{
+			path: "/releaseResearch",
+			component: _85ef9dd0,
+			name: "releaseResearch"
+		},
+		{
+			path: "/services/:id?",
+			component: _81db52ba,
+			name: "services-id"
+		},
+		{
+			path: "/experts/:id",
+			component: _0eb4caec,
+			children: [
+				{
+					path: "",
+					component: _4072918d,
+					name: "experts-id"
+				},
+				{
+					path: "reports",
+					component: _6163818c,
+					name: "experts-id-reports"
+				}
+			]
+		},
+		{
+			path: "/companyResearch/:id?",
+			component: _c236c98e,
+			name: "companyResearch-id"
 		}
     ],
     fallback: false

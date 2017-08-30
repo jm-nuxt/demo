@@ -5,10 +5,10 @@
         <el-col :span="6" :class="{'last': index === 3}" class="help-nav" v-for="(item, index) in footer" :key="index" >
           <ul>
             <li v-for="(item, index) in item.artInfo" :key="index">
-              <a href="#">
-                <p>{{item.title}}</p>
+              <nuxt-link :to="`/services/${item.id}`">
+                <p :title="item.title">{{item.title}}</p>
                 <small>{{ item.subTitle}}</small>
-              </a>
+              </nuxt-link>
             </li>
           </ul>
 
@@ -32,7 +32,7 @@
 
           <p>Address : NORTHWEST PODIUM OF ANNO DOMINI MANSION, NO.8, QIUSHI ROAD,HANGZHOU,CHINA</p>
 
-          <p>Copyright &copyright; 聚贸云智库 www.jmexpert.com 浙ICP备15010831号-58</p>
+          <p>Copyright &copy; 聚贸云智库 www.jmexpert.com 浙ICP备15010831号-58</p>
         </el-col>
       </el-row>
     </div>
@@ -44,12 +44,13 @@
   import axios from '~/plugins/axios'
   import vuex from 'vuex'
 
-
   export default{
-    computed:{
-      footer(){
+    data () {
+      return {}
+    },
+    computed: {
+      footer () {
         return this.$store.state.footer.footer
-        // return this.$store.footer.state.footer
       }
     }
   }
@@ -59,6 +60,7 @@
   footer{
     color: #6e6e6e;
     padding-bottom: 25px;
+    background-color: #f5f5f5;
   }
   .help-list{
     padding: 35px 0;

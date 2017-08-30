@@ -86,19 +86,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+console.log(0);
 
 var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
-var host = process.env.HOST || '192.168.2.106';
+var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
 
 app.set('port', port);
-
+console.log(1);
 // Import API Routes
 app.use('/api', __WEBPACK_IMPORTED_MODULE_2__api__["a" /* default */]);
 
 // Import and Set Nuxt.js options
 var config = __webpack_require__(5);
-config.dev = !("development" === 'production');
+console.log(2);
+config.dev = !("production" === 'production');
+
+// TODO remove
+process.on('unhandledRejection', function (reason, p) {
+  console.log(p);
+  console.log('Unhandled Rejection:', reason.stack);
+  process.exit(1);
+});
 
 // Init Nuxt.js
 var nuxt = new __WEBPACK_IMPORTED_MODULE_1_nuxt__["Nuxt"](config);
@@ -203,9 +212,12 @@ module.exports = {
   modules: [['@nuxtjs/proxy']],
   proxy: {
     '/webapi/v2': {
-      target: address.SERVER_ADDRESS, //'http://www.jmexpert.com',
+      target: address.SERVER_ADDRESS,
       ws: false
-      // changeOrigin: true
+    },
+    '/sso': {
+      target: address.SERVER_ADDRESS,
+      ws: false
     }
   },
 
@@ -216,8 +228,9 @@ module.exports = {
   /*
    ** Add axios globally
    */
-  plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive'],
+  plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive', '~plugins/checkLogin'],
   build: {
+
     vendor: ['axios', 'element-ui'],
 
     babel: {
@@ -226,6 +239,19 @@ module.exports = {
         styleLibraryName: 'theme-default'
       }]]]
     },
+
+    extend: function extend(config, ctx) {
+      if (ctx.isClient) {
+        // config.module.rules.push({
+        //   test: /\.vue$/,
+        //   loader: 'vue-loader',
+        //   options: {
+        //     preserveWhitespace: false
+        //   }
+        // })
+      }
+    },
+
 
     loaders: [{
       test: /\.(png|jpe?g|gif|svg)$/,
@@ -252,12 +278,12 @@ module.exports = {
    */
   extend: function extend(config, ctx) {
     if (ctx.isClient) {
-      config.module.rules.push({
-        enforce: 'pre',
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        exclude: /(node_modules)/
-      });
+      // config.module.rules.push({
+      //   enforce: 'pre',
+      //   test: /\.(js|vue)$/,
+      //   loader: 'eslint-loader',
+      //   exclude: /(node_modules)/
+      // })
     }
   }
 };
@@ -269,15 +295,25 @@ module.exports = {
 var envs = {
   dev: {
     IMG_ADDRESS: 'http://image.jm.com',
-    SERVER_ADDRESS: 'http://webapi.jtt.com' //'http://www.jmexpert.com'
+    SERVER_ADDRESS: 'http://192.168.102.191:8099'
+  },
+
+  test: {
+    IMG_ADDRESS: 'http://image.jm.com',
+    SERVER_ADDRESS: 'http://webapi.jtt.com',
+    USERCENTER_ADDRESS: 'http://test-uc3.dev.com',
+    CENTER_ADDRESS: 'http://center.jtt.com'
   },
 
   production: {
     IMG_ADDRESS: 'http://img.jumore.com',
-    SERVER_ADDRESS: 'http://www.jmexpert.com'
+    SERVER_ADDRESS: 'http://www.jmexpert.com',
+    USERCENTER_ADDRESS: 'http://passport.jumore.com/cas/',
+    CENTER_ADDRESS: 'http://center.jmexpert.com'
   }
-  // let env = 'dev'
-};var env = 'production';
+};
+
+var env = 'production';
 module.exports = envs[env];
 
 /***/ }),
