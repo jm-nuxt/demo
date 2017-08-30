@@ -96,7 +96,7 @@ app.use('/api', __WEBPACK_IMPORTED_MODULE_2__api__["a" /* default */]);
 
 // Import and Set Nuxt.js options
 var config = __webpack_require__(5);
-config.dev = !("development" === 'production');
+config.dev = !("production" === 'production');
 
 // TODO remove
 process.on('unhandledRejection', function (reason, p) {
@@ -196,16 +196,17 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: 'starter',
+    title: '聚贸云智库---工业全产业链跨境专家平台',
     meta: [{
       charset: 'utf-8'
     }, {
-      name: 'viewport',
-      content: 'width=device-width, initial-scale=1'
+      hid: 'keyword',
+      name: 'keyword',
+      content: '聚贸云智库,云智库,工业全产业链跨境专家平台'
     }, {
       hid: 'description',
       name: 'description',
-      content: 'Nuxt.js project'
+      content: '聚贸云智库是聚贸旗下工业全产业链跨境专家平台，云智库汇聚了全球各行各业领域的顶尖专家和精英人士，为用户提供咨询、反馈信息、进行诊断、预测未来。'
     }],
     link: [{
       rel: 'icon',
@@ -240,40 +241,30 @@ module.exports = {
   plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive', '~plugins/checkLogin'],
 
   build: {
+    filenames: {
+      css: 'styles.[chunkhash].css'
+    },
+    extractCSS: true,
     vendor: ['axios', 'element-ui'],
-
     babel: {
       plugins: [['component', [{
         libraryName: 'element-ui',
         styleLibraryName: 'theme-default'
       }]]]
     },
-
-    extend: function extend(config, _ref) {
-      // config.module.rules.push({
-      //   test: /\.vue$/,
-      //   loader: 'html-minify-loader',
-      //   exclude: /(node_modules)/
-      // })
-
-      var isClient = _ref.isClient;
-    },
-
-
     publicPath: address.CDN_ADDRESS
   },
-
   /*
-   ** Run ESLINT on save
-   */
+  ** Run ESLINT on save
+  */
   extend: function extend(config, ctx) {
     if (ctx.isClient) {
-      config.module.rules.push({
-        enforce: 'pre',
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        exclude: /(node_modules)/
-      });
+      // config.module.rules.push({
+      //   enforce: 'pre',
+      //   test: /\.(js|vue)$/,
+      //   loader: 'eslint-loader',
+      //   exclude: /(node_modules)/
+      // })
     }
   }
 };
@@ -301,7 +292,8 @@ var envs = {
     SERVER_ADDRESS: 'http://www.jmexpert.com',
     USERCENTER_ADDRESS: 'http://passport.jumore.com/cas/',
     CENTER_ADDRESS: 'http://center.jmexpert.com',
-    CDN_ADDRESS: 'http://static.jmexpert.com/static/'
+    CDN_ADDRESS: 'http://127.0.0.1:3000/_nuxt/'
+    // CDN_ADDRESS: 'http://static.jmexpert.com/static/'
   }
 };
 

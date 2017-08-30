@@ -70,10 +70,9 @@
 	import axios from '~/plugins/axios'
 
 	export default {
-		data(){
+		name: 'demandOrder',
+		data () {
 			return {
-				
-
 				rules: {
 		      requirementContent: [
 		        { required: true, message: '请输入需求描述', trigger: 'blur' },
@@ -185,8 +184,6 @@
 	.release-form{
 		padding: 40px 0;
 	}
-
-
 
 	.submit-btn{
 		width: 200px;

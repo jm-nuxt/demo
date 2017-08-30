@@ -8,9 +8,7 @@
 				<nav class="sub-nav">
 					<ul>
 						<li v-for="(item, index) in left.arts" :key="index">
-							<nuxt-link class="text-overflow" :to="`/services/${item.id}`">	
-								{{ item.title }}
-							</nuxt-link>
+							<nuxt-link class="text-overflow" :to="`/services/${item.id}`">{{ item.title }}</nuxt-link>
 						</li>
 					</ul>
 				</nav>
@@ -32,11 +30,12 @@
 	import axios from '~/plugins/axios'
 
 	export default {
+		name: 'service-id',
 		async fetch ({ store, params }) {
       const { data } = await axios.get(`/webapi/v2/indexBottomMenu`)
       store.commit('SET_FOOTER', data.rows)
     },
-    
+
 		asyncData({ params }){
 			return Promise.all([
 				axios.get(`/webapi/v2/artDetails/${params.id}`).then(data => data.data.rows),
@@ -48,14 +47,14 @@
         }
       }).catch(e => console.log(e))
 		}
-	
+
 	}
 </script>
 
 <style lang="scss" scoped>
 	.service{
 		padding: 60px 0;
-		border-top: 2px solid #2788e8;  
+		border-top: 2px solid #2788e8;
 	}
 
 	.side-bar{

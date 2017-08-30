@@ -16,11 +16,10 @@
 			    	</h3>
 
 				    <p>
-				    	<span :title="expert.positionName">
-				    		{{ expert.positionName }}</span>
-				    		<span v-if="expert.positionName && expert.companyName"> | </span>
-				    		<span v-if="expert.companyName":title="expert.companyName">{{ expert.companyName }}</span>
-				    		<span v-if="expert.yearsOfWorking"> {{ Number(expert.yearsOfWorking) }}年</span>
+				    	<span :title="expert.positionName">{{ expert.positionName }}</span>
+			    		<span v-if="expert.positionName && expert.companyName"> | </span>
+			    		<span v-if="expert.companyName":title="expert.companyName">{{ expert.companyName }}</span>
+			    		<span v-if="expert.yearsOfWorking"> {{ Number(expert.yearsOfWorking) }}年</span>
 				    </p>
 
 				    <p>{{ expert.expertIntroduces}}</p>
@@ -98,7 +97,7 @@
 	import axios from '~/plugins/axios'
 
 	export default {
-		
+		name: 'releaseResearch',
 		data () {
 			return {
 				rules: {

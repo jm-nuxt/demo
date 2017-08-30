@@ -2,58 +2,48 @@
   <el-row class="website-container header">
     <el-col :span="12" class="logo">
       <h1 class="logo-title">
-        <a href="/" class="logo-link">
-            聚贸云智库
-        </a>
+        <a href="/" class="logo-link">聚贸云智库</a>
       </h1>
     </el-col>
     <el-col :span="12">
       <nav class="website-nav">
         <ul class="clearfix">
           <li>
-              <h3>
-                <p>发布需求</p>
-                <small>Post demand</small>
-              </h3>
-
-              <div class="sub-nav">
-                <ul>
-                  <li>
-                    <nuxt-link :to="{path: '/demandOrder'}">
-                      企业需求
-                      <small>Enterprise demand</small>
-                    </nuxt-link>
-                  </li>
-
-                  <li>
-                    <nuxt-link :to="{ path: `/experts` }">
-                      媒体采访
-                      <small>Media interview</small>
-                    </nuxt-link>
-                  </li>
-                </ul>
-              </div>
-          </li>
-
-          <li>
             <h3>
-                <p>联系专家</p>
-                <small>Contact an expert</small>
+              <p>发布需求</p>
+              <small>Post demand</small>
             </h3>
 
             <div class="sub-nav">
               <ul>
                 <li>
-                  <nuxt-link :to="{ path: `/experts` }">
-                    我要咨询专家
-                    <small>I want my consultant</small>
+                  <nuxt-link :to="{path: '/demandOrder'}">企业需求<small>Enterprise demand</small>
                   </nuxt-link>
                 </li>
 
                 <li>
-                  <nuxt-link :to="{path:'/releaseResearch'}">
-                    邀请专家调研企业
-                    <small>Invite experts to do researches</small>
+                  <nuxt-link :to="{ path: `/experts` }">媒体采访<small>Media interview</small>
+                  </nuxt-link>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <li>
+            <h3>
+              <p>联系专家</p>
+              <small>Contact an expert</small>
+            </h3>
+
+            <div class="sub-nav">
+              <ul>
+                <li>
+                  <nuxt-link :to="{ path: `/experts` }">我要咨询专家<small>I want my consultant</small>
+                  </nuxt-link>
+                </li>
+
+                <li>
+                  <nuxt-link :to="{path:'/releaseResearch'}">邀请专家调研企业<small>Invite experts to do researches</small>
                   </nuxt-link>
                 </li>
               </ul>

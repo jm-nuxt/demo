@@ -23,7 +23,7 @@ let layouts = {
 let resolvedLayouts = {}
 
 export default {
-  head: {"title":"starter","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Nuxt.js project"}],"link":[{"rel":"icon","type":"image/x-icon","href":"/favicon.ico"}],"style":[],"script":[]},
+  head: {"title":"聚贸云智库---工业全产业链跨境专家平台","meta":[{"charset":"utf-8"},{"hid":"keyword","name":"keyword","content":"聚贸云智库,云智库,工业全产业链跨境专家平台"},{"hid":"description","name":"description","content":"聚贸云智库是聚贸旗下工业全产业链跨境专家平台，云智库汇聚了全球各行各业领域的顶尖专家和精英人士，为用户提供咨询、反馈信息、进行诊断、预测未来。"}],"link":[{"rel":"icon","type":"image/x-icon","href":"/favicon.ico"}],"style":[],"script":[]},
   data: () => ({
     layout: null,
     layoutName: ''

@@ -17,13 +17,13 @@
                   <dt>
                     <h3 :title="item.expertName" class="expert-name">{{ item.expertName }}</h3>
 
-                    <address class="address" v-if="item.city" :title="item.city"><i class="icon-location"></i>{{ item.city }}
-                    </address>
+                    <address class="address" v-if="item.city" :title="item.city">
+                      <i class="icon-location"></i>{{item.city}}</address>
 
-                    <span class="job" :title="item.positionName">{{ item.positionName }}</span>
+                    <span class="job" :title="item.positionName">{{item.positionName}}</span>
 
                     <span v-if="item.companyName"
-                          :title="item.companyName"> | {{ item.companyName}}</span>
+                          :title="item.companyName"> | {{item.companyName}}</span>
 
                     <button
                       type="button"
@@ -39,7 +39,7 @@
                   </dt>
                   <dd class="expert-desc-title">专家简介</dd>
                   <dd class="expert-desc"
-                    :title="item.expertIntroduces">{{ item.expertIntroduces | cut_str(150) }}
+                    :title="item.expertIntroduces">{{item.expertIntroduces | cut_str(150)}}
                   </dd>
                 </dl>
               </el-col>
@@ -67,6 +67,15 @@ export default {
       page: 1,
       limit: 8
     }
+  },
+
+  head: {
+    title: '媒体采访---聚贸云智库',
+    meta: [{
+      hid: 'keyword',
+      name: 'keyword',
+      content: '媒体采访'
+    }]
   },
 
   computed: {

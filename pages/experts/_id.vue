@@ -158,15 +158,12 @@
           <p class="desc">{{ detail.expertIntroduces}}</p>
 
           <p class="text-center actions">
-            <button type="button" name="button" class="btn btn-line" @click="openDialog('contact')">我要咨询专家
-              <small class="small">I want to consult an expert</small>
+            <button type="button" name="button" class="btn btn-line" @click="openDialog('contact')">我要咨询专家<small class="small">I want to consult an expert</small>
             </button>
             <nuxt-link :to="{ path: '/releaseResearch', query: { expertId: params.id } }" @click="isLogin(e)"
-                       class="btn btn-line">邀请专家调研企业
-              <small class="small">Apply for expert's research</small>
+                       class="btn btn-line">邀请专家调研企业<small class="small">Apply for expert's research</small>
             </nuxt-link>
-            <button type="button" name="button" class="btn btn-line" @click="openDialog('interview')">我要采访专家
-              <small class="small">I want to interview an expert</small>
+            <button type="button" name="button" class="btn btn-line" @click="openDialog('interview')">我要采访专家<small class="small">I want to interview an expert</small>
             </button>
           </p>
         </div>
@@ -432,6 +429,19 @@
         }
       } catch (e) {
         console.log(e)
+      }
+    },
+
+    head () {
+      const detail = this.detail
+
+      return {
+        title: `${detail.expertName} ${detail.positionName} ---聚贸云智库`,
+        meta: [{
+          hid: 'keyword',
+          name: 'keyword',
+          content: `${detail.positionName}`
+        }]
       }
     },
 

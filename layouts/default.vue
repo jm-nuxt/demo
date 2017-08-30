@@ -9,9 +9,7 @@
 
     <button v-show="($route.path === '/' && scrollTag)"  @click="goTop()" class="back-top"></button>
 
-    <nuxt-link v-show="$route.path !== '/'" :to="'/'" class="go-home">
-      首页
-    </nuxt-link>
+    <nuxt-link v-show="$route.path !== '/'" :to="'/'" class="go-home">首页</nuxt-link>
   </div>
 </template>
 

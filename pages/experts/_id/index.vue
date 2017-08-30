@@ -1,55 +1,54 @@
 <template>
-    <div>
-        <!-- 专家详情 -->
-        <div class="expert-detail" :class="{'hasBg': query.tpl == 3}">
-            <div class="website-container">
-                <header class="text-center">
-                    <h3 class="style-header"><span class="title">专家详情</span>
-                        <small class="small">Expert Details</small>
-                    </h3>
-                </header>
+  <div>
+    <!-- 专家详情 -->
+    <div class="expert-detail" :class="{'hasBg': query.tpl == 3}">
+      <div class="website-container">
+        <header class="text-center">
+          <h3 class="style-header"><span class="title">专家详情</span>
+            <small class="small">Expert Details</small>
+          </h3>
+        </header>
 
-                <div class="detail">
-                    <p class="text-indent">{{attribute.desc}}</p>
-                </div>
-            </div>
+        <div class="detail">
+          <p class="text-indent">{{attribute.desc}}</p>
         </div>
-
-        <div class="pic">
-            <img src="~assets/img/bg-expertdetail-middle.jpg" alt="个人详情中间图">
-        </div>
-
-        <!-- 企业研报 -->
-        <div class="research-report" v-if="report.length">
-            <div class="website-container">
-                <header class="text-center">
-                    <h3 class="style-header"><span class="title">企业研报</span>
-                        <small class="small">Enterprise Research Report</small>
-                    </h3>
-                </header>
-
-                <div class="content">
-                    <ul class="report-list">
-                        <li v-for="(item, index) in report" :key="index">
-                            <div class="img-box">
-                                <img :src="item.report | imgCdn" :alt="item.title" :title="item.title">
-                            </div>
-
-                            <dl class="report-content">
-                                <dt class="title text-overflow" :title="item.title">
-                                    <nuxt-link :to="{path: `/companyResearch/${item.id}` }">{{item.title}}
-                                        <time class="time">{{item.publisTime}}</time>
-                                    </nuxt-link>
-                                </dt>
-                                <dd class="desc">{{item.report}}</dd>
-                            </dl>
-                        </li>
-                    </ul>
-                    <nuxt-link class="expert-more" :to="{ path:`/experts/${params.id}/reports?tpl=${query.tpl}` }">更多研报 >></nuxt-link>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+
+    <div class="pic">
+      <img src="~assets/img/bg-expertdetail-middle.jpg" alt="个人详情中间图">
+    </div>
+
+    <!-- 企业研报 -->
+    <div class="research-report" v-if="report.length">
+      <div class="website-container">
+        <header class="text-center">
+          <h3 class="style-header"><span class="title">企业研报</span>
+            <small class="small">Enterprise Research Report</small>
+          </h3>
+        </header>
+
+        <div class="content">
+          <ul class="report-list">
+            <li v-for="(item, index) in report" :key="index">
+              <div class="img-box">
+                <img :src="item.report | imgCdn" :alt="item.title" :title="item.title">
+              </div>
+
+              <dl class="report-content">
+                <dt class="title text-overflow" :title="item.title">
+                  <nuxt-link :to="{path: `/companyResearch/${item.id}` }">{{item.title}}<time class="time">{{item.publisTime}}</time>
+                  </nuxt-link>
+                </dt>
+                <dd class="desc">{{item.report}}</dd>
+              </dl>
+            </li>
+          </ul>
+          <nuxt-link class="expert-more" :to="{ path:`/experts/${params.id}/reports?tpl=${query.tpl}` }">更多研报 >></nuxt-link>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
     import axios from '~/plugins/axios'

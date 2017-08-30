@@ -148,6 +148,7 @@
   import axios from '~/plugins/axios'
 
   export default {
+    name: 'index',
     data () {
       return {
         styleInfoFilter: [],
@@ -175,10 +176,6 @@
           bottomCarouselsFilter: data[3]
         }
       }).catch(error => console.log(error))
-    },
-
-    head () {
-
     },
 
     computed: {

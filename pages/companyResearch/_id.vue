@@ -9,7 +9,7 @@
 
           <div class="company-info d-table-cell">
             <h2 class="company-name" :title="detail.companyName">{{ detail.companyName }}</h2>
-            <a target="_blank" class="go" :href="detail.websiteUrl" :title="detail.companyName">跳转至公司界面</a>  
+            <a target="_blank" class="go" :href="detail.websiteUrl" :title="detail.companyName">跳转至公司界面</a>
           </div>
         </div>
       </div>
@@ -50,8 +50,7 @@
             </div>
 
             <dl class="d-table-cell repert-info">
-              <dd class="name text-overflow">{{
-              expert.expertName}}</dd>
+              <dd class="name text-overflow">{{expert.expertName}}</dd>
               <dd>
                 <address class="address text-overflow"> <i class="icon-location"></i>{{expert.city}}</address>
               </dd>
@@ -59,12 +58,12 @@
           </div>
 
           <div class="content-list">
-            <p> 
+            <p>
               <label>担任职务:</label>
               <span>{{expert.positionName}}</span>
             </p>
 
-            <p> 
+            <p>
               <label>所在公司:</label>
               <span>{{expert.companyName}}</span>
             </p>
@@ -152,7 +151,7 @@ export default {
       color: #6e6e6e;
       padding: 8px 12px;
       border-radius: 3px;
-      height: 32px; 
+      height: 32px;
     }
   }
 
@@ -251,7 +250,7 @@ export default {
 
     label{
       padding-right: 8px;
-    } 
+    }
   }
   .expert-link{
     margin: 0 auto;

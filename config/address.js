@@ -9,7 +9,7 @@ const envs = {
     SERVER_ADDRESS: 'http://webapi.jtt.com',
     USERCENTER_ADDRESS: 'http://test-uc3.dev.com',
     CENTER_ADDRESS: 'http://center.jtt.com',
-    CDN_ADDRESS:''
+    CDN_ADDRESS: ''
   },
 
   production: {
@@ -17,7 +17,8 @@ const envs = {
     SERVER_ADDRESS: 'http://www.jmexpert.com',
     USERCENTER_ADDRESS: 'http://passport.jumore.com/cas/',
     CENTER_ADDRESS: 'http://center.jmexpert.com',
-    CDN_ADDRESS:'http://static.jmexpert.com/static/'
+    CDN_ADDRESS: 'http://127.0.0.1:3000/_nuxt/'
+    // CDN_ADDRESS: 'http://static.jmexpert.com/static/'
   }
 }
 
