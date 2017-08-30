@@ -1,28 +1,26 @@
 <template>
-    <div>
-        <div class="research-report">
-            <div class="website-container">
-                <header class="text-center">
-                    <h3 class="style-header"><span class="title">企业研报</span>
-                        <small class="small">Enterprise Research Report</small>
-                    </h3>
-                </header>
-                <div class="content text-center">
-                    <ul class="report-list clearfix">
-                        <li v-for="(item, index) in reports" :key="index">
-                            <div class="img-box">
-                                <img :src="item.report | imgCdn" :title="item.title" alt="研报封面图">
-                            </div>
-                            <div class="report-layout">
-                                <h4 class="report-title" :title="item.title">{{item.title}}</h4>
-                                <time>{{item.publisTime.slice(0, 10)}}</time>
-                                <p class="report-content">{{item.content | cut_str(350)}}</p>
-                                <nuxt-link class="report-detail" :to="`/companyResearch/${item.id}`">查看详情 >></nuxt-link>
-                            </div>
-                        </li>
-                    </ul>
-                    <a href="javascript:;" @click="getMore" v-if="totalSize >= reports.length" class="report-more">查看更多研报</a>
-                </div>
+    <div class="research-report">
+        <div class="website-container">
+            <header class="text-center">
+                <h3 class="style-header"><span class="title">企业研报</span>
+                    <small class="small">Enterprise Research Report</small>
+                </h3>
+            </header>
+            <div class="content text-center">
+                <ul class="report-list clearfix">
+                    <li v-for="(item, index) in reports" :key="index">
+                        <div class="img-box">
+                            <img :src="item.report | imgCdn" :title="item.title" alt="研报封面图">
+                        </div>
+                        <div class="report-layout">
+                            <h4 class="report-title" :title="item.title">{{item.title}}</h4>
+                            <time>{{item.publisTime.slice(0, 10)}}</time>
+                            <p class="report-content">{{item.content | cut_str(350)}}</p>
+                            <nuxt-link class="report-detail" :to="`/companyResearch/${item.id}`">查看详情 >></nuxt-link>
+                        </div>
+                    </li>
+                </ul>
+                <a href="javascript:;" @click="getMore" v-if="totalSize >= reports.length" class="report-more">查看更多研报</a>
             </div>
         </div>
     </div>

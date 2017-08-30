@@ -20,7 +20,6 @@
   import MyHeader from '~/components/Header.vue'
   import MyFooter from '~/components/Footer.vue'
   import Login from '~/components/Login.vue'
-
   export default {
     data(){
       return {
@@ -36,7 +35,6 @@
       MyFooter,
       Login
     },
-
     mounted(){
       this.scrollTop();
       window.addEventListener('scroll', this.scrollTop)
@@ -57,7 +55,6 @@
          window.scrollTo(0, this.scroll)
        }, 16)
       },
-
       scrollTop(){
         let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
         if(scrollTop > 500){
@@ -71,7 +68,6 @@
 </script>
 
 <style lang="scss" scoped>
-
   %btn-link {
     width: 45px;
     height: 45px;
@@ -90,7 +86,6 @@
     @extend %btn-link;
     color: #fff;
     font-size: 12px;
-
     &::before{
       content: "";
       display: block;
@@ -101,7 +96,6 @@
       background-size: 100%;
     }
   }
-
   .back-top{
     @extend %btn-link;
     &::after{

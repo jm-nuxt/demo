@@ -1,6 +1,14 @@
 const address = require('./config/address')
 
 module.exports = {
+  // 设置缓存
+  // 默认
+  // cache: {
+  //   max: 1000,       // 组件缓存数
+  //   maxAge: 900000   // 15分钟
+  // }
+  cache: true,
+  transition: 'page',
   /*
    ** Headers of the page
    */
@@ -22,6 +30,11 @@ module.exports = {
       href: '/favicon.ico'
     }]
   },
+
+  router: {
+    middleware: 'check-login'
+  },
+
   modules: [
     ['@nuxtjs/proxy']
   ],
@@ -44,6 +57,7 @@ module.exports = {
    ** Add axios globally
    */
   plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive', '~plugins/checkLogin'],
+
   build: {
 
     vendor: ['axios', 'element-ui'],
@@ -56,40 +70,9 @@ module.exports = {
         }]]
       ]
     },
-
-    extend(config, ctx){
-      if(ctx.isClient){
-        // config.module.rules.push({
-        //   test: /\.vue$/,
-        //   loader: 'vue-loader',
-        //   options: {
-        //     preserveWhitespace: false
-        //   }
-        // })
-      }
-    },
-
-    loaders: [{
-      test: /\.(png|jpe?g|gif|svg)$/,
-      loader: 'url-loader',
-      query: {
-        limit: 1000,
-        name: 'img/[name].[hash:7].[ext]'
-      }
-    }, {
-      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-      loader: 'url-loader',
-      query: {
-        limit: 1000,
-        name: 'fonts/[name].[hash:7].[ext]'
-      }
-    }],
-    postcss: [
-      require('autoprefixer')({
-        browsers: ['last 3 versions']
-      })
-    ]
   },
+
+  publicPath: address.CDN_ADDRESS,
 
   /*
    ** Run ESLINT on save

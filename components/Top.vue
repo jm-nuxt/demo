@@ -12,7 +12,7 @@
         <div v-if="user.id" class="user-wrap">
 
           <img class="header-img" v-if="user.headImg" :src="user.headImg | imgCdn" :alt="user.userName">
-          <img class="header-img" src="~assets/img/user-photo.png" alt="用户头像"/>
+          <img class="header-img" v-else src="~assets/img/user-photo.png" alt="用户头像"/>
 
           <a :href="`${centerAddress}/jttoverview/init`" class="user-name text-overflow">{{user.userName}}</a>
           <div class="actions">
@@ -45,7 +45,6 @@ export default {
     this.fullpath = location.origin;
 
     login.hasLogin()
-
     .then(data => {
       return axios.get(`/webapi/v2/userInfo`)
         .then(data => {

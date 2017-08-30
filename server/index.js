@@ -5,17 +5,15 @@ import api from './api'
 console.log(0)
 
 const app = express()
-const host = process.env.HOST || '127.0.0.1'
+const host = process.env.HOST || '192.168.102.114'
 const port = process.env.PORT || 3000
 
 app.set('port', port)
-console.log(1)
 // Import API Routes
 app.use('/api', api)
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
-console.log(2)
 config.dev = !(process.env.NODE_ENV === 'production')
 
 // TODO remove
