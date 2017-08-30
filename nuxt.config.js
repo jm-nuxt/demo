@@ -70,9 +70,8 @@ module.exports = {
         }]]
       ]
     },
+    publicPath: address.CDN_ADDRESS
   },
-
-  publicPath: address.CDN_ADDRESS,
 
   /*
    ** Run ESLINT on save

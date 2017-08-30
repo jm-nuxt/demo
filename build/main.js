@@ -86,21 +86,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-console.log(0);
-
 var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
 var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
 
 app.set('port', port);
-console.log(1);
 // Import API Routes
 app.use('/api', __WEBPACK_IMPORTED_MODULE_2__api__["a" /* default */]);
 
 // Import and Set Nuxt.js options
 var config = __webpack_require__(5);
-console.log(2);
-config.dev = !("production" === 'production');
+config.dev = !("development" === 'production');
 
 // TODO remove
 process.on('unhandledRejection', function (reason, p) {
@@ -188,6 +184,14 @@ router.get('/users/:id', function (req, res, next) {
 var address = __webpack_require__(6);
 
 module.exports = {
+  // 设置缓存
+  // 默认
+  // cache: {
+  //   max: 1000,       // 组件缓存数
+  //   maxAge: 900000   // 15分钟
+  // }
+  cache: true,
+  transition: 'page',
   /*
    ** Headers of the page
    */
@@ -209,6 +213,11 @@ module.exports = {
       href: '/favicon.ico'
     }]
   },
+
+  router: {
+    middleware: 'check-login'
+  },
+
   modules: [['@nuxtjs/proxy']],
   proxy: {
     '/webapi/v2': {
@@ -229,6 +238,7 @@ module.exports = {
    ** Add axios globally
    */
   plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive', '~plugins/checkLogin'],
+
   build: {
 
     vendor: ['axios', 'element-ui'],
@@ -239,38 +249,7 @@ module.exports = {
         styleLibraryName: 'theme-default'
       }]]]
     },
-
-    extend: function extend(config, ctx) {
-      if (ctx.isClient) {
-        // config.module.rules.push({
-        //   test: /\.vue$/,
-        //   loader: 'vue-loader',
-        //   options: {
-        //     preserveWhitespace: false
-        //   }
-        // })
-      }
-    },
-
-
-    loaders: [{
-      test: /\.(png|jpe?g|gif|svg)$/,
-      loader: 'url-loader',
-      query: {
-        limit: 1000,
-        name: 'img/[name].[hash:7].[ext]'
-      }
-    }, {
-      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-      loader: 'url-loader',
-      query: {
-        limit: 1000,
-        name: 'fonts/[name].[hash:7].[ext]'
-      }
-    }],
-    postcss: [__webpack_require__(7)({
-      browsers: ['last 3 versions']
-    })]
+    publicPath: address.CDN_ADDRESS
   },
 
   /*
@@ -302,25 +281,21 @@ var envs = {
     IMG_ADDRESS: 'http://image.jm.com',
     SERVER_ADDRESS: 'http://webapi.jtt.com',
     USERCENTER_ADDRESS: 'http://test-uc3.dev.com',
-    CENTER_ADDRESS: 'http://center.jtt.com'
+    CENTER_ADDRESS: 'http://center.jtt.com',
+    CDN_ADDRESS: ''
   },
 
   production: {
     IMG_ADDRESS: 'http://img.jumore.com',
     SERVER_ADDRESS: 'http://www.jmexpert.com',
     USERCENTER_ADDRESS: 'http://passport.jumore.com/cas/',
-    CENTER_ADDRESS: 'http://center.jmexpert.com'
+    CENTER_ADDRESS: 'http://center.jmexpert.com',
+    CDN_ADDRESS: 'http://static.jmexpert.com/static/'
   }
 };
 
 var env = 'production';
 module.exports = envs[env];
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = require("autoprefixer");
 
 /***/ })
 /******/ ]);
