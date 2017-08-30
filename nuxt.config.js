@@ -59,7 +59,6 @@ module.exports = {
   plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive', '~plugins/checkLogin'],
 
   build: {
-
     vendor: ['axios', 'element-ui'],
 
     babel: {
@@ -70,6 +69,15 @@ module.exports = {
         }]]
       ]
     },
+
+    extend (config, { isClient }) {
+      // config.module.rules.push({
+      //   test: /\.vue$/,
+      //   loader: 'html-minify-loader',
+      //   exclude: /(node_modules)/
+      // })
+    },
+
     publicPath: address.CDN_ADDRESS
   },
 
@@ -78,12 +86,12 @@ module.exports = {
    */
   extend (config, ctx) {
     if (ctx.isClient) {
-      // config.module.rules.push({
-      //   enforce: 'pre',
-      //   test: /\.(js|vue)$/,
-      //   loader: 'eslint-loader',
-      //   exclude: /(node_modules)/
-      // })
+      config.module.rules.push({
+        enforce: 'pre',
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        exclude: /(node_modules)/
+      })
     }
   }
 }

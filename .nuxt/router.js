@@ -8,7 +8,7 @@ const _9cca36ce = () => import('../pages/demandOrder.vue' /* webpackChunkName: "
 const _d4dbd0bc = () => import('../pages/experts/index.vue' /* webpackChunkName: "pages/experts" */).then(m => m.default || m)
 const _85ef9dd0 = () => import('../pages/releaseResearch.vue' /* webpackChunkName: "pages/releaseResearch" */).then(m => m.default || m)
 const _81db52ba = () => import('../pages/services/_id.vue' /* webpackChunkName: "pages/services-id" */).then(m => m.default || m)
-const _0eb4caec = () => import('../pages/experts/_id.vue' /* webpackChunkName: "pages/" */).then(m => m.default || m)
+const _0eb4caec = () => import('../pages/experts/_id.vue' /* webpackChunkName: "pages/undefined" */).then(m => m.default || m)
 const _4072918d = () => import('../pages/experts/_id/index.vue' /* webpackChunkName: "pages/experts-id" */).then(m => m.default || m)
 const _6163818c = () => import('../pages/experts/_id/reports.vue' /* webpackChunkName: "pages/experts-id-reports" */).then(m => m.default || m)
 const _c236c98e = () => import('../pages/companyResearch/_id.vue' /* webpackChunkName: "pages/companyResearch-id" */).then(m => m.default || m)
