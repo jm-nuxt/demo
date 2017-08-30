@@ -95,6 +95,7 @@ a:hover{
   color: #fff;
   background: transparent;
   border-radius: 3px;
+  display: inline-block;
 }
 
 .btn-line:hover{
