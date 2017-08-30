@@ -14,7 +14,7 @@ const filters = [
   },
   {
     name: 'cut_str',
-    fn (str, L) {
+    fn (str = '', L = 8) {
       if (!((typeof str === 'string') && str.constructor === String)) {
         return ''
       }

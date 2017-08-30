@@ -20,7 +20,7 @@
                         </div>
                     </li>
                 </ul>
-                <a href="javascript:;" @click="getMore" v-if="totalSize >= reports.length" class="report-more">查看更多研报</a>
+                <a href="javascript:;" @click="getMore" v-if="totalSize > reports.length" class="report-more">查看更多研报</a>
             </div>
         </div>
     </div>
@@ -48,8 +48,10 @@
       },
       methods: {
         async getMore () {
+          this.offset += this.limit
           const { data } = await axios.get(`/webapi/v2/pageResearchReport?expertId=${this.$route.params.id}&offset=${this.offset}&limit=${this.limit}`)
           this.reports = [...this.reports, ...data.rows]
+          this.totalSize = data.totalSize
         }
       }
     }
@@ -90,7 +92,6 @@
             width: 120px;
             border: 1px solid #ccc;
             border-radius: 50%;
-            overflow: hidden;
             img{
                 width: 100%;
                 height: 100%;

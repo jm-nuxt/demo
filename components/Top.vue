@@ -19,7 +19,6 @@
             <p>
               <a :href="`${centerAddress}/jttoverview/init`" target="_blank">个人中心</a>
             </p>
-            <!-- {{$route || 123}} -->
             <p><a :href="`${userCenterAddress}/logout?returnUrl=${fullpath}`">退出</a></p>
           </div>
         </div>
@@ -29,81 +28,80 @@
 </template>
 
 <script>
-import login from "~/plugins/checkLogin"
-import axios from '~/plugins/axios'
-import address from '~/config/address'
+  import login from '~/plugins/checkLogin'
+  import axios from '~/plugins/axios'
+  import address from '~/config/address'
 
-export default {
-  data(){
-    return {
-      fullpath: '',
-      centerAddress: address.CENTER_ADDRESS,
-      userCenterAddress: address.USERCENTER_ADDRESS
-    }
-  },
-  mounted(){
-    this.fullpath = location.origin;
+  export default {
+    data () {
+      return {
+        fullpath: '',
+        centerAddress: address.CENTER_ADDRESS,
+        userCenterAddress: address.USERCENTER_ADDRESS
+      }
+    },
+    mounted () {
+      this.fullpath = location.origin
 
-    login.hasLogin()
-    .then(data => {
-      return axios.get(`/webapi/v2/userInfo`)
+      login.hasLogin()
         .then(data => {
-          return data.data.rows || {}
+          return axios.get(`/webapi/v2/userInfo`)
+            .then(data => {
+              return data.data.rows || {}
+            })
+        }, data => {
+          console.log('Not Login')
         })
-    }, data => {
-      console.log('Not Login')
-    })
-    .then(data => {
-      this.$store.commit('SET_USER', data || {})
-    })
-  },
-  computed: {
+        .then(data => {
+          this.$store.commit('SET_USER', data || {})
+        })
+    },
+    computed: {
 
-    user: {
-      get(){
-        return this.$store.state.user.user || {}
+      user: {
+        get () {
+          return this.$store.state.user.user || {}
+        },
+
+        set (newVal) {
+          this.$store.state.user.user = newVal
+        }
+      }
+    },
+    methods: {
+      // 显示登录
+      showLogin () {
+        this.$store.commit('SET_OPEN', {opend: true})
       },
 
-      set(newVal){
-        this.$store.state.user.user = newVal
+      goCenter ($event) {
+        if (!this.user.id) {
+          $event.preventDefault()
+          this.showLogin()
+        }
       }
-      
     }
-  },
-  methods: {
-    // 显示登录
-    showLogin(){
-      this.$store.commit('SET_OPEN', {opend: true})
-    },
-
-    goCenter($event){
-      if(!this.user.id){
-        $event.preventDefault();
-        this.showLogin()
-      }
-    },
   }
-}
 </script>
 
-<style lang="scss" scoped>
-  .website-top{
+<style lang="scss" type="text/scss" rel="stylesheet/scss" scoped>
+  .website-top {
     line-height: 30px;
     height: 32px;
     background-color: #f5f5f5;
     color: #6e6e6e;
     // overflow: hidden;
   }
-  
-  .user-wrap{
+
+  .user-wrap {
     width: 168px;
     display: inline-block;
     position: relative;
     padding-right: 20px;
     vertical-align: middle;
     cursor: pointer;
-    
-    &::after{
+
+    &::after {
       content: "";
       display: inline-block;
       width: 7px;
@@ -112,23 +110,23 @@ export default {
       top: 50%;
       transform: translateY(-50%) rotate(-45deg);
       height: 7px;
-      border-top: 1px solid #3e3e3e;
-      border-right: 1px solid #3e3e3e;
+      border-bottom: 1px solid #3e3e3e;
+      border-left: 1px solid #3e3e3e;
       transform-origin: center;
       transition: transform .3s;
     }
 
-    &:hover{
-      .actions{
+    &:hover {
+      .actions {
         display: block;
       }
-      &:after{
-        transform: translateY(-50%) rotate(135deg);    
+      &:after {
+        transform: translateY(-50%) rotate(135deg);
       }
     }
   }
 
-  .actions{
+  .actions {
     display: none;
     position: absolute;
     top: 100%;
@@ -140,38 +138,37 @@ export default {
     z-index: 9;
     text-align: center;
 
-    p{
+    p {
       line-height: 40px;
 
-      a{
+      a {
         margin-left: 0;
       }
     }
 
-
-    a:hover{
+    a:hover {
       color: #2788e8;
     }
   }
 
-  .header-img{
+  .header-img {
     vertical-align: middle;
     width: 30px;
     height: 30px;
     border-radius: 100%;
-    border: none; 
+    border: none;
   }
 
-  .user-name{
+  .user-name {
     display: inline-block;
     width: 100px;
     vertical-align: middle;
   }
 
-  .website-top a{
+  .website-top a {
     margin-left: 25px;
-    
-    &.user-name{
+
+    &.user-name {
       margin-left: 0;
     }
   }

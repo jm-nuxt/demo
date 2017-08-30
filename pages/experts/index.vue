@@ -134,7 +134,7 @@ export default {
           if (data.statusCode !== 200) {
             this.$message.error(data.desc)
           } else {
-            expert.isFavorite = expert.isFavorite? 0 : 1
+            expert.isFavorite = expert.isFavorite ? 0 : 1
           }
         } catch (e) {
           this.$set(expert, 'loading', false)
@@ -165,6 +165,16 @@ export default {
         console.log(e)
       }
       this.$store.commit('SET_LOADING', false)
+    }
+  },
+  watch: {
+    async user (val, newVal) {
+      try {
+        const { data } = await axios.get('/webapi/v2/pageExpertInfo', { params: { offset: 0, limit: this.page * this.limit } })
+        this.experts = data.rows
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }
