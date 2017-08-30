@@ -5,7 +5,7 @@
         <el-col :span="6" :class="{'last': index === 3}" class="help-nav" v-for="(item, index) in footer" :key="index" >
           <ul>
             <li v-for="(item, index) in item.artInfo" :key="index">
-              <nuxt-link :to="`/services/${item.id}`">
+              <nuxt-link target="_blank" :to="`/services/${item.id}`">
                 <p :title="item.title">{{item.title}}</p>
                 <small>{{ item.subTitle}}</small>
               </nuxt-link>

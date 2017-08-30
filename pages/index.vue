@@ -77,8 +77,8 @@
 
         <div  class="box-content">
           <ul  class="photo-list">
-            <li v-for="(item, index) in styleInfoFilter" :class="{'pull-right': index === 5}">
-              <nuxt-link :to="{ path: `/experts/${item.id}`, query: {tpl: item.templateId} }">
+            <li v-for="(item, index) in styleInfoFilter" :class="{'pull-right': index === 5}" :key="index">
+              <nuxt-link target="_blank" :to="{ path: `/experts/${item.id}`, query: {tpl: item.templateId} }">
                 <img v-lazyload="lazyLoadPic(item.imgUrl)" :alt="item.companyName" :title="item.companyName" />
 
                 <div class="expert-info">
@@ -122,7 +122,7 @@
 
                 <dd v-for="(items, index2) in item.multipleSkills.slice(0,4)" :key="index2">{{items}}</dd>
               </dl>
-              <nuxt-link class="detail" :to="{ path: `/experts/${item.id}?tpl=${item.templateId || 1}` }"> 查看详情 》</nuxt-link>
+              <nuxt-link target="_blank" class="detail" :to="{ path: `/experts/${item.id}?tpl=${item.templateId || 1}` }"> 查看详情 》</nuxt-link>
             </li>
           </ul>
           <nuxt-link class="more" to="/experts">
