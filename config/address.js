@@ -19,5 +19,5 @@ const envs = {
   }
 }
 
-let env = 'test'
+let env = 'production'
 module.exports = envs[env]

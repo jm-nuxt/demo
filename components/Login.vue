@@ -1,8 +1,8 @@
 <template>
-  <section>
-    <el-dialog custom-class="dialog-login" :visible.sync="opend">
+  <section @keyup.enter="login('form')">
+    <el-dialog custom-class="dialog-login" :visible.sync="opend" >
       <h2 class="text-center title">欢迎登录</h2>
-      <el-form :model="form" ref="form" :rules="rules" @keyup.enter="login()">
+      <el-form :model="form" ref="form" :rules="rules" >
         <el-form-item prop="username">
           <el-input
             v-model="form.username"
@@ -12,7 +12,7 @@
           </el-input>
         </el-form-item>
 
-        <el-form-item prop="password">
+        <el-form-item prop="password" >
             <el-input
               type="password"
               v-model="form.password"
@@ -76,6 +76,8 @@
 		methods: {
 			login (formName) {
 
+
+
 				this.$refs[formName].validate((valid) => {
           if (valid) {
           	login.hasLogin().then(()=>{}, ()=>{})
@@ -106,7 +108,6 @@
 								console.log(e)
                 this.loading = false
 							})
-
           }
         })
       }
