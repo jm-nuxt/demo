@@ -1,30 +1,5 @@
 <template>
     <div>
-        <!-- 专家介绍 -->
-        <div class="expert-introduce" v-if="query.tpl == 3">
-            <div class="introduce website-container style-box">
-                <header>
-                    <h3 class="expert-header">专家介绍</h3>
-                </header>
-
-                <div class="content">
-                    <p class="desc">{{ detail.expertIntroduces}}</p>
-
-                    <p class="text-center actions">
-                        <button type="button" name="button" class="btn btn-line">我要咨询专家
-                            <small class="small">I want to consult an expert</small>
-                        </button>
-                        <button type="button" name="button" class="btn btn-line">邀请专家调研企业
-                            <small class="small">Apply for expert's research</small>
-                        </button>
-                        <button type="button" name="button" class="btn btn-line">我要采访专家
-                            <small class="small">I want to interview an expert</small>
-                        </button>
-                    </p>
-                </div>
-            </div>
-        </div>
-
         <!-- 专家详情 -->
         <div class="expert-detail" :class="{'hasBg': query.tpl == 3}">
             <div class="website-container">
@@ -91,7 +66,6 @@
         return Promise.all([
           axios.get(`/webapi/v2/expertAttribute/${expertId}`).then((data) => data.data),
           axios.get(`/webapi/v2/researchReport/${expertId}`).then((data) => data.data.rows),
-          axios.get(`/webapi/v2/pageResearchReport?expertId=${params.id}&offset=0&limit=3`)
         ]).then(data => {
           return {
             attribute: data[0],

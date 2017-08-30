@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
     <section>
         <!-- 个人信息 style-2-->
         <div class="expert-info" :class="{'style-1': query.tpl == 1, 'style-2': query.tpl == 2}">
@@ -10,128 +10,127 @@
                             <img :src="detail.imgUrl | imgCdn" alt="专家头像" :title="detail.expertName">
                         </div>
 
-            <button type="button"
-                    class="collection btn-line pull-none"
-                    :class="{liked: detail.isFavorite === 1}"
-                    name="button"
-                    v-if="query.tpl == 1">
-              <i class="start"></i>
-              <span class="favorite-text"
-                    v-if="detail.isFavorite === 1"
-                    @click="collectExpert(0)">收藏成功</span>
-              <span class="favorite-text" v-else @click="collectExpert(1)">收藏专家</span>
-              <small class="small">Add expert to your favorite</small>
-            </button>
-          </el-col>
-
-            <!-- 模板一 -->
-          <el-col :span="20" v-if="query.tpl == 1">
-            <el-row class="d-table info-wrap">
-              <el-col :span="10" class="d-table-cell pull-none">
-                <dl class="info">
-                  <dt>
-                    <h3 class="clearfix">
-                      <span class="name">{{detail.expertName}}</span>
-                    </h3>
-                  </dt>
-                  <dd class="font-md">{{detail.positionName}} | {{detail.maxSchool}}</dd>
-                  <dd>
-                    <span class="mr-sm" v-if="detail.yearsOfWorking">工作经验： {{detail.yearsOfWorking}}年</span>
-                    <span v-if="detail.city">城市：
-                      <address class="address">{{detail.city}}</address>
-                    </span>
-                  </dd>
-                </dl>
-              </el-col>
-
-              <el-col class="text-right d-table-cell pull-none">
-                <button type="button" name="button" class="btn btn-line">我要咨询专家
-                  <small class="small">I want to consult an expert</small>
-                </button>
-                <button type="button" name="button" class="btn btn-line">邀请专家调研企业
-                  <small class="small">Apply for expert's research</small>
-                </button>
-                <button type="button" name="button" class="btn btn-line">我要采访专家
-                  <small class="small">I want to interview an expert</small>
-                </button>
-              </el-col>
-            </el-row>
-
-            <el-row>
-              <el-col class="introduction">
-                <p>专家介绍:</p>
-                <p class="introduction-content">{{detail.expertIntroduces}}</p>
-              </el-col>
-            </el-row>
-          </el-col>
-
-          <!-- 模板二 -->
-          <el-col :span="24" v-if="query.tpl == 2">
-            <el-row>
-                <el-col :span="24" class="d-table info-wrap">
-                    <div class="img-box d-table-cell">
-                        <img :src="detail.imgUrl | imgCdn" alt="专家头像" :title="detail.expertName">
-                    </div>
-
-                    <dl class="info d-table-cell pl-sm">
-                        <dt>
-                        <h3 class="clearfix"><span class="name">{{detail.expertName}}</span>
-                            <address ng-if="detail.city" class="address">{{detail.city}}</address>
-                        </h3>
-                        </dt>
-                        <dd class="font-md">{{detail.positionName}} | {{detail.maxSchool}}</dd>
-                        <dd>
-                            <span class="mr-sm" v-if="detail.yearsOfWorking">工作经验： {{detail.yearsOfWorking}}年</span>
-                            <span v-if="detail.city">城市：<address
-                                    class="address">{{detail.city}}</address></span>
-                        </dd>
-                    </dl>
-
-                    <div class="d-table-cell text-right">
-                        <button type="button" class="collection btn-line" name="button"
-                                :class="{liked: detail.isFavorite === 1}">
+                        <button type="button"
+                                class="collection btn-line pull-none"
+                                :class="{liked: detail.isFavorite === 1}"
+                                name="button"
+                                v-if="query.tpl == 1">
                             <i class="start"></i>
-                            <span class="favorite-text" v-if="detail.isFavorite === 1"
+                            <span class="favorite-text"
+                                  v-if="detail.isFavorite === 1"
                                   @click="collectExpert(0)">收藏成功</span>
                             <span class="favorite-text" v-else @click="collectExpert(1)">收藏专家</span>
                             <small class="small">Add expert to your favorite</small>
                         </button>
-                    </div>
-                </el-col>
-            </el-row>
+                    </el-col>
 
-            <el-row class="introduction">
-              <el-col :span="20">
-                <p>专家介绍:</p>
-                <p class="introduction-content">{{detail.expertIntroduces}}</p>
-              </el-col>
-              <el-col :span="4" class="text-right">
-                <button type="button" name="button" class="btn btn-line">我要咨询专家
-                  <small class="small">I want to consult an expert</small>
-                </button>
-                <button type="button" name="button" class="btn btn-line">邀请专家调研企业
-                  <small class="small">Apply for expert's research</small>
-                </button>
-                <button type="button" name="button" class="btn btn-line">我要采访专家
-                  <small class="small">I want to interview an expert</small>
-                </button>
-              </el-col>
-            </el-row>
-          </el-col>
+                    <!-- 模板一 -->
+                    <el-col :span="20" v-if="query.tpl == 1">
+                        <el-row class="d-table info-wrap">
+                            <el-col :span="10" class="d-table-cell pull-none">
+                                <dl class="info">
+                                    <dt>
+                                    <h3 class="clearfix">
+                                        <span class="name">{{detail.expertName}}</span>
+                                    </h3>
+                                    </dt>
+                                    <dd class="font-md">{{detail.positionName}} | {{detail.maxSchool}}</dd>
+                                    <dd>
+                                        <span class="mr-sm" v-if="detail.yearsOfWorking">工作经验： {{detail.yearsOfWorking}}年</span>
+                                        <span v-if="detail.city">城市：
+                      <address class="address">{{detail.city}}</address>
+                    </span>
+                                    </dd>
+                                </dl>
+                            </el-col>
 
-          <!-- 模板三   -->
-          <el-col :span="16" v-if="query.tpl == 3">
-              <dl class="info">
-                <dt>
-                  <h3 class="clearfix">
-                    <span class="name">{{detail.expertName}}</span>
-                    <address ng-if="detail.city" class="address">{{detail.city}}</address>
-                  </h3>
-                </dt>
-                <dd>{{detail.positionName}} | {{detail.maxSchool}}</dd>
-              </dl>
-          </el-col>
+                            <el-col class="text-right d-table-cell pull-none">
+                                <button type="button" name="button" class="btn btn-line">我要咨询专家
+                                    <small class="small">I want to consult an expert</small>
+                                </button>
+                                <button type="button" name="button" class="btn btn-line">邀请专家调研企业
+                                    <small class="small">Apply for expert's research</small>
+                                </button>
+                                <button type="button" name="button" class="btn btn-line">我要采访专家
+                                    <small class="small">I want to interview an expert</small>
+                                </button>
+                            </el-col>
+                        </el-row>
 
+                        <el-row>
+                            <el-col class="introduction">
+                                <p>专家介绍:</p>
+                                <p class="introduction-content">{{detail.expertIntroduces}}</p>
+                            </el-col>
+                        </el-row>
+                    </el-col>
+
+                    <!-- 模板二 -->
+                    <el-col :span="24" v-if="query.tpl == 2">
+                        <el-row>
+                            <el-col :span="24" class="d-table info-wrap">
+                                <div class="img-box d-table-cell">
+                                    <img :src="detail.imgUrl | imgCdn" alt="专家头像" :title="detail.expertName">
+                                </div>
+
+                                <dl class="info d-table-cell pl-sm">
+                                    <dt>
+                                    <h3 class="clearfix"><span class="name">{{detail.expertName}}</span>
+                                        <address ng-if="detail.city" class="address">{{detail.city}}</address>
+                                    </h3>
+                                    </dt>
+                                    <dd class="font-md">{{detail.positionName}} | {{detail.maxSchool}}</dd>
+                                    <dd>
+                                        <span class="mr-sm" v-if="detail.yearsOfWorking">工作经验： {{detail.yearsOfWorking}}年</span>
+                                        <span v-if="detail.city">城市：<address
+                                                class="address">{{detail.city}}</address></span>
+                                    </dd>
+                                </dl>
+
+                                <div class="d-table-cell text-right">
+                                    <button type="button" class="collection btn-line" name="button"
+                                            :class="{liked: detail.isFavorite === 1}">
+                                        <i class="start"></i>
+                                        <span class="favorite-text" v-if="detail.isFavorite === 1"
+                                              @click="collectExpert(0)">收藏成功</span>
+                                        <span class="favorite-text" v-else @click="collectExpert(1)">收藏专家</span>
+                                        <small class="small">Add expert to your favorite</small>
+                                    </button>
+                                </div>
+                            </el-col>
+                        </el-row>
+
+                        <el-row class="introduction">
+                            <el-col :span="20">
+                                <p>专家介绍:</p>
+                                <p class="introduction-content">{{detail.expertIntroduces}}</p>
+                            </el-col>
+                            <el-col :span="4" class="text-right">
+                                <button type="button" name="button" class="btn btn-line">我要咨询专家
+                                    <small class="small">I want to consult an expert</small>
+                                </button>
+                                <button type="button" name="button" class="btn btn-line">邀请专家调研企业
+                                    <small class="small">Apply for expert's research</small>
+                                </button>
+                                <button type="button" name="button" class="btn btn-line">我要采访专家
+                                    <small class="small">I want to interview an expert</small>
+                                </button>
+                            </el-col>
+                        </el-row>
+                    </el-col>
+
+                    <!-- 模板三   -->
+                    <el-col :span="16" v-if="query.tpl == 3">
+                        <dl class="info">
+                            <dt>
+                            <h3 class="clearfix">
+                                <span class="name">{{detail.expertName}}</span>
+                                <address ng-if="detail.city" class="address">{{detail.city}}</address>
+                            </h3>
+                            </dt>
+                            <dd>{{detail.positionName}} | {{detail.maxSchool}}</dd>
+                        </dl>
+                    </el-col>
                     <el-col :span="4" class="actions" v-if="query.tpl==3">
                         <button type="button" class="collection btn-line" name="button"
                                 :class="{liked: detail.isFavorite === 1}">
@@ -143,6 +142,30 @@
                         </button>
                     </el-col>
                 </el-row>
+            </div>
+        </div>
+        <!-- 专家介绍 -->
+        <div class="expert-introduce" v-if="query.tpl == 3">
+            <div class="introduce website-container style-box">
+                <header>
+                    <h3 class="expert-header">专家介绍</h3>
+                </header>
+
+                <div class="content">
+                    <p class="desc">{{ detail.expertIntroduces}}</p>
+
+                    <p class="text-center actions">
+                        <button type="button" name="button" class="btn btn-line">我要咨询专家
+                            <small class="small">I want to consult an expert</small>
+                        </button>
+                        <button type="button" name="button" class="btn btn-line">邀请专家调研企业
+                            <small class="small">Apply for expert's research</small>
+                        </button>
+                        <button type="button" name="button" class="btn btn-line">我要采访专家
+                            <small class="small">I want to interview an expert</small>
+                        </button>
+                    </p>
+                </div>
             </div>
         </div>
         <nuxt-child></nuxt-child>
@@ -165,7 +188,7 @@
     async asyncData ({params}) {
       let expertId = params.id
       try {
-        const { data } = await axios.get(`/webapi/v2/detailedExpertInfo/${expertId}`)
+        const {data} = await axios.get(`/webapi/v2/detailedExpertInfo/${expertId}`)
         return {
           detail: data.rows
         }
@@ -174,8 +197,8 @@
       }
     },
 
-    async fetch ({ store, params }) {
-      const { data } = await axios.get(`/webapi/v2/indexBottomMenu`)
+    async fetch ({store}) {
+      const {data} = await axios.get(`/webapi/v2/indexBottomMenu`)
       store.commit('SET_FOOTER', data.rows)
     },
 
