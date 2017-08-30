@@ -59,9 +59,11 @@ module.exports = {
   plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive', '~plugins/checkLogin'],
 
   build: {
-
+    filenames: {
+      css: 'styles.[chunkhash].css'
+    },
+    extractCSS: true,
     vendor: ['axios', 'element-ui'],
-
     babel: {
       plugins: [
         ['component', [{
@@ -72,10 +74,9 @@ module.exports = {
     },
     publicPath: address.CDN_ADDRESS
   },
-
   /*
-   ** Run ESLINT on save
-   */
+  ** Run ESLINT on save
+  */
   extend (config, ctx) {
     if (ctx.isClient) {
       // config.module.rules.push({
