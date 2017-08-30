@@ -43,20 +43,6 @@ export default {
   },
   mounted(){
     this.fullpath = location.origin;
-
-    login.hasLogin()
-
-    .then(data => {
-      return axios.get(`/webapi/v2/userInfo`)
-        .then(data => {
-          return data.data.rows || {}
-        })
-    }, data => {
-      console.log('Not Login')
-    })
-    .then(data => {
-      this.$store.commit('SET_USER', data || {})
-    })
   },
   computed: {
 

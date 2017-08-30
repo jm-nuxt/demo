@@ -22,6 +22,11 @@ module.exports = {
       href: '/favicon.ico'
     }]
   },
+  
+  router: {
+    middleware: 'check-login'
+  },
+
   modules: [
     ['@nuxtjs/proxy']
   ],
