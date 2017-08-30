@@ -9,14 +9,14 @@
 import Vue from 'vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
-import '../assets/css/main.css'
+import '..\\node_modules\\element-ui\\lib\\theme-default\\index.css'
 
-import '../node_modules/element-ui/lib/theme-default/index.css'
+import '..\\assets\\css\\main.css'
 
 
 let layouts = {
 
-  "_default": () => import('../layouts/default.vue'  /* webpackChunkName: "layouts/default" */).then(m => m.default || m)
+  "_default": () => import('..\\layouts\\default.vue'  /* webpackChunkName: "layouts\\default" */).then(m => m.default || m)
 
 }
 

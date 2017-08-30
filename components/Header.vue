@@ -64,7 +64,7 @@
   }
 </script>
 
-<style lang="scss" type="text/scss" scoped="scoped">
+<style lang="scss" type="text/scss" scoped>
   .header {
     position: relative;
     z-index: 3;

@@ -3,15 +3,15 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _8f0c9eb0 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
-const _9cca36ce = () => import('../pages/demandOrder.vue' /* webpackChunkName: "pages/demandOrder" */).then(m => m.default || m)
-const _d4dbd0bc = () => import('../pages/experts/index.vue' /* webpackChunkName: "pages/experts" */).then(m => m.default || m)
-const _85ef9dd0 = () => import('../pages/releaseResearch.vue' /* webpackChunkName: "pages/releaseResearch" */).then(m => m.default || m)
-const _81db52ba = () => import('../pages/services/_id.vue' /* webpackChunkName: "pages/services-id" */).then(m => m.default || m)
-const _0eb4caec = () => import('../pages/experts/_id.vue' /* webpackChunkName: "pages/undefined" */).then(m => m.default || m)
-const _4072918d = () => import('../pages/experts/_id/index.vue' /* webpackChunkName: "pages/experts-id" */).then(m => m.default || m)
-const _6163818c = () => import('../pages/experts/_id/reports.vue' /* webpackChunkName: "pages/experts-id-reports" */).then(m => m.default || m)
-const _c236c98e = () => import('../pages/companyResearch/_id.vue' /* webpackChunkName: "pages/companyResearch-id" */).then(m => m.default || m)
+const _26cc3b47 = () => import('..\\pages\\index.vue' /* webpackChunkName: "pages\\index" */).then(m => m.default || m)
+const _dd468810 = () => import('..\\pages\\demandOrder.vue' /* webpackChunkName: "pages\\demandOrder" */).then(m => m.default || m)
+const _d07640f8 = () => import('..\\pages\\experts\\index.vue' /* webpackChunkName: "pages\\experts" */).then(m => m.default || m)
+const _a17d7e12 = () => import('..\\pages\\releaseResearch.vue' /* webpackChunkName: "pages\\releaseResearch" */).then(m => m.default || m)
+const _26afbdde = () => import('..\\pages\\services\\_id.vue' /* webpackChunkName: "pages\\services-id" */).then(m => m.default || m)
+const _074cf2ec = () => import('..\\pages\\experts\\_id.vue' /* webpackChunkName: "pages\\undefined" */).then(m => m.default || m)
+const _0d868016 = () => import('..\\pages\\experts\\_id\\index.vue' /* webpackChunkName: "pages\\experts-id" */).then(m => m.default || m)
+const _b1bea0fa = () => import('..\\pages\\experts\\_id\\reports.vue' /* webpackChunkName: "pages\\experts-id-reports" */).then(m => m.default || m)
+const _a1d411c6 = () => import('..\\pages\\companyResearch\\_id.vue' /* webpackChunkName: "pages\\companyResearch-id" */).then(m => m.default || m)
 
 
 
@@ -49,48 +49,48 @@ export function createRouter () {
     routes: [
 		{
 			path: "/",
-			component: _8f0c9eb0,
+			component: _26cc3b47,
 			name: "index"
 		},
 		{
 			path: "/demandOrder",
-			component: _9cca36ce,
+			component: _dd468810,
 			name: "demandOrder"
 		},
 		{
 			path: "/experts",
-			component: _d4dbd0bc,
+			component: _d07640f8,
 			name: "experts"
 		},
 		{
 			path: "/releaseResearch",
-			component: _85ef9dd0,
+			component: _a17d7e12,
 			name: "releaseResearch"
 		},
 		{
 			path: "/services/:id?",
-			component: _81db52ba,
+			component: _26afbdde,
 			name: "services-id"
 		},
 		{
 			path: "/experts/:id",
-			component: _0eb4caec,
+			component: _074cf2ec,
 			children: [
 				{
 					path: "",
-					component: _4072918d,
+					component: _0d868016,
 					name: "experts-id"
 				},
 				{
 					path: "reports",
-					component: _6163818c,
+					component: _b1bea0fa,
 					name: "experts-id-reports"
 				}
 			]
 		},
 		{
 			path: "/companyResearch/:id?",
-			component: _c236c98e,
+			component: _a1d411c6,
 			name: "companyResearch-id"
 		}
     ],

@@ -87,7 +87,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
-var host = process.env.HOST || '127.0.0.1';
+var host = process.env.HOST || '192.168.102.114';
 var port = process.env.PORT || 3000;
 
 app.set('port', port);
@@ -234,7 +234,7 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: ['~/assets/css/main.css', '~/node_modules/element-ui/lib/theme-default/index.css'],
+  css: ['~/node_modules/element-ui/lib/theme-default/index.css', '~/assets/css/main.css'],
   /*
    ** Add axios globally
    */
@@ -284,7 +284,9 @@ var envs = {
     SERVER_ADDRESS: 'http://webapi.jtt.com',
     USERCENTER_ADDRESS: 'http://test-uc3.dev.com',
     CENTER_ADDRESS: 'http://center.jtt.com',
-    CDN_ADDRESS: ''
+    CDN_ADDRESS: 'http://127.0.0.1:3000/_nuxt/',
+    NODE_SERVER: 'http://127.0.0.1',
+    NODE_PORT: 3000
   },
 
   production: {
@@ -292,7 +294,7 @@ var envs = {
     SERVER_ADDRESS: 'http://www.jmexpert.com',
     USERCENTER_ADDRESS: 'http://passport.jumore.com/cas/',
     CENTER_ADDRESS: 'http://center.jmexpert.com',
-    CDN_ADDRESS: 'http://127.0.0.1:3000/_nuxt/'
+    CDN_ADDRESS: 'http://192.168.102.114:3000/_nuxt/'
     // CDN_ADDRESS: 'http://static.jmexpert.com/static/'
   }
 };
