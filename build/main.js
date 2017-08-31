@@ -87,7 +87,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
-var host = process.env.HOST || '192.168.102.114';
+var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
 
 app.set('port', port);
@@ -96,7 +96,7 @@ app.use('/api', __WEBPACK_IMPORTED_MODULE_2__api__["a" /* default */]);
 
 // Import and Set Nuxt.js options
 var config = __webpack_require__(5);
-config.dev = !("production" === 'production');
+config.dev = !("development" === 'production');
 
 // TODO remove
 process.on('unhandledRejection', function (reason, p) {
@@ -271,35 +271,37 @@ module.exports = {
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 var envs = {
   dev: {
     IMG_ADDRESS: 'http://image.jm.com',
-    SERVER_ADDRESS: 'http://192.168.102.191:8099'
-  },
-
-  test: {
-    IMG_ADDRESS: 'http://image.jm.com',
     SERVER_ADDRESS: 'http://webapi.jtt.com',
     USERCENTER_ADDRESS: 'http://test-uc3.dev.com',
     CENTER_ADDRESS: 'http://center.jtt.com',
-    CDN_ADDRESS: 'http://192.168.102.114:3002/_nuxt/'
-
+    CDN_ADDRESS: 'http://127.0.0.1:3000/_nuxt/'
   },
 
   production: {
+    // 图片服务器
     IMG_ADDRESS: 'http://img.jumore.com',
+    // API 服务器
     SERVER_ADDRESS: 'http://www.jmexpert.com',
+    // 认证中心
     USERCENTER_ADDRESS: 'http://passport.jumore.com/cas/',
+    // 中台地址
     CENTER_ADDRESS: 'http://center.jmexpert.com',
-    // CDN_ADDRESS: 'http://192.168.102.114:3000/_nuxt/'
-    CDN_ADDRESS: 'http://static.jmexpert.com/static/'
+
+    // CDN 服务器
+    CDN_ADDRESS: 'http://static.jmexpert.com/static/',
+
+    // 图片上传服务器
+    UPLOAD_ADDRESS: 'http://image5.jm.com'
   }
 };
 
-console.log(process.env);
-var env = 'production';
+var env =  true ? 'dev' : 'production';
+
 module.exports = envs[env];
 
 /***/ })
