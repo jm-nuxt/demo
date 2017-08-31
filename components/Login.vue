@@ -1,6 +1,6 @@
 <template>
   <section @keyup.enter="login('form')">
-    <el-dialog custom-class="dialog-login" :visible.sync="opend">
+    <el-dialog custom-class="dialog-login" :visible.sync="opend" @close="close('form')">
       <h2 class="text-center title">欢迎登录</h2>
       <el-form :model="form" ref="form" :rules="rules">
         <el-form-item prop="username">
@@ -22,7 +22,7 @@
         </el-form-item>
 
         <el-form-item>
-          <a target="_blank" class="pull-left">免费注册</a>
+          <a target="_blank" :href="`${centerAddress}/user/toRegister`" class="pull-left">免费注册</a>
           <a :href="`${centerAddress}/user/forgetPassword?flag=1`" target="_blank" class="pull-right">忘记密码</a>
         </el-form-item>
 
@@ -73,6 +73,11 @@
     },
 
     methods: {
+      
+      close (formName) {
+        this.$refs[formName].resetFields()
+      },
+
       login (formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -129,16 +134,6 @@
   }
 </script>
 
-<style lang="scss" type="text/scss" scoped>
-  .dialog-login {
-    width: 360px;
-
-    .el-dialog__body {
-      padding: 30px 60px;
-    }
-  }
-
-</style>
 
 <style lang="scss" scoped type="text/scss">
   .title {

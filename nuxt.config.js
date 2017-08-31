@@ -57,7 +57,7 @@ module.exports = {
   /*
    ** Add axios globally
    */
-  plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive', '~plugins/checkLogin'],
+  plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive', '~plugins/checkLogin', '~plugins/baidu'],
 
   build: {
     filenames: {

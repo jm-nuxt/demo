@@ -16,7 +16,6 @@ config.dev = !(process.env.NODE_ENV === 'production')
 
 // TODO remove
 process.on('unhandledRejection', function (reason, p) {
-  console.log(p)
   console.log('Unhandled Rejection:', reason.stack)
   process.exit(1)
 })

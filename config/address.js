@@ -9,9 +9,8 @@ const envs = {
     SERVER_ADDRESS: 'http://webapi.jtt.com',
     USERCENTER_ADDRESS: 'http://test-uc3.dev.com',
     CENTER_ADDRESS: 'http://center.jtt.com',
-    CDN_ADDRESS: 'http://127.0.0.1:3000/_nuxt/',
-    NODE_SERVER: 'http://127.0.0.1',
-    NODE_PORT: 3000
+    CDN_ADDRESS: 'http://192.168.102.114:3002/_nuxt/'
+
   },
 
   production: {

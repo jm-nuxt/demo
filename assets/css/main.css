@@ -282,3 +282,10 @@ i[class*= 'icon-']{
   width: 100%;
   margin-left: 0 !important;
 }
+
+.dialog-login {
+  width: 360px;
+  .el-dialog__body {
+    padding: 30px 60px;
+  }
+}

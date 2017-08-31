@@ -18,6 +18,8 @@
   import MyHeader from '~/components/Header.vue'
   import MyFooter from '~/components/Footer.vue'
   import Login from '~/components/Login.vue'
+  import baidu from '~/plugins/baidu'
+
   export default {
     data(){
       return {
@@ -34,8 +36,9 @@
       Login
     },
     mounted(){
-      this.scrollTop();
+      this.scrollTop()
       window.addEventListener('scroll', this.scrollTop)
+      baidu.baidu()
     },
     destroyed(){
       window.removeEventlistener('scroll', this.scrollTop)

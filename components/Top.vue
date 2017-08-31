@@ -5,7 +5,7 @@
 
         <a :href="`${centerAddress}/expertApply/init`" @click="goCenter($event)">申请成为专家/Apply for an expert</a>
 
-        <a target="_blank" v-if="!user.id">用户注册/Free Registration</a>
+        <a target="_blank" :href="`${centerAddress}/user/toRegister`" v-if="!user.id">用户注册/Free Registration</a>
 
         <a href="#" v-if="!user.id" @click.prevent="showLogin()">登录/Sign</a>
 

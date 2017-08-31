@@ -96,11 +96,10 @@ app.use('/api', __WEBPACK_IMPORTED_MODULE_2__api__["a" /* default */]);
 
 // Import and Set Nuxt.js options
 var config = __webpack_require__(5);
-config.dev = !("production" === 'production');
+config.dev = !("development" === 'production');
 
 // TODO remove
 process.on('unhandledRejection', function (reason, p) {
-  console.log(p);
   console.log('Unhandled Rejection:', reason.stack);
   process.exit(1);
 });
@@ -238,7 +237,7 @@ module.exports = {
   /*
    ** Add axios globally
    */
-  plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive', '~plugins/checkLogin'],
+  plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive', '~plugins/checkLogin', '~plugins/baidu'],
 
   build: {
     filenames: {
@@ -284,9 +283,8 @@ var envs = {
     SERVER_ADDRESS: 'http://webapi.jtt.com',
     USERCENTER_ADDRESS: 'http://test-uc3.dev.com',
     CENTER_ADDRESS: 'http://center.jtt.com',
-    CDN_ADDRESS: 'http://127.0.0.1:3000/_nuxt/',
-    NODE_SERVER: 'http://127.0.0.1',
-    NODE_PORT: 3000
+    CDN_ADDRESS: 'http://192.168.102.114:3002/_nuxt/'
+
   },
 
   production: {
