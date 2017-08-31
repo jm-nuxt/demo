@@ -1,13 +1,13 @@
 <template>
   <div>
-    <top />
-    <my-header />
+    <top/>
+    <my-header/>
     <nuxt/>
     <my-footer/>
 
-    <login />
+    <login/>
 
-    <button v-show="($route.path === '/' && scrollTag)"  @click="goTop()" class="back-top"></button>
+    <button v-show="($route.path === '/' && scrollTag)" @click="goTop()" class="back-top"></button>
 
     <nuxt-link v-show="$route.path !== '/'" :to="'/'" class="go-home">首页</nuxt-link>
   </div>
@@ -18,10 +18,9 @@
   import MyHeader from '~/components/Header.vue'
   import MyFooter from '~/components/Footer.vue'
   import Login from '~/components/Login.vue'
-  import baidu from '~/plugins/baidu'
 
   export default {
-    data(){
+    data () {
       return {
         scrollTag: false,
         timer: null,
@@ -35,46 +34,44 @@
       MyFooter,
       Login
     },
-    mounted(){
+    mounted () {
       this.scrollTop()
       window.addEventListener('scroll', this.scrollTop)
-      baidu.baidu()
     },
-    destroyed(){
+    destroyed () {
       window.removeEventlistener('scroll', this.scrollTop)
     },
     methods: {
-      goTop() {
-       clearInterval(this.timer);
-       this.scroll = document.body.scrollTop || document.documentElement.scrollTop;
-       this.timer = setInterval(() => {
-         if(this.scroll < 0){
-           clearInterval(this.timer);
-           return false;
-         }
-         this.scroll -= this.speed;
-         window.scrollTo(0, this.scroll)
-       }, 16)
+      goTop () {
+        clearInterval(this.timer)
+        this.scroll = document.body.scrollTop || document.documentElement.scrollTop
+        this.timer = setInterval(() => {
+          if (this.scroll < 0) {
+            clearInterval(this.timer)
+            return false
+          }
+          this.scroll -= this.speed
+          window.scrollTo(0, this.scroll)
+        }, 16)
       },
-      scrollTop(){
-        let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-        if(scrollTop > 500){
-            this.scrollTag = true;
-        }else{
-            this.scrollTag = false;
+      scrollTop () {
+        let scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+        if (scrollTop > 500) {
+          this.scrollTag = true
+        } else {
+          this.scrollTag = false
         }
       }
     }
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" type="text/scss" rel="stylesheet/scss" scoped>
   %btn-link {
     width: 45px;
     height: 45px;
     border-radius: 5px;
-    background: rgba(161,161,161,.8);
-    border-radius: 5px;
+    background: rgba(161, 161, 161, .8);
     text-align: center;
     position: fixed;
     right: 5%;
@@ -82,12 +79,14 @@
     z-index: 10;
     border: none;
   }
-  .go-home{
+
+  .go-home {
     padding: 5px;
     @extend %btn-link;
     color: #fff;
     font-size: 12px;
-    &::before{
+
+    &::before {
       content: "";
       display: block;
       width: 20px;
@@ -96,10 +95,13 @@
       background: url('~assets/img/home.png') no-repeat center;
       background-size: 100%;
     }
+
   }
-  .back-top{
+
+  .back-top {
     @extend %btn-link;
-    &::after{
+
+    &::after {
       content: "";
       display: inline-block;
       vertical-align: middle;
@@ -112,5 +114,6 @@
       top: 2px;
       cursor: pointer;
     }
+
   }
 </style>
