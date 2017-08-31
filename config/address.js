@@ -17,7 +17,8 @@ const envs = {
     // 中台地址
     CENTER_ADDRESS: 'http://center.jmexpert.com',
     // CDN 服务器
-    CDN_ADDRESS: 'http://static.jmexpert.com/static/',
+    // CDN_ADDRESS: 'http://static.jmexpert.com/static/',
+    CDN_ADDRESS: 'http://127.0.0.1:3000/_nuxt/',
     // 图片上传服务器
     UPLOAD_ADDRESS: 'http://image5.jm.com'
   }
