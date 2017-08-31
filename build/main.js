@@ -96,7 +96,7 @@ app.use('/api', __WEBPACK_IMPORTED_MODULE_2__api__["a" /* default */]);
 
 // Import and Set Nuxt.js options
 var config = __webpack_require__(5);
-config.dev = !("development" === 'production');
+config.dev = !("production" === 'production');
 
 // TODO remove
 process.on('unhandledRejection', function (reason, p) {
@@ -117,7 +117,7 @@ if (config.dev) {
 app.use(nuxt.render);
 
 // Listen the server
-app.listen(port, host);
+app.listen(port);
 console.log('Server listening on ' + host + ':' + port); // eslint-disable-line no-console
 
 /***/ }),
@@ -300,7 +300,7 @@ var envs = {
   }
 };
 
-var env =  true ? 'dev' : 'production';
+var env =  false ? 'dev' : 'production';
 
 module.exports = envs[env];
 
