@@ -16,10 +16,8 @@ const envs = {
     USERCENTER_ADDRESS: 'http://passport.jumore.com/cas/',
     // 中台地址
     CENTER_ADDRESS: 'http://center.jmexpert.com',
-
     // CDN 服务器
     CDN_ADDRESS: 'http://static.jmexpert.com/static/',
-    
     // 图片上传服务器
     UPLOAD_ADDRESS: 'http://image5.jm.com'
   }
