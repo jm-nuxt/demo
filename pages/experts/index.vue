@@ -39,8 +39,7 @@
                   </dt>
                   <dd class="expert-desc-title">专家简介</dd>
                   <dd class="expert-desc"
-                    :title="item.expertIntroduces">{{item.expertIntroduces | cut_str(150)}}
-                  </dd>
+                    :title="item.expertIntroduces">{{item.expertIntroduces | cut_str(150)}}</dd>
                 </dl>
               </el-col>
             </el-row>
