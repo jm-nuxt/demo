@@ -167,25 +167,27 @@
         axios.get(`/webapi/v2/indexBanner`).then((data) => data.data.rows),
         axios.get(`/webapi/v2/advantageExpertInfo`).then((data) => data.data.rows),
         axios.get(`/webapi/v2/indexIndustryExp?offset=0&limit=4`).then((data) => data.data.rows),
-        axios.get(`/webapi/v2/indexBannerBottom`).then((data) => data.data.rows)
+        axios.get(`/webapi/v2/indexBannerBottom`).then((data) => data.data.rows),
+        axios.get(`/webapi/v2/betweenExpertBanner`).then(data => data.data.rows)
       ]).then((data) => {
         return {
           carouselsFilter: data[0],
           styleInfoFilter: data[1],
           expertLists: data[2],
-          bottomCarouselsFilter: data[3]
+          bottomCarouselsFilter: data[3],
+          betweenExpertBanner: data[4]
         }
       }).catch(error => console.log(error))
     },
 
     computed: {
       styleBannerImg () {
-        var sb = this.styleInfoFilter || []
+        var sb = this.betweenExpertBanner || []
         return sb.length > 0 ? sb[0].adsImg : ''
       },
 
       styleBannerUrl () {
-        var sb = this.styleInfoFilter || []
+        var sb = this.betweenExpertBanner || []
         return sb.length > 0 ? sb[0].url : ''
       }
     },
