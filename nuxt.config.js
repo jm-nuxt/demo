@@ -8,6 +8,7 @@ module.exports = {
   //   maxAge: 900000   // 15分钟
   // }
   cache: true,
+  
   transition: 'page',
   /*
    ** Headers of the page

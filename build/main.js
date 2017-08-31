@@ -96,7 +96,7 @@ app.use('/api', __WEBPACK_IMPORTED_MODULE_2__api__["a" /* default */]);
 
 // Import and Set Nuxt.js options
 var config = __webpack_require__(5);
-config.dev = !("development" === 'production');
+config.dev = !("production" === 'production');
 
 // TODO remove
 process.on('unhandledRejection', function (reason, p) {
@@ -190,6 +190,7 @@ module.exports = {
   //   maxAge: 900000   // 15分钟
   // }
   cache: true,
+
   transition: 'page',
   /*
    ** Headers of the page
@@ -258,12 +259,12 @@ module.exports = {
   */
   extend: function extend(config, ctx) {
     if (ctx.isClient) {
-      // config.module.rules.push({
-      //   enforce: 'pre',
-      //   test: /\.(js|vue)$/,
-      //   loader: 'eslint-loader',
-      //   exclude: /(node_modules)/
-      // })
+      config.module.rules.push({
+        enforce: 'pre',
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        exclude: /(node_modules)/
+      });
     }
   }
 };
@@ -292,11 +293,12 @@ var envs = {
     SERVER_ADDRESS: 'http://www.jmexpert.com',
     USERCENTER_ADDRESS: 'http://passport.jumore.com/cas/',
     CENTER_ADDRESS: 'http://center.jmexpert.com',
-    CDN_ADDRESS: 'http://192.168.102.114:3000/_nuxt/'
-    // CDN_ADDRESS: 'http://static.jmexpert.com/static/'
+    // CDN_ADDRESS: 'http://192.168.102.114:3000/_nuxt/'
+    CDN_ADDRESS: 'http://static.jmexpert.com/static/'
   }
 };
 
+console.log(process.env);
 var env = 'production';
 module.exports = envs[env];
 
