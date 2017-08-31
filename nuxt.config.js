@@ -8,7 +8,7 @@ module.exports = {
   //   maxAge: 900000   // 15分钟
   // }
   cache: true,
-  
+
   transition: 'page',
   /*
    ** Headers of the page
@@ -58,7 +58,12 @@ module.exports = {
   /*
    ** Add axios globally
    */
-  plugins: ['~plugins/element-ui', '~plugins/filter', '~plugins/directive', '~plugins/checkLogin', '~plugins/baidu'],
+  plugins: [
+    '~plugins/element-ui', 
+    '~plugins/filter', 
+    '~plugins/directive', 
+    '~plugins/checkLogin', 
+    {src: '~plugins/baidu', ssr: false}],
 
   build: {
     filenames: {

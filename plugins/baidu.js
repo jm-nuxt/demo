@@ -1,7 +1,8 @@
 /**
   * 只在生产模式下使用
   */
-if (process.BROWSER_BUILD && process.env.NODE_ENV === 'production') {
+
+if (process.env.NODE_ENV === 'production') {
   let _hmt = _hmt || [];
   (function (document) {
     let hm = document.createElement('script')

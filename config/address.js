@@ -22,7 +22,7 @@ const envs = {
     
     // 图片上传服务器
     UPLOAD_ADDRESS: 'http://image5.jm.com'
-}
+  }
 }
 
 let env = process.env.NODE_ENV !== 'production'
