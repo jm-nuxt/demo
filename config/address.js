@@ -18,8 +18,8 @@ const envs = {
     SERVER_ADDRESS: 'http://www.jmexpert.com',
     USERCENTER_ADDRESS: 'http://passport.jumore.com/cas/',
     CENTER_ADDRESS: 'http://center.jmexpert.com',
-    CDN_ADDRESS: 'http://192.168.102.114:3000/_nuxt/'
-    // CDN_ADDRESS: 'http://static.jmexpert.com/static/'
+    // CDN_ADDRESS: 'http://192.168.102.114:3000/_nuxt/'
+    CDN_ADDRESS: 'http://static.jmexpert.com/static/'
   }
 }
 
